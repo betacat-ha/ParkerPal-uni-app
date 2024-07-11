@@ -33,7 +33,17 @@
       "pages": [
         {
           "path": "login/index",
-          "navigationStyle": "custom"
+          "style": {
+            "app-plus": {
+              "titleNView": {
+                "buttons": [{
+                  "type": "home",
+                  "float": "left",
+                  "color": "white"
+                }]
+              }
+            }
+          }
         },
         {
           "path": "webview/index",
@@ -50,7 +60,7 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#3572EF",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [{
@@ -65,9 +75,9 @@
     }]
   },
   "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "智泊无忧",
+    "navigationBarBackgroundColor": "#3572EF",
+    "backgroundColor": "#f3f5f9"
   }
 }

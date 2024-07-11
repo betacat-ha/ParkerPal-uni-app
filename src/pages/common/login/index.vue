@@ -63,9 +63,14 @@ const inputStyle = computed<CSSProperties>(() => {
   const style = {} as CSSProperties;
   if (tel.value && code.value) {
     style.color = '#fff';
-    style.backgroundColor = uni.$u.color.warning;
+    style.backgroundColor = '#3572EF';
   }
   return style;
+});
+
+// 返回首页
+onNavigationBarButtonTap(() => {
+  uni.reLaunch({ url: '/' });
 });
 
 function codeChange(text: string) {
@@ -116,7 +121,7 @@ function submit() {
   }
 
   .login-btn {
-    @apply flex items-center justify-center py-12rpx px-0 text-30rpx bg-#fdf3d0 border-none;
+    @apply flex items-center justify-center py-12rpx px-0 text-30rpx bg-#A7E6FF border-none;
 
     color: $u-tips-color;
 
