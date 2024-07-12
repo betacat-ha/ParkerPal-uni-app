@@ -155,6 +155,7 @@ pnpm build:mp-weixin-prod
 
 ### 代码提交
 ```bash
+pnpm run eslint # eslint校验
 pnpm cz
 ```
 
