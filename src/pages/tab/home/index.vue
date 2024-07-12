@@ -7,18 +7,25 @@
       </text>
     </view>
 
+    <VehicleInfoCardVue />
+
     <MerchantCard style="margin-top: 30rpx" />
     <MerchantCard style="margin-top: 30rpx" />
+
     <!-- #ifdef MP-WEIXIN -->
     <!-- 隐私协议组件 -->
     <agree-privacy v-model="showAgreePrivacy" :disable-check-privacy="false" @agree="handleAgree" />
     <!-- #endif -->
+
+    <!-- 底部安全区 -->
+    <!-- <view style="height: 84vh;" /> -->
   </view>
 </template>
 
 <script setup lang="ts">
 import MerchantCard from '@/components/merchant-card/merchant-card.vue';
 import { useUserStore } from '@/store';
+import VehicleInfoCardVue from '@/components/vehicle-info-card/vehicle-info-card.vue';
 
 const title = ref<string>();
 title.value = import.meta.env.VITE_APP_TITLE;

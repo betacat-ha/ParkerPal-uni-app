@@ -121,7 +121,7 @@ function submit() {
   }
 
   .login-btn {
-    @apply flex items-center justify-center py-12rpx px-0 text-30rpx bg-#A7E6FF border-none;
+    @apply flex items-center justify-center py-12rpx px-0 text-30rpx bg-#9fbfff border-none;
 
     color: $u-tips-color;
 

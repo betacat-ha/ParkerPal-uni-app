@@ -13,5 +13,6 @@ declare module 'vue' {
     PageNav: typeof import('./../src/components/page-nav/page-nav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VehicleInfoCard: typeof import('./../src/components/vehicle-info-card/vehicle-info-card.vue')['default']
   }
 }
