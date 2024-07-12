@@ -36,11 +36,13 @@
           "style": {
             "app-plus": {
               "titleNView": {
-                "buttons": [{
-                  "type": "home",
-                  "float": "left",
-                  "color": "white"
-                }]
+                "buttons": [
+                  {
+                    "type": "home",
+                    "float": "left",
+                    "color": "white"
+                  }
+                ]
               }
             }
           }
@@ -50,12 +52,25 @@
           "navigationBarTitleText": "网页"
         }
       ]
+    },
+    {
+      "root": "pages/navigation",
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "index"
+          }
+        }
+      ]
     }
   ],
   "preloadRule": {
     "pages/tab/home/index": {
       "network": "all",
-      "packages": ["pages/common"]
+      "packages": [
+        "pages/common"
+      ]
     }
   },
   "tabBar": {
@@ -63,16 +78,20 @@
     "selectedColor": "#3572EF",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "list": [{
-      "pagePath": "pages/tab/home/index",
-      "text": "首页"
-    }, {
-      "pagePath": "pages/tab/list/index",
-      "text": "列表"
-    }, {
-      "pagePath": "pages/tab/user/index",
-      "text": "我的"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/tab/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tab/list/index",
+        "text": "列表"
+      },
+      {
+        "pagePath": "pages/tab/user/index",
+        "text": "我的"
+      }
+    ]
   },
   "globalStyle": {
     "navigationBarTextStyle": "white",

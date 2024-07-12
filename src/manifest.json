@@ -1,18 +1,16 @@
 {
   "name": "",
   "appid": "",
-  "description": "",
+  "description": "__UNI__F03F2D1",
   "versionName": "1.0.0",
   "versionCode": "100",
   "transformPx": false,
   /* 5+App特有相关 */
-  "app-plus":
-  {
+  "app-plus": {
     "usingComponents": true,
     "nvueStyleCompiler": "uni-app",
     "compilerVersion": 3,
-    "splashscreen":
-    {
+    "splashscreen": {
       "alwaysShowBeforeRender": true,
       "waiting": true,
       "autoclose": true,
@@ -21,11 +19,9 @@
     /* 模块配置 */
     "modules": {},
     /* 应用发布信息 */
-    "distribute":
-    {
+    "distribute": {
       /* android打包配置 */
-      "android":
-      {
+      "android": {
         "permissions": [
           "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
@@ -53,38 +49,55 @@
   /* 快应用特有相关 */
   "quickapp": {},
   /* 小程序特有相关 */
-  "mp-weixin":
-  {
+  "mp-weixin": {
     "appid": "",
-    "setting":
-    {
+    "setting": {
       "urlCheck": false
     },
     "usingComponents": true
   },
-  "mp-alipay":
-  {
+  "mp-alipay": {
     "usingComponents": true
   },
-  "mp-baidu":
-  {
+  "mp-baidu": {
     "usingComponents": true
   },
-  "mp-toutiao":
-  {
+  "mp-toutiao": {
     "usingComponents": true
   },
-  "uniStatistics":
-  {
+  "uniStatistics": {
     "enable": false
   },
   "vueVersion": "3",
-  "h5":
-  {
-    "router":
-    {
+  "h5": {
+    "router": {
       "mode": "hash",
       "base": "/uniapp-vue3-template/"
+    },
+    "sdkConfigs": {
+      // 使用地图或位置相关功能必须填写其一
+      "maps": {
+        "qqmap": {
+          // 腾讯地图秘钥 https://lbs.qq.com/dev/console/key/manage
+          "key": ""
+        },
+        "google": {
+          // 谷歌地图秘钥（HBuilderX 3.2.10+）https://developers.google.com/maps/documentation/javascript/get-api-key
+          "key": ""
+        },
+        "amap": {
+          // 高德地图秘钥（HBuilderX 3.6.0+）https://console.amap.com/dev/key/app
+          "key": "",
+          // 高德地图安全密钥（HBuilderX 3.6.0+）https://console.amap.com/dev/key/app
+          "securityJsCode": "",
+          // 高德地图安全密钥代理服务器地址（HBuilderX 3.6.0+）https://lbs.amap.com/api/jsapi-v2/guide/abc/prepare
+          "serviceHost": ""
+        },
+        "bmap": {
+          // 百度地图秘钥（HBuilderX 3.99+）http://lbsyun.baidu.com/apiconsole/key#/home
+          "key": ""
+        }
+      }
     }
   }
 }

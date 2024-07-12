@@ -7,7 +7,16 @@
       </text>
     </view>
 
-    <VehicleInfoCardVue />
+    <!-- 按钮 -->
+    <view class="flex flex-col items-center justify-center">
+      <button class="rounded bg-blue-500 px-4 py-2 text-white font-bold hover:bg-blue-700" @click="map">
+        <text class="font-size-36rpx color-white">
+          导航
+        </text>
+      </button>
+    </view>
+
+    <VehicleInfoCardVue @click="map" />
 
     <MerchantCard style="margin-top: 30rpx" />
     <MerchantCard style="margin-top: 30rpx" />
@@ -37,6 +46,12 @@ const showAgreePrivacy = ref(false);
 // 同意隐私协议
 function handleAgree() {
   console.log('同意隐私政策');
+}
+
+function map() {
+  uni.navigateTo({
+    url: '/pages/navigation/index',
+  });
 }
 </script>
 
