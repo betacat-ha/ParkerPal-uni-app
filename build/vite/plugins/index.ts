@@ -4,6 +4,7 @@
  */
 import uniPlugin from '@dcloudio/vite-plugin-uni';
 import type { PluginOption } from 'vite';
+import vitePluginRequire from 'vite-plugin-require';
 import { AutoImportDeps } from './autoImport';
 import { AutoRegistryComponents } from './component';
 import { ConfigUnoCSSPlugin } from './unocss';
@@ -13,6 +14,7 @@ import { ConfigUnoCSSPlugin } from './unocss';
 
 export default function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
+    // vitePluginRequire.default(),
     // UnoCSS配置
     ConfigUnoCSSPlugin(),
     // 自动按需引入依赖

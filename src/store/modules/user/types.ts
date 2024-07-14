@@ -1,9 +1,15 @@
 export type RoleType = '' | '*' | 'user';
+
+export interface UserInfo {
+  id: string | undefined
+  name: string | undefined
+  avatar: string | undefined
+}
+
 export interface UserState {
-  user_id?: string
-  user_name?: string
-  avatar?: string
-  token?: string
+  info: UserInfo
+  token: string
+  tabValue: number
 }
 
 export type providerType =

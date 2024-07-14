@@ -7,12 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AgreePrivacy: typeof import('./../src/components/agree-privacy/index.vue')['default']
-    Card: typeof import('./../src/components/common/card.vue')['default']
-    MerchantCard: typeof import('./../src/components/merchant-card/merchant-card.vue')['default']
-    PageNav: typeof import('./../src/components/page-nav/page-nav.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
-    VehicleInfoCard: typeof import('./../src/components/vehicle-info-card/vehicle-info-card.vue')['default']
+    AgreePrivacy: typeof import('./../src/components/agree-privacy/agree-privacy.vue')['default']
+    Card: typeof import('./../src/components/card/card.vue')['default']
+    Login: typeof import('./../src/components/login/login.vue')['default']
+    Map: typeof import('./../src/components/map/map.vue')['default']
+    Tabbar: typeof import('./../src/components/tabbar/tabbar.vue')['default']
   }
 }

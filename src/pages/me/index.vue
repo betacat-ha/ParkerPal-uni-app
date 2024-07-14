@@ -42,6 +42,8 @@
       </u-cell-group>
     </view>
   </view>
+
+  <Tabbar />
 </template>
 
 <script setup lang="ts">

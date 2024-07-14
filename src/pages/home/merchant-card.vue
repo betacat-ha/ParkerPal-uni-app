@@ -1,5 +1,5 @@
 <template>
-  <Card style="">
+  <Card>
     <!-- 商户信息 -->
     <view class="merchant">
       <image :src="merchantData.logo" mode="aspectFill" class="logo" />
@@ -33,11 +33,8 @@
 </template>
 
 <script>
-import card from '@/components/common/card.vue';
-
 export default {
   name: 'MerchantCard',
-  components: { Card: card },
   props: {
     merchantData: {
       type: Object,
@@ -99,10 +96,10 @@ export default {
 }
 
 .plan {
-    margin-top: 20rpx;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20rpx;
 
     .info {
         display: flex;
@@ -110,11 +107,11 @@ export default {
         align-items: center;
 
         .tag {
-            border: 3rpx solid #fb7900;
-            color: #fb7900;
-            border-radius: 15rpx;
             padding: 2rpx 15rpx;
             font-size: smaller;
+            color: #fb7900;
+            border: 3rpx solid #fb7900;
+            border-radius: 15rpx;
         }
 
         .name {
@@ -123,8 +120,8 @@ export default {
     }
 
     .price {
-        color: #fb7900;
         font-size: 32rpx;
+        color: #fb7900;
     }
 }
 </style>

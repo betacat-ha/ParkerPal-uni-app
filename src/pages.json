@@ -1,102 +1,51 @@
 {
   "easycom": {
+    "autoscan": true,
     "custom": {
-      "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
-      "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
-      "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
-      "^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue"
+      "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue"
     }
   },
   "pages": [
     {
-      "path": "pages/tab/home/index",
+      "path": "pages/home/index",
       "style": {
         "navigationBarTitleText": "首页"
       }
     },
     {
-      "path": "pages/tab/list/index",
+      "path": "pages/driving/index",
       "style": {
-        "navigationBarTitleText": "列表"
+        "navigationBarTitleText": "导航"
       }
     },
     {
-      "path": "pages/tab/user/index",
+      "path": "pages/me/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "我的"
       }
     }
   ],
-  "subPackages": [
-    {
-      "root": "pages/common",
-      "pages": [
-        {
-          "path": "login/index",
-          "style": {
-            "app-plus": {
-              "titleNView": {
-                "buttons": [
-                  {
-                    "type": "home",
-                    "float": "left",
-                    "color": "white"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        {
-          "path": "webview/index",
-          "navigationBarTitleText": "网页"
-        }
-      ]
-    },
-    {
-      "root": "pages/navigation",
-      "pages": [
-        {
-          "path": "index",
-          "style": {
-            "navigationBarTitleText": "index"
-          }
-        }
-      ]
-    }
-  ],
-  "preloadRule": {
-    "pages/tab/home/index": {
-      "network": "all",
-      "packages": [
-        "pages/common"
-      ]
-    }
-  },
-  "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#3572EF",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/tab/home/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/tab/list/index",
-        "text": "列表"
-      },
-      {
-        "pagePath": "pages/tab/user/index",
-        "text": "我的"
-      }
-    ]
-  },
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "智泊无忧",
     "navigationBarBackgroundColor": "#3572EF",
     "backgroundColor": "#f3f5f9"
+  },
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#303133",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index"
+      },
+      {
+        "pagePath": "pages/driving/index"
+      },
+      {
+        "pagePath": "pages/me/index"
+      }
+    ]
   }
 }

@@ -11,10 +11,13 @@ import { clearToken, setToken } from '@/utils/auth';
 
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    user_id: '',
-    user_name: '江阳小道',
-    avatar: '',
+    info: {
+      id: '',
+      name: '',
+      avatar: '',
+    },
     token: '',
+    tabValue: 0, // 默认选中的索引
   }),
   getters: {
     userInfo(state: UserState): UserState {
@@ -23,17 +26,15 @@ const useUserStore = defineStore('user', {
   },
   actions: {
     // 设置用户的信息
-    setInfo(partial: Partial<UserState>) {
+    setUserInfo(partial: Partial<UserState>) {
       this.$patch(partial);
     },
-    // 重置用户信息
-    resetInfo() {
-      this.$reset();
+    setTabValue(active) {
+      this.activeTab = active;
     },
-    // 获取用户信息
     async info() {
       const result = await getUserProfile();
-      this.setInfo(result);
+      this.setUserInfo(result);
     },
     // 异步登录并存储token
     login(loginForm: LoginParams) {
@@ -49,10 +50,9 @@ const useUserStore = defineStore('user', {
         });
       });
     },
-    // Logout
     async logout() {
       await userLogout();
-      this.resetInfo();
+      this.$reset();
       clearToken();
     },
     // 小程序授权登录

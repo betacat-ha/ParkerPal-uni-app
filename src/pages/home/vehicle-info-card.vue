@@ -24,11 +24,8 @@
 </template>
 
 <script>
-import card from '@/components/common/card.vue';
-
 export default {
   name: 'VehicleInfoCard',
-  components: { Card: card },
   props: {
     vehicleData: {
       type: Object,
@@ -59,16 +56,19 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .merchant-name {
     font-size: 30rpx;
     font-weight: bold;
   }
+
   .detail {
     display: flex;
     flex-direction: column;
+
     .detail-gray {
-      color: #999;
       margin-top: 5rpx;
+      color: #999;
     }
   }
 }
