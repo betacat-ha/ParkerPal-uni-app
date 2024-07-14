@@ -20,12 +20,13 @@ dist
 *.sln
 *.sw?
 
-#user
+
+# Lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Custom
 .hbuilderx
 unpackage
 /stats.html
-# pnpm-lock.yaml
-yarn.lock
-package-lock.json
-
-*.local
