@@ -1,6 +1,6 @@
 <template>
   <view>
-    <h1>路径规划</h1>
+    <text>路径规划</text>
     <Map />
 
     <Tabbar />
