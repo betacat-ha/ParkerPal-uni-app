@@ -29,8 +29,8 @@ const useUserStore = defineStore('user', {
     setUserInfo(partial: Partial<UserState>) {
       this.$patch(partial);
     },
-    setTabValue(active) {
-      this.activeTab = active;
+    setTabValue(active: number) {
+      this.tabValue = active;
     },
     async info() {
       const result = await getUserProfile();
