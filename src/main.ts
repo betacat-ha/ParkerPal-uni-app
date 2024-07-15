@@ -14,7 +14,7 @@ import setupStore from '@/store';
 import setupRequest from '@/utils/request';
 
 // 权限管理
-import '@/permission';
+// import '@/permission';
 
 // #ifdef VUE3
 export function createApp() {
