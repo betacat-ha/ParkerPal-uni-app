@@ -13,7 +13,10 @@
             <text style="padding-right: 20rpx;">
               智泊无忧
             </text>
-            <u-search v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场" @search="handleSearch" />
+            <u-search
+              v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场"
+              @search="handleSearch" @click-icon="handleScan"
+            />
           </view>
         </view>
       </template>
@@ -41,6 +44,18 @@ const searchKeyword = ref<string>();
 function handleSearch() {
   console.log('搜索关键字：', searchKeyword.value);
   uni.$u.toast(`搜索关键字：${searchKeyword.value}`);
+}
+function handleScan() {
+  uni.scanCode({
+    onlyFromCamera: true,
+    success: (res) => {
+      console.log('扫描二维码成功,结果:', res.result);
+      uni.$u.toast(`${res.result}`);
+    },
+    error: () => {
+      console.log('扫描二维码出现错误');
+    },
+  });
 }
 
 const showAgreePrivacy = ref(false);
