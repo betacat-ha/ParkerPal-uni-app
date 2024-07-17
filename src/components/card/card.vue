@@ -1,5 +1,5 @@
 <template>
-  <view class="card">
+  <view class="card" :style="{ 'box-shadow': shadow ? '0 0 20rpx rgb(0 0 0 / 10%)' : '0' }">
     <!-- 如果有标题，则显示 -->
     <view v-if="shouldDisplayHeader" class="card-header">
       <view class="card-header-title">
@@ -39,6 +39,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  shadow: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 // 计算属性决定是否显示头部
@@ -48,11 +52,10 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
 <style lang="scss" scoped>
 .card {
   padding: 0 !important;
-  width: 90vw;
+  width: 100%;
   height: 100%;
   background-color: #fff;
   border-radius: 20rpx;
-  box-shadow: 0 0 20rpx rgb(0 0 0 / 10%);
 
   .card-header {
     display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <Card>
+  <Card :shadow="false">
     <!-- 图标按钮组 -->
     <view class="icon-buttons">
       <view
@@ -24,9 +24,9 @@
 
 <script>
 export default {
-  name: 'FunctionCard',
+  name: 'OrderCard',
   props: {
-    functionData: {
+    orderData: {
       type: Object,
       default: () => ({}),
     },

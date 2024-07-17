@@ -1,7 +1,7 @@
 <template>
   <view class="page-wrap">
-    <u-navbar title="" placeholder left-icon="" right-icon="camera-fill" />
-    <view class="flex items-center bg-white pb-30rpx pl-30rpx pr-20rpx">
+    <!-- <u-navbar title="" placeholder left-icon="" right-icon="camera-fill" /> -->
+    <view class="flex items-center bg-white pb-30rpx pl-30rpx pr-20rpx pt-30rpx">
       <view class="mr-10rpx">
         <u-avatar src="/static/images/logo.png" size="70" />
       </view>
@@ -67,7 +67,7 @@
 
     <function-card /> -->
     <view class="center-container">
-      <function-card />
+      <order-card />
     </view>
 
     <view class="mt-20rpx bg-white">
@@ -97,8 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-import functionCard from './function-card.vue';
+import orderCard from './order-card.vue';
 import { useClipboard } from '@/hooks';
 
 // 创建响应式数据

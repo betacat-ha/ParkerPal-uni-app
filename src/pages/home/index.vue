@@ -22,12 +22,12 @@
       </template>
     </u-navbar>
 
-    <MerchantCard style="margin-top: 30rpx" />
-    <MerchantCard style="margin-top: 30rpx" />
+    <MerchantCard class="merchant-card" />
+    <MerchantCard class="merchant-card" />
 
     <!-- #ifdef MP-WEIXIN -->
     <!-- 隐私协议组件 -->
-    <AgreePrivacy v-model="showAgreePrivacy" :disable-check-privacy="false" @agree="handleAgree" />
+    <!-- <AgreePrivacy v-model="showAgreePrivacy" :disable-check-privacy="false" @agree="handleAgree" /> -->
     <!-- #endif -->
 
     <Tabbar />
@@ -66,73 +66,8 @@ function handleAgree() {
 </script>
 
 <style lang="scss">
-.card {
-  padding: 20rpx;
-  width: 90%;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 0 20rpx rgb(0 0 0 / 10%);
-
-  .merchant {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-
-    .logo {
-      width: 150rpx;
-      height: 150rpx;
-      border-radius: 20rpx;
-    }
-
-    .info {
-      // 垂直左对齐
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      margin-left: 20rpx;
-
-      .name {
-        font-size: 32rpx;
-        color: #333;
-      }
-
-      .address {
-        font-size: 24rpx;
-        color: #999;
-      }
-    }
-  }
-
-  .plan {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20rpx;
-
-    .info {
-      display: flex;
-      justify-content: left;
-      align-items: center;
-
-      .tag {
-        padding: 2rpx 15rpx;
-        font-size: smaller;
-        color: #fb7900;
-        border: 3rpx solid #fb7900;
-        border-radius: 15rpx;
-      }
-
-      .name {
-        margin-left: 15rpx;
-      }
-    }
-
-    .price {
-      font-size: 32rpx;
-      color: #fb7900;
-    }
-  }
+.merchant-card {
+  margin-top: 30rpx;
+  width: 90vw;
 }
 </style>
