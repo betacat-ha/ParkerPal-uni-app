@@ -5,18 +5,15 @@
       <view
         v-for="(icon, index) in icons"
         :key="index"
-        class="icon-wrapper"
         @click="navigateToPage(icon.pagePath)"
       >
         <u-icon
+          :label="icon.text"
+          label-pos="bottom"
           :name="icon.name"
           :size="icon.size"
           :color="icon.color"
-          class="icon-button"
         />
-        <span class="icon-text">
-          {{ icon.text }}
-        </span>
       </view>
     </view>
   </Card>
@@ -35,36 +32,36 @@ export default {
     return {
       icons: [
         {
-          name: 'home',
-          size: '48rpx',
+          name: 'order',
+          size: '50rpx',
           color: '#696969',
           text: '全部订单',
           pagePath: '/pages/home/index', // 首页路由路径
         },
         {
-          name: 'setting',
-          size: '48rpx',
+          name: 'clock',
+          size: '50rpx',
           color: '#696969',
           text: '待付款',
           pagePath: '/pages/setting/index', // 设置路由路径
         },
         {
-          name: 'home',
-          size: '48rpx',
+          name: 'reload',
+          size: '50rpx',
           color: '#696969',
           text: '退款/取消',
           pagePath: '/pages/home/index', // 首页路由路径
         },
         {
-          name: 'setting',
-          size: '48rpx',
+          name: 'chat',
+          size: '50rpx',
           color: '#696969',
           text: '待评价',
           pagePath: '/pages/setting/index', // 设置路由路径
         },
         {
-          name: 'setting',
-          size: '48rpx',
+          name: 'coupon',
+          size: '50rpx',
           color: '#696969',
           text: '钱包卡卷',
           pagePath: '/pages/setting/index', // 设置路由路径
@@ -84,37 +81,10 @@ export default {
 </script>
 
 <style lang="scss">
-.function-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px; /* 调整图标之间的间距 */
-}
-
 .icon-buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px; /* 调整图标按钮组之间的间距 */
-}
-
-.icon-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #007aff;
-  transition: transform 0.3s;
-}
-
-.icon-button:hover .icon {
-  transform: scale(1.1);
-}
-
-.icon-text {
-  font-size: 14px;
-  margin-top: 5px;
 }
 </style>
