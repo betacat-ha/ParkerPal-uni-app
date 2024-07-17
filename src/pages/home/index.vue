@@ -6,6 +6,21 @@
         {{ title }}
       </text>
     </view>
+    <u-navbar :safe-area-inset-top="true" :placeholder="true">
+      <template #left>
+        <view class="u-nav-slot" style="width: 68vw;">
+          <view class="flex items-center justify-between">
+            <text style="padding-right: 20rpx;">
+              智泊无忧
+            </text>
+            <u-search
+              v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场"
+              @search="handleSearch" @click-icon="handleScan"
+            />
+          </view>
+        </view>
+      </template>
+    </u-navbar>
 
     <MerchantCard style="margin-top: 30rpx" />
     <MerchantCard style="margin-top: 30rpx" />
@@ -24,6 +39,24 @@ import MerchantCard from './merchant-card.vue';
 
 const title = ref<string>();
 title.value = import.meta.env.VITE_APP_TITLE;
+
+const searchKeyword = ref<string>();
+function handleSearch() {
+  console.log('搜索关键字：', searchKeyword.value);
+  uni.$u.toast(`搜索关键字：${searchKeyword.value}`);
+}
+function handleScan() {
+  uni.scanCode({
+    onlyFromCamera: true,
+    success: (res) => {
+      console.log('扫描二维码成功,结果:', res.result);
+      uni.$u.toast(`${res.result}`);
+    },
+    error: () => {
+      console.log('扫描二维码出现错误');
+    },
+  });
+}
 
 const showAgreePrivacy = ref(false);
 // 同意隐私协议
