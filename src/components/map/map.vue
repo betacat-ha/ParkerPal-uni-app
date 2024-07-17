@@ -8,23 +8,23 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted } from 'vue';
+import { getCurrentInstance, onBeforeUnmount, onMounted } from 'vue';
 
+const { proxy } = getCurrentInstance();
 /**
  * 踩坑
  * 1. import * as om from xx 不行
  * 2. vite-plugin-commonjs 不行
  * 3. vite-plugin-require 没有正确配置插件，还不知道
  */
-const om = await import('@/static/js/ooomap.xcx.min.js');
+const om = require('../../static/js/ooomap.xcx.min.js');
 
 // ooomap map 实例
 let map = null;
 let canvas2d, canvas3d;
 
-// 封装在微信小程序中得到domElement的方法
 function getElement(id, callback) {
-  uni.createSelectorQuery().select(`#${id}`).node().exec((res) => {
+  proxy.createSelectorQuery().select(`#${id}`).node().exec((res) => {
     const node = res[0].node;
 
     if (callback) {
@@ -60,7 +60,7 @@ function createOMMap(canvas3d, canvas2d) {
 
     // 在ooomap编辑器中生成，或由官方提供
     verifyUrl: 'https://www.ooomap.com/ooomap-verify/check/50689bb01e0ac2a9d93bb18f1e1260f8',
-    appID: '87ae6a00e5ca4e33dd7e858a66b73475',
+    appID: 'wxa1a174ebef6d4ca6',
 
   });
 
