@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-tabbar :value="userStore.tabValue" :fixed="true" :placeholder="true" :safe-area-inset-bottom="true">
+    <u-tabbar :value="userStore.tabValue" :fixed="true" :placeholder="true" :safe-area-inset-bottom="true" active-color="#66CDAA">
       <u-tabbar-item
         v-for="(item, index) in tabbarList" :key="index" :icon="getTabbarIcon(item, index)"
         :text="item.text" @click="handleTabbarItemClick(item, index)"
@@ -18,19 +18,19 @@ const tabbarList = reactive([
   {
     pagePath: '/pages/home/index',
     text: '首页',
-    iconPath: '',
+    iconPath: 'home',
     selectedIconPath: '',
   },
   {
     pagePath: '/pages/driving/index',
     text: '导航',
-    iconPath: '',
+    iconPath: 'map',
     selectedIconPath: '',
   },
   {
     pagePath: '/pages/me/index',
     text: '我的',
-    iconPath: '',
+    iconPath: 'account',
     selectedIconPath: '',
   },
 ]);
