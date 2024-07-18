@@ -53,6 +53,7 @@
 import uCode from 'uview-plus/components/u-code/u-code.vue';
 import type { CSSProperties } from 'vue';
 import { setToken } from '@/utils/auth';
+import { post } from '@/utils/request/index';
 
 const tel = ref<string>('18502811111');
 const code = ref<string>('1234');
@@ -96,8 +97,18 @@ function getCode() {
 }
 function submit() {
   if (uni.$u.test.mobile(tel.value)) {
-    setToken('1234567890');
-    uni.reLaunch({ url: '/pages/tab/home/index' });
+    post({
+      url: '/user/login',
+      data: {
+        mobile: tel.value,
+        code: code.value,
+      },
+    }).then((res) => {
+      uni.$u.toast('登录成功');
+      setToken(res);
+      uni.reLaunch({ url: '/' });
+    }).catch(() => {
+    });
   }
 }
 </script>

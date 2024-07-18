@@ -80,7 +80,7 @@ function responseInterceptors() {
       const custom = config?.custom;
 
       // 请求成功则返回结果
-      if (data.code === 200)
+      if (data.code === 200 || data.code === '200')
         return data || {};
 
       // 登录状态失效，重新登录
@@ -110,7 +110,7 @@ function responseInterceptors() {
 
       // 如果没有显式定义custom的toast参数为false的话，默认对报错进行toast弹出提示
       if (custom?.toast !== false)
-        uni.$u.toast(data.message);
+        uni.$u.toast(data.msg);
 
       // 如果需要catch返回，则进行reject
       if (custom?.catch) {

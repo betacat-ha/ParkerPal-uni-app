@@ -17,8 +17,8 @@ export function setupRequest() {
 export function request<T = any>(config: HttpRequestConfig): Promise<T> {
   return new Promise((resolve) => {
     uni.$u.http.request(config).then((res: IResponse) => {
-      const { result } = res;
-      resolve(result as T);
+      const { data } = res;
+      resolve(data as T);
     });
   });
 }

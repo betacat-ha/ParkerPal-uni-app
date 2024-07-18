@@ -18,7 +18,7 @@ const storage = {
   },
   getJSON(key: any) {
     const value = this.get(key);
-    if (value != null)
+    if (value != null && value !== '')
       return JSON.parse(value);
   },
   remove(key: string) {

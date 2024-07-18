@@ -6,7 +6,7 @@
         <view class="mr-10rpx">
           <u-avatar src="/static/images/logo.png" size="70" />
         </view>
-        <view class="flex-1">
+        <view class="flex-1" @click="doLogin">
           <view class="pb-20rpx font-size-36rpx">
             智泊无忧
           </view>
@@ -47,7 +47,6 @@
 
 <script setup lang="ts">
 import orderCard from './order-card.vue';
-import { useClipboard } from '@/hooks';
 
 // 创建响应式数据
 // const list = reactive([
@@ -83,6 +82,13 @@ const list2 = reactive([
     title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
   },
 ]);
+
+function doLogin() {
+  uni.navigateTo({
+    url: '/pages/me/login/index',
+  });
+}
+
 // // 创建对子组件的引用
 // const uToastRef = ref(null);
 

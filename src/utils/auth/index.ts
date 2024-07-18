@@ -1,5 +1,5 @@
-const TokenKey = 'admin-token';
-const TokenPrefix = 'Bearer ';
+const TokenKey = 'token';
+const TokenPrefix = 'Parkerpal ';
 function isLogin() {
   return !!uni.getStorageSync(TokenKey);
 }
