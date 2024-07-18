@@ -106,7 +106,7 @@ function submit() {
     }).then((res) => {
       uni.$u.toast('登录成功');
       setToken(res);
-      uni.reLaunch({ url: '/' });
+      uni.switchTab({ url: '/pages/me/index' });
     }).catch(() => {
     });
   }
