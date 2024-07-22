@@ -10,19 +10,20 @@ import type { LoginParams } from '@/api/user/types';
 import { clearToken, setToken } from '@/utils/auth';
 
 const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    info: {
-      id: '',
-      name: '',
-      avatar: '',
-    },
-    token: '',
-    tabValue: 0, // 默认选中的索引
-  }),
+  state: (): UserState => {
+    return {
+      info: {
+        id: '0',
+        name: '智泊无忧',
+        avatar: '',
+        weixinId: '',
+      },
+      token: '',
+      tabValue: 0, // 默认选中的索引
+    };
+  },
   getters: {
-    userInfo(state: UserState): UserState {
-      return { ...state };
-    },
+    // userInfo: state => state.info,
   },
   actions: {
     // 设置用户的信息
@@ -33,6 +34,7 @@ const useUserStore = defineStore('user', {
       this.tabValue = active;
     },
     async info() {
+      console.log('开始获取信息');
       const result = await getUserProfile();
       this.setUserInfo(result);
     },
