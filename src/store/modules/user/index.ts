@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import type { UserState, providerType } from './types';
 import {
+  getTextCode,
   getUserProfile,
-  loginByCode,
-  login as userLogin,
+  loginByAuthCode,
+  loginByPhone as userLoginByPhone,
   logout as userLogout,
 } from '@/api/user/index';
-import type { LoginParams } from '@/api/user/types';
+import type { LoginByPhoneParams } from '@/api/user/types';
 import { clearToken, setToken } from '@/utils/auth';
 
 const useUserStore = defineStore('user', {
@@ -14,7 +15,7 @@ const useUserStore = defineStore('user', {
     return {
       info: {
         id: '0',
-        name: '智泊无忧',
+        name: '',
         avatar: '',
         weixinId: '',
       },
@@ -39,13 +40,23 @@ const useUserStore = defineStore('user', {
       this.setUserInfo(result);
     },
     // 异步登录并存储token
-    login(loginForm: LoginParams) {
+    loginByPhone(loginForm: LoginByPhoneParams) {
       return new Promise((resolve, reject) => {
-        userLogin(loginForm).then((res) => {
+        userLoginByPhone(loginForm).then((res) => {
           const token = res.token;
           if (token) {
             setToken(token);
           }
+          resolve(res);
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    },
+    // 异步登录并存储token
+    getCodeByPhone(phone: string) {
+      return new Promise((resolve, reject) => {
+        getTextCode({ phone }).then((res) => {
           resolve(res);
         }).catch((error) => {
           reject(error);
@@ -64,7 +75,7 @@ const useUserStore = defineStore('user', {
           provider,
           success: async (result: UniApp.LoginRes) => {
             if (result.code) {
-              const res = await loginByCode({ code: result.code });
+              const res = await loginByAuthCode({ code: result.code });
               resolve(res);
             }
             else {

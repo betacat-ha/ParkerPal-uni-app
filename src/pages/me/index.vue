@@ -6,14 +6,12 @@
         <view class="mr-10rpx">
           <u-avatar src="/static/images/logo.png" size="70" />
         </view>
-        <view class="flex-1" @click="userInfo == null ? doLogin() : doLogout();">
+        <view class="flex-1" @click="userInfo.name === '' ? doLogin() : doLogout();">
           <view class="pb-20rpx font-size-36rpx">
-            智泊无忧
-            <!-- {{ userInfo.name == null ? '未登录' : userInfo.name }} -->
+            {{ userInfo.name === '' ? '未登录' : userInfo.name }}
           </view>
           <view class="u-tips-color font-size-28rpx">
-            微信号:Parkerpal
-            <!-- {{ userInfo.weixinId == null ? '点这里可以登录' : `微信号：${userInfo.weixinId}` }} -->
+            {{ userInfo.name === '' ? '点这里可以登录' : `微信号：${userInfo.weixinId}` }}
           </view>
         </view>
         <view class="ml-10rpx p-10rpx">
@@ -22,18 +20,6 @@
         <view class="ml-10rpx p-10rpx">
           <u-icon name="arrow-right" color="#969799" />
         </view>
-      </view>
-    </Card>
-
-    <Card left-title="Pinia调试">
-      <u-button @click="printUserInfo">
-        从服务器获取
-      </u-button>
-      <view>
-        常规方法获取userInfo: {{ userInfo }}
-      </view>
-      <view>
-        解构state获取userInfo: {{ userStore.$state.info }}
       </view>
     </Card>
 
@@ -58,7 +44,7 @@
 
     <Tabbar />
 
-    <u-action-sheet :actions="sheet.list" :show="sheet.show" cancel-text="取消" @select="sheetOnSelect" @close="sheet.show = false" />
+    <u-action-sheet :actions="sheet.list" :title="sheet.title" :show="sheet.show" :safe-area="true" cancel-text="取消" @select="sheetOnSelect" @close="sheet.show = false" />
   </view>
 </template>
 
@@ -88,21 +74,11 @@ const list2 = reactive([
 ]);
 
 const userStore = useUserStore();
-const userInfo = storeToRefs(userStore).info;
-
-// 异步获取用户信息并打印
-async function printUserInfo() {
-  try {
-    await userStore.info(); // 获取用户信息
-  }
-  catch (error) {
-    console.error('Failed to get user info:', error);
-  }
-}
+const userInfo = userStore.$state.info;
 
 const sheet = ref({
   show: false,
-  title: '提示',
+  title: '',
   list: [] as sheetListModel[],
 });
 
@@ -118,6 +94,7 @@ function doLogin() {
 
 function doLogout() {
   console.log('doLogout');
+  sheet.value.title = '';
   sheet.value.list = [{
     name: '退出登录',
     callback: () => {
@@ -127,6 +104,14 @@ function doLogout() {
   }];
   sheet.value.show = true;
 }
+
+function fetchUserInfo() {
+  userStore.info();
+}
+
+onMounted(() => {
+  fetchUserInfo();
+});
 </script>
 
 <style lang="scss">

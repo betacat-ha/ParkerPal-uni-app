@@ -1,9 +1,14 @@
 export interface LoginParams {
+  username: string
+  password: string
+}
+
+export interface LoginByPhoneParams {
   phone: string
   code: string
 }
 
-export interface LoginByCodeParams {
+export interface LoginByAuthCodeParams {
   code: string
 }
 
