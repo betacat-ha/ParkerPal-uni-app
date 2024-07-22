@@ -3,6 +3,52 @@
 ### 技术栈
 uni-app、vue3、uview-plus、ooomap
 
+### 开发
+
+#### API接口
+
+服务端返回的结果统一为json格式，返回结果格式如下：
+
+``` json
+{
+  "status": 0, // 状态码
+  "msg": "", // 提示信息
+  "data": {
+    "code": 0 // 业务状态码（可选）
+    // 业务数据
+  }
+}
+```
+
+获取用户信息成功的响应结果示例：
+
+``` json
+{
+  "status": 200,
+  "msg": "success",
+  "data": {
+    "code": 200,
+    "info": {
+      "id": "1",
+      "name": "智泊无忧",
+      "avatar": "",
+      "weixinId": "ParkerPal"
+    },
+    "token": "eyJhbGciOiJIUz(省略后续内容)"
+  }
+}
+```
+
+获取用户信息失败的响应结果示例：
+
+``` json
+{
+  "status": 403,
+  "msg": "登录已失效",
+  "data": ""
+}
+```
+
 ### 部署
 
 ```bash
