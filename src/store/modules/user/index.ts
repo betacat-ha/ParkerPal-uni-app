@@ -34,7 +34,7 @@ const useUserStore = defineStore('user', {
     setTabValue(active: number) {
       this.tabValue = active;
     },
-    async info() {
+    async fetchInfo() {
       console.log('开始获取信息');
       const result = await getUserProfile();
       this.setUserInfo(result);
@@ -53,7 +53,7 @@ const useUserStore = defineStore('user', {
         });
       });
     },
-    // 异步登录并存储token
+    // 获取手机验证码
     getCodeByPhone(phone: string) {
       return new Promise((resolve, reject) => {
         getTextCode({ phone }).then((res) => {

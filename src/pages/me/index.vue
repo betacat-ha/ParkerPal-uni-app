@@ -74,7 +74,7 @@ const list2 = reactive([
 ]);
 
 const userStore = useUserStore();
-const userInfo = userStore.$state.info;
+const userInfo = storeToRefs(userStore).info;
 
 const sheet = ref({
   show: false,
@@ -106,7 +106,7 @@ function doLogout() {
 }
 
 function fetchUserInfo() {
-  userStore.info();
+  userStore.fetchInfo();
 }
 
 onMounted(() => {
