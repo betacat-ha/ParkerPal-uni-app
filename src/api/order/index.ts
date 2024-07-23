@@ -7,7 +7,7 @@ import type { OrderInfo, OrderState } from '@/store/modules/order/types';
 
 enum URL {
   allList = '/order/all',
-  listByPage = '/order/',
+  listByPage = '/order/page',
 }
 
 export const getAllList = () => get<OrderState>({ url: URL.allList });
