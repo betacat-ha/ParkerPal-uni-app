@@ -6,7 +6,7 @@
         <view class="mr-10rpx">
           <u-avatar src="/static/images/logo.png" size="70" />
         </view>
-        <view class="flex-1" @click="userInfo.name === '' ? doLogin() : doLogout();">
+        <view class="ml-10rpx flex-1" @click="userInfo.name === '' ? doLogin() : doLogout();">
           <view class="pb-20rpx font-size-36rpx">
             {{ userInfo.name === '' ? '未登录' : userInfo.name }}
           </view>

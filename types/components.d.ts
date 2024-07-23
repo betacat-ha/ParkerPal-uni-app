@@ -10,6 +10,7 @@ declare module 'vue' {
     AgreePrivacy: typeof import('./../src/components/agree-privacy/agree-privacy.vue')['default']
     Card: typeof import('./../src/components/card/card.vue')['default']
     Map: typeof import('./../src/components/map/map.vue')['default']
+    PiniaDebug: typeof import('./../src/components/pinia-debug/pinia-debug.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Tabbar: typeof import('./../src/components/tabbar/tabbar.vue')['default']

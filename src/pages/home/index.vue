@@ -22,6 +22,7 @@
       </template>
     </u-navbar>
 
+    <VehicleInfoCard class="merchant-card" />
     <MerchantCard class="merchant-card" />
     <MerchantCard class="merchant-card" />
 
@@ -36,6 +37,7 @@
 
 <script setup lang="ts">
 import MerchantCard from './merchant-card.vue';
+import VehicleInfoCard from './vehicle-info-card.vue';
 
 const title = ref<string>();
 title.value = import.meta.env.VITE_APP_TITLE;

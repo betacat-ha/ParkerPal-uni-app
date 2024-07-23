@@ -35,6 +35,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  titleColor: {
+    type: String,
+    default: '#a7e6ff',
+  },
   desc: {
     type: String,
     default: '',
@@ -60,7 +64,7 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
   .card-header {
     display: flex;
     flex-direction: column;
-    background: #a7e6ff;
+    background: v-bind(titleColor);
     border-radius: 20rpx 20rpx 0 0;
 
     .card-header-title {
@@ -76,8 +80,6 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
   }
 
   .slot {
-    // 就微信**搞特殊
-
     /* #ifdef MP-WEIXIN */
     padding: 20rpx;
 
@@ -87,7 +89,6 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
     margin: 20rpx;
 
     /* #endif */
-
   }
 }
 </style>
