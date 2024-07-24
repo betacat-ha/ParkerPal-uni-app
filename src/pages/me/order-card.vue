@@ -13,6 +13,7 @@
           :name="icon.name"
           :size="icon.size"
           :color="icon.color"
+          @click="navigateToPage(icon.pagePath)"
         />
       </view>
     </view>
@@ -36,35 +37,35 @@ export default {
           size: '50rpx',
           color: '#696969',
           text: '全部订单',
-          pagePath: '/pages/home/index', // 首页路由路径
+          pagePath: '/pages/me/order',
         },
         {
           name: 'clock',
           size: '50rpx',
           color: '#696969',
           text: '待付款',
-          pagePath: '/pages/setting/index', // 设置路由路径
+          pagePath: '/pages/me/order',
         },
         {
           name: 'reload',
           size: '50rpx',
           color: '#696969',
           text: '退款/取消',
-          pagePath: '/pages/home/index', // 首页路由路径
+          pagePath: '/pages/me/order',
         },
         {
           name: 'chat',
           size: '50rpx',
           color: '#696969',
           text: '待评价',
-          pagePath: '/pages/setting/index', // 设置路由路径
+          pagePath: '/pages/me/order',
         },
         {
           name: 'coupon',
           size: '50rpx',
           color: '#696969',
           text: '钱包卡卷',
-          pagePath: '/pages/setting/index', // 设置路由路径
+          pagePath: '/pages/me/order',
         },
 
       ],
@@ -72,6 +73,7 @@ export default {
   },
   methods: {
     navigateToPage(pagePath) {
+      console.log('Navigating to:', pagePath);
       uni.navigateTo({
         url: pagePath,
       });
@@ -85,6 +87,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px; /* 调整图标按钮组之间的间距 */
+  gap: 10px;
 }
 </style>

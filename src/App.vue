@@ -8,10 +8,6 @@ onLaunch(() => {
 });
 onShow(() => {
   console.log('App Show');
-  // 隐藏原生标题栏
-  // #ifdef MP-WEIXIN
-  uni.hideTabBar();
-  // #endif
 });
 onHide(() => {
   console.log('App Hide');

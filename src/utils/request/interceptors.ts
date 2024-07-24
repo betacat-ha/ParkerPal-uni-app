@@ -80,11 +80,11 @@ function responseInterceptors() {
       const custom = config?.custom;
 
       // 请求成功则返回结果
-      if (data.code === 200 || data.code === '200')
+      if (data.status === 200 || data.status === '200')
         return data || {};
 
       // 登录状态失效，重新登录
-      if (data.code === 401) {
+      if (data.status === 401) {
         // 是否在获取token中,防止重复获取
         if (!isRefreshing) {
           // 修改登录状态为true

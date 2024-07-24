@@ -8,8 +8,8 @@
       <view class="u-border-bottom my-40rpx flex">
         <input v-model="code" class="flex-1" type="number" placeholder="请输入验证码">
         <view>
-          <u-code ref="uCodeRef" @change="codeChange" />
-          <u-button :text="tips" type="success" size="mini" @click="getCode" />
+          <u-code ref="uCodeRef" keep-running @change="codeChange" />
+          <u-button type="primary" :text="tips" size="mini" @click="getCode" />
         </view>
       </view>
       <button class="login-btn" :style="[inputStyle]" @tap="submit">
@@ -26,7 +26,7 @@
       </view>
     </view>
     <view class="login-type-wrap">
-      <view class="item wechat">
+      <view class="item wechat" @click="userStore.authLogin">
         <view class="icon">
           <u-icon size="35" name="weixin-fill" color="rgb(83,194,64)" />
         </view>
@@ -52,11 +52,12 @@
 <script setup lang="ts">
 import uCode from 'uview-plus/components/u-code/u-code.vue';
 import type { CSSProperties } from 'vue';
-import { setToken } from '@/utils/auth';
-import { post } from '@/utils/request/index';
+import { useUserStore } from '@/store/index';
 
-const tel = ref<string>('18502811111');
-const code = ref<string>('1234');
+const userStore = useUserStore();
+
+const tel = ref<string>('15012345678');
+const code = ref<string>('4321');
 const tips = ref<string>();
 const uCodeRef = ref<InstanceType<typeof uCode> | null>(null);
 
@@ -80,16 +81,18 @@ function codeChange(text: string) {
 
 function getCode() {
   if (uCodeRef.value?.canGetCode) {
-    // 模拟向后端请求验证码
     uni.showLoading({
       title: '正在获取验证码',
     });
-    setTimeout(() => {
+
+    userStore.getCodeByPhone(tel.value).then(() => {
       uni.hideLoading();
       uni.$u.toast('验证码已发送');
-      // 通知验证码组件内部开始倒计时
       uCodeRef.value?.start();
-    }, 1000);
+    }).catch(() => {
+      uni.hideLoading();
+      console.error('获取验证码失败');
+    });
   }
   else {
     uni.$u.toast('倒计时结束后再发送');
@@ -97,15 +100,13 @@ function getCode() {
 }
 function submit() {
   if (uni.$u.test.mobile(tel.value)) {
-    post({
-      url: '/user/login',
-      data: {
-        mobile: tel.value,
-        code: code.value,
-      },
-    }).then((res) => {
+    userStore.loginByPhone({
+      phone: tel.value,
+      code: code.value,
+    }).then(async () => {
+      // 获取用户信息
+      await userStore.fetchInfo();
       uni.$u.toast('登录成功');
-      setToken(res);
       uni.switchTab({ url: '/pages/me/index' });
     }).catch(() => {
     });
@@ -166,5 +167,9 @@ function submit() {
   .link {
     color: $u-warning;
   }
+}
+
+page {
+  background-color: #fff;
 }
 </style>

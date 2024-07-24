@@ -29,6 +29,16 @@
       "style": {
         "navigationBarTitleText": "我的"
       }
+    },
+    {
+      "path": "pages/me/order",
+      "style": {
+      }
+    },
+    {
+      "path": "pages/me/VehicleManagement",
+      "style": {
+      }
     }
   ],
   "subPackages": [
@@ -39,12 +49,29 @@
           "path": "index"
         }
       ]
+    },
+    {
+      "root": "pages/home/merchant",
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "附近的停车场"
+          }
+        },
+        {
+          "path": "detail",
+          "style": {
+            "navigationBarTitleText": "商户详情"
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "智泊无忧",
-    "navigationBarBackgroundColor": "#3572EF",
+    "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#f3f5f9"
   },
   "tabBar": {

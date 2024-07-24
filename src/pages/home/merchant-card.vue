@@ -14,7 +14,7 @@
     </view>
 
     <!-- 列出套餐 -->
-    <view v-for="(item, index) in merchantData.plan" :key="index" class="plan">
+    <view v-for="(item, index) in merchantData.plans" :key="index" class="plan">
       <view class="info">
         <view class="tag">
           {{ item.tag }}
@@ -42,7 +42,7 @@ export default {
         name: '广东技术师范大学体育馆',
         address: '中山大道西293号',
         logo: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
-        plan: [
+        plans: [
           {
             name: '夜间套餐（1月）',
             price: 100,

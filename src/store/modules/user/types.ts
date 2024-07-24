@@ -4,6 +4,7 @@ export interface UserInfo {
   id: string | undefined
   name: string | undefined
   avatar: string | undefined
+  weixinId: string | undefined
 }
 
 export interface UserState {

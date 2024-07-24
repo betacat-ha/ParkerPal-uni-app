@@ -1,28 +1,30 @@
 import { defineStore } from 'pinia';
 import type { UserState, providerType } from './types';
 import {
+  getTextCode,
   getUserProfile,
-  loginByCode,
-  login as userLogin,
+  loginByAuthCode,
+  loginByPhone as userLoginByPhone,
   logout as userLogout,
 } from '@/api/user/index';
-import type { LoginParams } from '@/api/user/types';
+import type { LoginByPhoneParams } from '@/api/user/types';
 import { clearToken, setToken } from '@/utils/auth';
 
 const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    info: {
-      id: '',
-      name: '',
-      avatar: '',
-    },
-    token: '',
-    tabValue: 0, // 默认选中的索引
-  }),
+  state: (): UserState => {
+    return {
+      info: {
+        id: '0',
+        name: '',
+        avatar: '',
+        weixinId: '',
+      },
+      token: '',
+      tabValue: 0, // 默认选中的索引
+    };
+  },
   getters: {
-    userInfo(state: UserState): UserState {
-      return { ...state };
-    },
+    // userInfo: state => state.info,
   },
   actions: {
     // 设置用户的信息
@@ -32,18 +34,29 @@ const useUserStore = defineStore('user', {
     setTabValue(active: number) {
       this.tabValue = active;
     },
-    async info() {
+    async fetchInfo() {
+      console.log('开始获取信息');
       const result = await getUserProfile();
       this.setUserInfo(result);
     },
     // 异步登录并存储token
-    login(loginForm: LoginParams) {
+    loginByPhone(loginForm: LoginByPhoneParams) {
       return new Promise((resolve, reject) => {
-        userLogin(loginForm).then((res) => {
+        userLoginByPhone(loginForm).then((res) => {
           const token = res.token;
           if (token) {
             setToken(token);
           }
+          resolve(res);
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    },
+    // 获取手机验证码
+    getCodeByPhone(phone: string) {
+      return new Promise((resolve, reject) => {
+        getTextCode({ phone }).then((res) => {
           resolve(res);
         }).catch((error) => {
           reject(error);
@@ -62,7 +75,7 @@ const useUserStore = defineStore('user', {
           provider,
           success: async (result: UniApp.LoginRes) => {
             if (result.code) {
-              const res = await loginByCode({ code: result.code });
+              const res = await loginByAuthCode({ code: result.code });
               resolve(res);
             }
             else {

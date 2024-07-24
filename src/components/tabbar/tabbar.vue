@@ -13,6 +13,9 @@
 import { reactive } from 'vue';
 import { useUserStore } from '@/store/index.ts';
 
+// 隐藏原生TabBar
+uni.hideTabBar();
+
 const userStore = useUserStore();
 const tabbarList = reactive([
   {
