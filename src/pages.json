@@ -46,6 +46,23 @@
           "path": "index"
         }
       ]
+    },
+    {
+      "root": "pages/home/merchant",
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "商户列表"
+          }
+        },
+        {
+          "path": "detail",
+          "style": {
+            "navigationBarTitleText": "商户详情"
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {
