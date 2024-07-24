@@ -1,7 +1,7 @@
 <template>
   <view class="page-wrap">
     <!-- <u-navbar title="" placeholder left-icon="" right-icon="camera-fill" /> -->
-    <Card class="card-container" :shadow="false">
+    <Card :shadow="false">
       <view class="flex items-center">
         <view class="mr-10rpx">
           <u-avatar src="/static/images/logo.png" size="70" />
@@ -23,7 +23,7 @@
       </view>
     </Card>
 
-    <order-card class="card-container" />
+    <order-card />
     <carCardVue />
     <view class="bg-white">
       <u-cell-group>
@@ -120,10 +120,6 @@ onMounted(() => {
   flex-direction: column;
   gap: 20rpx;
   padding: 20rpx;
-}
-
-.card-container {
-  width: 95vw;
 }
 
 .bg-white {
