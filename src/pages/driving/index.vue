@@ -1,12 +1,10 @@
 <template>
   <view>
-    <text>路径规划</text>
-    <Map />
+    <indoor-map />
 
     <Tabbar />
-  </view>>
+  </view>
 </template>
 
 <script setup lang="ts">
-
 </script>

@@ -18,7 +18,10 @@
     {
       "path": "pages/driving/index",
       "style": {
-        "navigationBarTitleText": "导航"
+        "navigationBarTitleText": "导航",
+        "usingComponents": {
+          "indoor-map": "/wxcomponents/indoormap/indoormap"
+        }
       }
     },
     {
