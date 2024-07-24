@@ -53,7 +53,7 @@
         {
           "path": "index",
           "style": {
-            "navigationBarTitleText": "商户列表"
+            "navigationBarTitleText": "附近的停车场"
           }
         },
         {
@@ -66,9 +66,9 @@
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "智泊无忧",
-    "navigationBarBackgroundColor": "#3572EF",
+    "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#f3f5f9"
   },
   "tabBar": {

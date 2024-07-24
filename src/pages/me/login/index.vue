@@ -168,4 +168,8 @@ function submit() {
     color: $u-warning;
   }
 }
+
+page {
+  background-color: #fff;
+}
 </style>
