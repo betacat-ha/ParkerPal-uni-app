@@ -10,7 +10,7 @@
         </view>
         <view class="content">
           <text class="license-plate">
-            {{ vehicleData.licensePlate }}
+            {{ vehicleInfo.licensePlate }}
           </text>
         </view>
       </view>
@@ -23,21 +23,26 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useVehicleStore } from '@/store/modules/vehicle';
+
+const vehicleStore = useVehicleStore();
+const vehicleInfo = computed(() => vehicleStore.vehicleData);
+
 export default {
   name: 'VehicleInfoCard',
-  props: {
-    vehicleData: {
-      type: Object,
-      default: () => ({
-        licensePlate: '粤M***1N',
-      }),
-    },
-  },
-  methods: {
-    goToPage() {
-      // 替换下面的路径为你的路由路径
-      this.$router.push('/pages/me/VehicleManagement');
-    },
+  setup() {
+    const router = useRouter();
+
+    // 定义 goToPage
+    const goToPage = () => {
+      router.push('/pages/me/VehicleManagement');
+    };
+    return {
+      vehicleInfo,
+      goToPage,
+    };
   },
 };
 </script>
