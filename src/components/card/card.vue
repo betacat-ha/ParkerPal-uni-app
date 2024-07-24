@@ -80,15 +80,7 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
   }
 
   .slot {
-    /* #ifdef MP-WEIXIN */
     padding: 20rpx;
-
-    /* #endif */
-
-    /* #ifndef MP-WEIXIN */
-    margin: 20rpx;
-
-    /* #endif */
   }
 }
 </style>
