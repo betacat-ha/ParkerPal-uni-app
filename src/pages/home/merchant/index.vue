@@ -1,6 +1,14 @@
 <template>
-  <z-paging ref="pagingRef" v-model="dataList" @query="queryList">
-    <view v-for="(item, index) in dataList" :key="index" style="padding: 20rpx;">
+  <z-paging ref="pagingRef" v-model="dataList" :safe-area-inset-bottom="false" @query="queryList">
+    <template #top>
+      <view class="search-bar">
+        <u-search
+          v-model="searchKeyword" search-icon="search" :show-action="false" placeholder="搜搜附近的停车场"
+          class="input" @search="handleSearch" @click-icon="handleScan"
+        />
+      </view>
+    </template>
+    <view v-for="(item, index) in dataList" :key="index" style="padding: 20rpx 20rpx 0 20rpx;">
       <MerchantCard :merchant-data="item" />
     </view>
   </z-paging>
@@ -42,3 +50,13 @@ async function queryList(pageNo: number, pageSize: number) {
   //   });
 }
 </script>
+
+<style lang="scss" scoped>
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 20rpx;
+}
+</style>

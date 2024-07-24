@@ -1,11 +1,11 @@
 <template>
   <view class="page-wrap">
-    <image class="mb-50rpx mt-200rpx h-200rpx w-200rpx" src="@/static/images/logo.png" width="200rpx" height="200rpx" />
+    <!-- <image class="mb-50rpx mt-200rpx h-200rpx w-200rpx" src="@/static/images/logo.png" width="200rpx" height="200rpx" />
     <view class="flex justify-center">
       <text class="font-size-36rpx color-gray-700">
         {{ title }}
       </text>
-    </view>
+    </view> -->
     <u-navbar :safe-area-inset-top="true" :placeholder="true">
       <template #left>
         <view class="u-nav-slot" style="width: 68vw;">
@@ -22,7 +22,11 @@
       </template>
     </u-navbar>
 
-    <Card left-title="Pinia调试">
+    <view class="bg-white" />
+
+    <u-swiper :list="bannerList" key-name="image" :autoplay="true" circular show-title />
+
+    <!-- <Card left-title="Pinia调试">
       <u-button @click="merchantStore.fetchAllInfo()">
         执行命令
       </u-button>
@@ -30,7 +34,7 @@
         state数据: {{ merchantList }}
       </view>
       <slot class="mg-20" />
-    </Card>
+    </Card> -->
 
     <VehicleInfoCard class="width-100" />
 
@@ -42,9 +46,9 @@
         查看更多 >
       </view>
     </view>
-
-    <MerchantCard class="width-100" />
-    <MerchantCard class="width-100" />
+    <view v-for="(item, index) in merchantList" :key="index" class="width-100">
+      <MerchantCard :merchant-data="item" />
+    </view>
 
     <!-- #ifdef MP-WEIXIN -->
     <!-- 隐私协议组件 -->
@@ -61,10 +65,32 @@ import VehicleInfoCard from './vehicle-info-card.vue';
 import { useMerchantStore } from '@/store/index';
 
 const merchantStore = useMerchantStore();
-const merchantList = storeToRefs(merchantStore);
+const merchantList = storeToRefs(merchantStore).list;
 
 const title = ref<string>();
 title.value = import.meta.env.VITE_APP_TITLE;
+
+onShow(() => {
+  merchantStore.fetchInfo({
+    page: 0,
+    limit: 3,
+  });
+});
+
+const bannerList = reactive([
+  {
+    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
+    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+  },
+  {
+    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+    title: '身无彩凤双飞翼，心有灵犀一点通',
+  },
+  {
+    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
+    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
+  },
+]);
 
 const searchKeyword = ref<string>();
 function handleSearch() {
@@ -127,5 +153,9 @@ function navigateToMerchant() {
     font-size: 24rpx;
     color: #909399;
   }
+}
+
+.bg-white {
+  background-color: white;
 }
 </style>
