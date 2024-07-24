@@ -5,6 +5,7 @@ import { createPinia } from 'pinia';
 import useAppStore from './modules/app';
 import useUserStore from './modules/user';
 import useOrderStore from './modules/order';
+import useMerchantStore from './modules/merchant';
 
 // import piniaPersist from 'pinia-plugin-persist-uni';
 
@@ -17,5 +18,5 @@ function setupStore(app: App) {
 }
 
 // 导出模块
-export { useAppStore, useUserStore, useOrderStore };
+export { useAppStore, useUserStore, useOrderStore, useMerchantStore };
 export default setupStore;
