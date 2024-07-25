@@ -9,13 +9,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     AgreePrivacy: typeof import('./../src/components/agree-privacy/agree-privacy.vue')['default']
     Card: typeof import('./../src/components/card/card.vue')['default']
-<<<<<<< HEAD
-=======
-    Map: typeof import('./../src/components/map/map.vue')['default']
     PiniaDebug: typeof import('./../src/components/pinia-debug/pinia-debug.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
->>>>>>> da943cc3d1013fe33a0edd27a9888109ee627ccd
     Tabbar: typeof import('./../src/components/tabbar/tabbar.vue')['default']
   }
 }
