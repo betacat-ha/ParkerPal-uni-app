@@ -46,7 +46,7 @@
         查看更多 >
       </view>
     </view>
-    <view v-for="(item, index) in merchantList" :key="index" class="width-100">
+    <view v-for="(item, index) in merchantList" :key="index" class="width-100" @click="navigateToMerchantByID(item.id)">
       <MerchantCard :merchant-data="item" />
     </view>
 
@@ -116,9 +116,17 @@ function handleAgree() {
   console.log('同意隐私政策');
 }
 
+// 点击查看更多
 function navigateToMerchant() {
   uni.navigateTo({
     url: '/pages/home/merchant/index',
+  });
+}
+
+// 点击商户卡片
+function navigateToMerchantByID(id: string) {
+  uni.navigateTo({
+    url: `/pages/home/merchant/detail?id=${id}`,
   });
 }
 </script>

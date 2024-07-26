@@ -1,3 +1,5 @@
+import type { SwiperItem } from '../common/type';
+
 export interface Plan {
   id: number
   name: string
@@ -17,6 +19,7 @@ export interface MerchantInfo {
   address: string
   phone: string
   logo: string
+  images: SwiperItem[]
   status: number
   createTime: string
   updateTime: string

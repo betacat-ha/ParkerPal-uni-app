@@ -2,7 +2,7 @@
   <view>
     <view v-if="showDetail">
       <view class="bg-white">
-        <u-swiper :list="list2" key-name="image" :autoplay="true" />
+        <u-swiper :list="merchantData.images" key-name="image" indicator :autoplay="true" radius="0" height="250" interval="5000" />
       </view>
       <view class="page-wrap">
         <Card class="merchant-info-card">
@@ -10,21 +10,35 @@
             <text class="title">
               {{ merchantData.name }}
             </text>
-            <text class="address">
-              {{ merchantData.address }}
-            </text>
+            <view class="address flex">
+              <u-icon name="map-fill" color="#007AFF" size="24" @click="hanleCall" />
+              <text>
+                {{ merchantData.address }}
+              </text>
+            </view>
           </view>
-          <u-gap height="1" bg-color="#cdcdcd" />
-          <view>
-            <text class="desc">
-              {{ merchantData.desc }}
+          <view style="padding: 15rpx 0rpx 15rpx 0rpx">
+            <u-gap height="1" bg-color="#cdcdcd" />
+          </view>
+          <view class="phone flex">
+            <u-icon name="phone-fill" color="#007AFF" size="24" @click="hanleCall" />
+            <text class="text">
+              {{ merchantData.phone }}
             </text>
           </view>
         </Card>
 
-        <Card left-title="停车优惠套餐" title-color="#FFFFFF">
+        <u-sticky bg-color="#f3f5f9">
+          <u-tabs :list="tabList" :scrollable="false" />
+        </u-sticky>
+
+        <Card>
           <view class="plans-card">
+            <view class="plans-title">
+              停车优惠套餐
+            </view>
             <view v-for="plan in plans" :key="plan.id">
+              <u-gap height="1" bg-color="#cdcdcd" />
               <view class="plan-cell">
                 <view class="plan-info">
                   <text class="plan-name">
@@ -39,8 +53,6 @@
                   ¥{{ plan.price }}
                 </text>
               </view>
-
-              <u-gap height="2" bg-color="#cdcdcd" />
             </view>
           </view>
         </Card>
@@ -64,15 +76,38 @@ const id = ref(0);
 const merchantData = ref<MerchantInfo>();
 const plans = ref([]);
 
-const showLoading = ref(false);
-const showDetail = ref(true);
-const showEmpty = computed(() => !showDetail.value && !showLoading.value);
+const showLoading = ref(true);
+const showDetail = ref(false);
+const showEmpty = ref(false);
+
+enum PageType {
+  Detail,
+  Empty,
+  Loading,
+}
+
+function switchPage(type: PageType) {
+  showLoading.value = false;
+  showDetail.value = false;
+  showEmpty.value = false;
+
+  switch (type) {
+    case PageType.Detail:
+      showDetail.value = true;
+      break;
+    case PageType.Empty:
+      showEmpty.value = true;
+      break;
+    case PageType.Loading:
+      showLoading.value = true;
+      break;
+  }
+}
 
 onLoad((option) => {
   id.value = option.id;
   if (!id.value) {
-    showLoading.value = false;
-    showDetail.value = false;
+    switchPage(PageType.Empty);
     console.warn('请传入商户ID');
     return;
   }
@@ -80,24 +115,21 @@ onLoad((option) => {
   getById(id.value).then((res) => {
     merchantData.value = res;
     plans.value = res.plans;
-    showLoading.value = false;
-    showDetail.value = true;
+
+    uni.setNavigationBarTitle({
+      title: merchantData.value.name,
+    });
+
+    switchPage(PageType.Detail);
   }).catch(() => {
-    showLoading.value = false;
-    showEmpty.value = true;
+    switchPage(PageType.Empty);
   });
 });
 
-const list2 = reactive([
-  {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-  },
-  {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-  },
-  {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-  },
+const tabList = reactive([
+  { name: '套餐' },
+  { name: '位置' },
+  { name: '服务' },
 ]);
 </script>
 
@@ -125,6 +157,12 @@ const list2 = reactive([
       color: #696969;
     }
   }
+
+  .phone {
+      .text {
+        font-size: 24rpx;
+      }
+    }
 }
 
 .plans-card {
@@ -132,11 +170,16 @@ const list2 = reactive([
   flex-direction: column;
   gap: 10rpx;
 
+  .plans-title {
+    font-size: 32rpx;
+    font-weight: bold;
+  }
+
   .plan-cell{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10rpx;
+    padding-top: 10rpx;
 
     .plan-info{
       display: flex;

@@ -60,16 +60,24 @@ interface sheetListModel {
 
 const list2 = reactive([
   {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
+    image: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
     title: '昨夜星辰昨夜风，画楼西畔桂堂东',
   },
   {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+    image: 'https://s2.loli.net/2024/07/26/YEHWeTjDQZ7ploI.jpg',
     title: '身无彩凤双飞翼，心有灵犀一点通',
   },
   {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
+    image: 'https://s2.loli.net/2024/07/26/28CWvoisqSc7AYK.jpg',
     title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/26/maQ163oScPik4uI.jpg',
+    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/26/8R9uLCVAjBJ3D6i.jpg',
+    title: '身无彩凤双飞翼，心有灵犀一点通',
   },
 ]);
 

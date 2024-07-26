@@ -70,7 +70,7 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
     .card-header-title {
       display: flex;
       justify-content: space-between;
-      padding: 10rpx 15rpx;
+      padding: 10rpx 20rpx 10rpx 20rpx;
     }
 
     .card-header-desc {

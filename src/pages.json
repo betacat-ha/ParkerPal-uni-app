@@ -62,7 +62,7 @@
         {
           "path": "detail",
           "style": {
-            "navigationBarTitleText": "商户详情"
+            "navigationBarTitleText": "车场详情"
           }
         }
       ]
