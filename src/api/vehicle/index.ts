@@ -10,7 +10,7 @@ enum VehicleURL {
 }
 
 // 获取车辆信息
-export const getVehicleInfo = (id: string): Promise<VehicleData> => get<VehicleData>({ url: `${VehicleURL.getVehicle}/${id}` });
+export const getVehicleInfo = (): Promise<VehicleData> => get<VehicleData>({ url: VehicleURL.getVehicle });
 
 // 提交车辆数据
 export const submitVehicleData = (data: VehicleData): Promise<VehicleData> => post<VehicleData>({ url: VehicleURL.submitVehicleData, data });

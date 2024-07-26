@@ -9,6 +9,15 @@ export interface VehicleData {
   model: string
 }
 
+export interface VehicleState {
+  id: string
+  licensePlate: string
+  powerType: 'oil' | 'electric' | 'hybrid'
+  vehicleType: 'non-pickup' | 'pickup'
+  etcInfo: 'yes' | 'no'
+  model: string
+}
+
 // 定义获取车辆信息的响应类型
 export interface GetVehicleInfoResponse {
   data: VehicleData

@@ -22,29 +22,19 @@
   </Card>
 </template>
 
-<script>
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useVehicleStore } from '@/store/modules/vehicle';
+<script setup>
+import { useVehicleStore } from '@/store/modules/vehicle/index';
 
 const vehicleStore = useVehicleStore();
-const vehicleInfo = computed(() => vehicleStore.vehicleData);
+const vehicleInfo = storeToRefs(vehicleStore);
 
-export default {
-  name: 'VehicleInfoCard',
-  setup() {
-    const router = useRouter();
-
-    // 定义 goToPage
-    const goToPage = () => {
-      router.push('/pages/me/VehicleManagement');
-    };
-    return {
-      vehicleInfo,
-      goToPage,
-    };
-  },
+const goToPage = () => {
+  uni.navigateTo({ url: '/pages/me/VehicleManagement' });
 };
+
+onLoad(() => {
+  vehicleStore.fetchVehicleInfo();
+});
 </script>
 
 <style lang="scss" scoped>
