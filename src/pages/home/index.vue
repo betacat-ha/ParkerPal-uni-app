@@ -15,7 +15,7 @@
             </text>
             <u-search
               v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场"
-              @search="handleSearch" @click-icon="handleScan"
+              :clearabled="true" @search="handleSearch" @click-icon="handleScan"
             />
           </view>
         </view>
@@ -92,11 +92,12 @@ const bannerList = reactive([
   },
 ]);
 
-const searchKeyword = ref<string>();
+const searchKeyword = ref<string>('广东技术师范大学');
+
 function handleSearch() {
-  console.log('搜索关键字：', searchKeyword.value);
-  uni.$u.toast(`搜索关键字：${searchKeyword.value}`);
+  uni.navigateTo({ url: `/pages/home/merchant/index?keyword=${searchKeyword.value}` });
 }
+
 function handleScan() {
   uni.scanCode({
     onlyFromCamera: true,

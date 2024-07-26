@@ -4,7 +4,7 @@
       <view class="search-bar">
         <u-search
           v-model="searchKeyword" search-icon="search" :show-action="false" placeholder="搜搜附近的停车场"
-          class="input" @search="handleSearch" @click-icon="handleScan"
+          class="input" :clearabled="true" @search="handleSearch"
         />
       </view>
     </template>
@@ -21,15 +21,21 @@ import { useMerchantStore } from '@/store/index';
 
 const pagingRef = ref<InstanceType<typeof zPaging> | null>(null);
 const dataList = ref<string[]>([]);
+const searchKeyword = ref('');
 
 const merchantStore = useMerchantStore();
 const merchantList = storeToRefs(merchantStore).list;
+
+function handleSearch() {
+  pagingRef.value?.reload();
+}
 
 async function queryList(pageNo: number, pageSize: number) {
   console.log('[ pageNo ] >', pageNo);
   console.log('[ pageSize ] >', pageSize);
 
   await merchantStore.fetchInfo({
+    keyword: searchKeyword.value || undefined, // 仅当searchKeyword有值时才传
     page: pageNo,
     limit: pageSize,
   });
@@ -43,6 +49,10 @@ function handleClick(id: string) {
     url: `/pages/home/merchant/detail?id=${id}`,
   });
 }
+
+onLoad((option) => {
+  searchKeyword.value = option.keyword;
+});
 </script>
 
 <style lang="scss" scoped>

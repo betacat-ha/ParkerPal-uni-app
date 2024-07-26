@@ -1,4 +1,7 @@
 export interface pageParams {
+  keyword?: string
+  sort?: string
+  order?: string
   page: number
   limit: number
 }

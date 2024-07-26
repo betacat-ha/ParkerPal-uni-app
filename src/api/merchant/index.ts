@@ -8,9 +8,9 @@ import type { MerchantInfo, MerchantState } from '@/store/modules/merchant/types
 enum URL {
   allList = '/merchant/all',
   listByPage = '/merchant/page',
-  listById = '/merchant/@{id}',
+  infoById = '/merchant/@{id}',
 }
 
 export const getAllList = () => get<MerchantState>({ url: URL.allList });
 export const getList = (data: pageParams) => post<pageResult<MerchantInfo>>({ url: URL.listByPage, data });
-export const getById = (id: string) => get<MerchantInfo>({ url: URL.listById.replace('@{id}', id) });
+export const getById = (id: string) => get<MerchantInfo>({ url: URL.infoById.replace('@{id}', id) });
