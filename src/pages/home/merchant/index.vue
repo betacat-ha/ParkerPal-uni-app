@@ -1,10 +1,11 @@
 <template>
   <z-paging ref="pagingRef" v-model="dataList" :safe-area-inset-bottom="false" @query="queryList">
     <template #top>
+      <!-- 顶部搜索栏 -->
       <view class="search-bar">
         <u-search
           v-model="searchKeyword" search-icon="search" :show-action="false" placeholder="搜搜附近的停车场"
-          class="input" :clearabled="true" @search="handleSearch"
+          class="input" :clearabled="true" @search="handleSearch" @clear="handleClear"
         />
       </view>
     </template>
@@ -27,6 +28,15 @@ const merchantStore = useMerchantStore();
 const merchantList = storeToRefs(merchantStore).list;
 
 function handleSearch() {
+  reloadList();
+}
+
+function handleClear() {
+  searchKeyword.value = '';
+  reloadList();
+}
+
+function reloadList() {
   pagingRef.value?.reload();
 }
 
