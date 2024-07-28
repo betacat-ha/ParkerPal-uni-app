@@ -19,9 +19,10 @@
 import zPaging from 'z-paging/components/z-paging/z-paging.vue';
 import MerchantCard from '../merchant-card.vue';
 import { useMerchantStore } from '@/store/index';
+import type { MerchantInfo } from '@/store/modules/merchant/types';
 
 const pagingRef = ref<InstanceType<typeof zPaging> | null>(null);
-const dataList = ref<string[]>([]);
+const dataList = ref<MerchantInfo[]>([]);
 const searchKeyword = ref('');
 
 const merchantStore = useMerchantStore();

@@ -10,7 +10,7 @@
         </view>
         <view class="content">
           <text class="license-plate">
-            {{ vehicleInfo.licensePlate }}
+            {{ vehicleInfo.licensePlate.value }}
           </text>
         </view>
       </view>

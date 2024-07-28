@@ -22,9 +22,9 @@
       </template>
     </u-navbar>
 
-    <view class="bg-white" />
-
-    <u-swiper :list="bannerList" key-name="image" :autoplay="true" circular show-title />
+    <view class="width-100 mb-20rpx">
+      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="150" radius="10" />
+    </view>
 
     <!-- <Card left-title="Pinia调试">
       <u-button @click="merchantStore.fetchAllInfo()">
@@ -36,14 +36,20 @@
       <slot class="mg-20" />
     </Card> -->
 
-    <VehicleInfoCard class="width-100" />
+    <view class="title-bar">
+      <view class="text">
+        正在进行的订单
+      </view>
+    </view>
+    <VehicleInfoCard class="width-100 mb-20rpx" />
 
     <view class="title-bar">
       <view class="text">
         附近的停车场
       </view>
       <view class="button" @click="navigateToMerchant">
-        查看更多 >
+        查看更多
+        <u-icon name="arrow-right" color="#909399" />
       </view>
     </view>
     <view v-for="(item, index) in merchantList" :key="index" class="width-100" @click="navigateToMerchantByID(item.id)">
@@ -139,7 +145,7 @@ function navigateToMerchantByID(id: string) {
   justify-content: center;
   align-items: center;
   gap: 20rpx;
-  padding: 20rpx;
+  padding: 0rpx 20rpx;
 }
 
 .width-100 {
@@ -159,6 +165,8 @@ function navigateToMerchantByID(id: string) {
     font-weight: bold;
   }
   .button{
+    display: flex;
+    align-items: center;
     font-size: 24rpx;
     color: #909399;
   }

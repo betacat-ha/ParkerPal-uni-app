@@ -1,7 +1,7 @@
 import type { SwiperItem } from '../common/type';
 
 export interface Plan {
-  id: number
+  id: string
   name: string
   description: string
   price: number
@@ -14,7 +14,7 @@ export interface Plan {
 }
 
 export interface MerchantInfo {
-  id: number
+  id: string
   name: string
   address: string
   phone: string
