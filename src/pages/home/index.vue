@@ -23,7 +23,7 @@
     </u-navbar>
 
     <view class="width-100 mb-20rpx">
-      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="150" radius="10" />
+      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10" />
     </view>
 
     <!-- <Card left-title="Pinia调试">
@@ -85,16 +85,7 @@ onShow(() => {
 
 const bannerList = reactive([
   {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
-  },
-  {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-    title: '身无彩凤双飞翼，心有灵犀一点通',
-  },
-  {
-    image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
+    image: 'https://s2.loli.net/2024/07/28/BHxQ5yLgJ986KnA.png',
   },
 ]);
 
