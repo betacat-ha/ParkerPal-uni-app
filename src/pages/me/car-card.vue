@@ -1,25 +1,27 @@
 <template>
-  <Card :shadow="false" @click="goToPage">
-    <!-- 车辆信息展示 -->
-    <view class="car">
-      <view class="info">
-        <view class="sub-header">
-          <text class="sub-title">
-            我的车辆
-          </text>
+  <view @click="goToPage">
+    <Card :shadow="false">
+      <!-- 车辆信息展示 -->
+      <view class="car">
+        <view class="info">
+          <view class="sub-header">
+            <text class="sub-title">
+              我的车辆
+            </text>
+          </view>
+          <view class="content">
+            <text class="license-plate">
+              {{ vehicleInfo.licensePlate.value }}
+            </text>
+          </view>
         </view>
-        <view class="content">
-          <text class="license-plate">
-            {{ vehicleInfo.licensePlate.value }}
-          </text>
+        <!-- 图片展示 -->
+        <view class="image-container">
+          <image class="vehicle-image" src="https://img.icons8.com/color/480/porsche.png" />
         </view>
       </view>
-      <!-- 图片展示 -->
-      <view class="image-container">
-        <image class="vehicle-image" src="https://img.icons8.com/color/480/porsche.png" />
-      </view>
-    </view>
-  </Card>
+    </Card>
+  </view>
 </template>
 
 <script setup>
