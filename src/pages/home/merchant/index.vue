@@ -70,7 +70,7 @@ function handleClick(id: string) {
 // 页面加载时的操作
 onLoad((option) => {
   // 取出URL中的搜索关键词
-  searchKeyword.value = option.keyword;
+  searchKeyword.value = option?.keyword || '';
 });
 </script>
 
