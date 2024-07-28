@@ -9,6 +9,8 @@
         />
       </view>
     </template>
+
+    <!-- 商家列表 -->
     <view v-for="(item, index) in dataList" :key="index" style="padding: 20rpx 20rpx 0 20rpx;" @click="handleClick(item.id)">
       <MerchantCard :merchant-data="item" />
     </view>
@@ -28,19 +30,23 @@ const searchKeyword = ref('');
 const merchantStore = useMerchantStore();
 const merchantList = storeToRefs(merchantStore).list;
 
+// 处理搜索事件
 function handleSearch() {
   reloadList();
 }
 
+// 处理清空搜索事件
 function handleClear() {
   searchKeyword.value = '';
   reloadList();
 }
 
+// 重载列表
 function reloadList() {
   pagingRef.value?.reload();
 }
 
+// 查询列表，由z-paging调用
 async function queryList(pageNo: number, pageSize: number) {
   console.log('[ pageNo ] >', pageNo);
   console.log('[ pageSize ] >', pageSize);
@@ -54,14 +60,16 @@ async function queryList(pageNo: number, pageSize: number) {
   pagingRef.value?.complete(merchantList.value);
 }
 
-// 点击商户卡片
+// 处理点击商户卡片事件
 function handleClick(id: string) {
   uni.navigateTo({
     url: `/pages/home/merchant/detail?id=${id}`,
   });
 }
 
+// 页面加载时的操作
 onLoad((option) => {
+  // 取出URL中的搜索关键词
   searchKeyword.value = option.keyword;
 });
 </script>

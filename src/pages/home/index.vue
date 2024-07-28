@@ -23,18 +23,8 @@
     </u-navbar>
 
     <view class="width-100 mb-20rpx">
-      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10" />
+      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10" interval="5000" />
     </view>
-
-    <!-- <Card left-title="Pinia调试">
-      <u-button @click="merchantStore.fetchAllInfo()">
-        执行命令
-      </u-button>
-      <view class="mg-20">
-        state数据: {{ merchantList }}
-      </view>
-      <slot class="mg-20" />
-    </Card> -->
 
     <view class="title-bar">
       <view class="text">
@@ -86,6 +76,9 @@ onShow(() => {
 const bannerList = reactive([
   {
     image: 'https://s2.loli.net/2024/07/28/BHxQ5yLgJ986KnA.png',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/28/t3LIk8SRUnZ2miV.png',
   },
 ]);
 
