@@ -1,7 +1,9 @@
 <template>
   <view>
     <!-- 标签栏 -->
-    <u-tabs :list="list1" @change="handleClick" />
+    <u-sticky bg-color="#ffffff">
+      <u-tabs :list="list1" :current="activeTabIndex" @change="handleClick" />
+    </u-sticky>
     <!-- 内容展示 -->
     <view v-if="activeTab === '全部'">
       <OrderCard v-for="order in orders" :key="order.id" :order-data="order" />
@@ -82,6 +84,7 @@ const list1 = reactive([
 ]);
 
 const activeTab = ref('全部'); // 默认显示全部订单
+const activeTabIndex = computed(() => list1.findIndex(item => item.name === activeTab.value)); // 计算当前激活的标签的索引
 
 const router = useRouter();
 const type = ref(router.currentRoute.value.query.type || 'all'); // 获取 URL 中的 type 参数，默认为 'all'
