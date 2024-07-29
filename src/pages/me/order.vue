@@ -24,43 +24,43 @@ import OrderCard from './OrderCard.vue';
 
 const orders = ref([
   {
-    id: 1,
+    time: '2023-02-18 19:30',
     title: '广东技术师范大学停车场',
     status: '待付款',
     amount: 39.99,
   },
   {
-    id: 2,
+    time: '2024-06-18 21:30',
     title: '幸福花园地下停车场',
     status: '待使用',
     amount: 15.00,
   },
   {
-    id: 3,
+    time: '2024-05-22 09:30',
     title: '棠下智慧停车场',
     status: '退款/取消',
     amount: 59.00,
   },
   {
-    id: 4,
+    time: '2023-11-23 20:10',
     title: '棠下智慧停车场',
     status: '待评价',
     amount: 30.05,
   },
   {
-    id: 5,
+    time: '2023-11-23 20:10',
     title: '广东技术师范大学停车场',
     status: '待付款',
     amount: 39.19,
   },
   {
-    id: 6,
+    time: '2023-11-23 20:10',
     title: '棠下智慧停车场',
     status: '待使用',
     amount: 25.00,
   },
   {
-    id: 7,
+    time: '2023-11-23 20:10',
     title: '幸福花园地下停车场',
     status: '退款/取消',
     amount: 59.00,
@@ -85,7 +85,7 @@ const list1 = reactive([
 const activeTab = ref('全部'); // 默认显示全部订单
 const activeTabIndex = computed(() => list1.findIndex(item => item.name === activeTab.value)); // 计算当前激活的标签的索引
 
-const type = ref('all'); // 获取 URL 中的 type 参数，默认为 'all'
+const type = ref('all');
 
 // 根据当前激活的标签筛选订单
 const filteredOrders = computed(() => {
