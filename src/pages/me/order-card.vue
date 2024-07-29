@@ -5,7 +5,7 @@
       <view
         v-for="(icon, index) in icons"
         :key="index"
-        @click="navigateToPage(icon.pagePath)"
+        @click="navigateToPage(icon.pagePath, icon.type)"
       >
         <u-icon
           :label="icon.text"
@@ -13,7 +13,6 @@
           :name="icon.name"
           :size="icon.size"
           :color="icon.color"
-          @click="navigateToPage(icon.pagePath)"
         />
       </view>
     </view>
@@ -28,6 +27,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    type: {
+      type: String,
+      default: 'all',
+    },
   },
   data() {
     return {
@@ -38,6 +41,7 @@ export default {
           color: '#696969',
           text: '全部订单',
           pagePath: '/pages/me/order',
+          type: '全部',
         },
         {
           name: 'clock',
@@ -45,6 +49,7 @@ export default {
           color: '#696969',
           text: '待付款',
           pagePath: '/pages/me/order',
+          type: '待付款',
         },
         {
           name: 'reload',
@@ -52,6 +57,7 @@ export default {
           color: '#696969',
           text: '退款/取消',
           pagePath: '/pages/me/order',
+          type: '退款/取消',
         },
         {
           name: 'chat',
@@ -59,6 +65,7 @@ export default {
           color: '#696969',
           text: '待评价',
           pagePath: '/pages/me/order',
+          type: '待评价',
         },
         {
           name: 'coupon',
@@ -66,16 +73,16 @@ export default {
           color: '#696969',
           text: '钱包卡卷',
           pagePath: '/pages/me/order',
+          type: '钱包卡卷',
         },
-
       ],
     };
   },
   methods: {
-    navigateToPage(pagePath) {
-      console.log('Navigating to:', pagePath);
+    navigateToPage(pagePath, type) {
+      console.log('Navigating to:', pagePath, 'with type:', type);
       uni.navigateTo({
-        url: pagePath,
+        url: `${pagePath}?type=${type}`,
       });
     },
   },
