@@ -2,3 +2,7 @@ page {
 	font-size: 28rpx;
 	background-color: #f3f5f9;
 }
+
+.safe-area-inset-bottom {
+	padding-bottom: env(safe-area-inset-bottom);
+}

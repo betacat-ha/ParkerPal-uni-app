@@ -15,7 +15,7 @@
           </text>
         </view>
         <view class="nav-btn">
-          <up-icon name="map" size="50rpx" />
+          <u-icon name="map" size="50rpx" />
           <!-- <text>室内导航</text> -->
         </view>
       </view>

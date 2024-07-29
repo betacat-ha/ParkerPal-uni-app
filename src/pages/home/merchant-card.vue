@@ -2,7 +2,11 @@
   <Card>
     <!-- 商户信息 -->
     <view class="merchant">
-      <image :src="merchantData.logo" mode="aspectFill" class="logo" />
+      <image :src="merchantData.logo" mode="aspectFill" :fade="true" class="logo">
+        <template #loading>
+          <u-loading-icon />
+        </template>
+      </image>
       <view class="info">
         <text class="name">
           {{ merchantData.name }}

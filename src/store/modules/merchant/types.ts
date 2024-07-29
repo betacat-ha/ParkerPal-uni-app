@@ -13,13 +13,26 @@ export interface Plan {
   updateTime: string
 }
 
+export interface Service {
+  id: string
+  icon: string
+  name: string
+  description: string
+  status: string
+  tag: string
+}
+
 export interface MerchantInfo {
   id: string
   name: string
   address: string
+  description: string
   phone: string
   logo: string
   images: SwiperItem[]
+  longitude: number
+  latitude: number
+  services: Service[]
   status: number
   createTime: string
   updateTime: string

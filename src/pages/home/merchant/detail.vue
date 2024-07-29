@@ -2,28 +2,31 @@
   <view>
     <view v-if="showDetail">
       <view class="bg-white">
-        <u-swiper :list="merchantData.images" key-name="image" indicator :autoplay="true" radius="0" height="250" interval="5000" />
+        <u-swiper :list="merchantData?.images" key-name="image" indicator :autoplay="true" radius="0" height="250" interval="5000" :loading="showLoading" />
       </view>
       <view class="page-wrap">
         <Card class="merchant-info-card">
           <view class="detail">
             <text class="title">
-              {{ merchantData.name }}
+              {{ merchantData?.name }}
             </text>
-            <view class="address flex">
-              <u-icon name="map-fill" color="#007AFF" size="24" @click="hanleCall" />
-              <text>
-                {{ merchantData.address }}
-              </text>
-            </view>
+            <text class="desc">
+              {{ merchantData?.description }}
+            </text>
           </view>
           <view style="padding: 15rpx 0rpx 15rpx 0rpx">
             <u-gap height="1" bg-color="#cdcdcd" />
           </view>
+          <view class="address flex">
+            <u-icon name="map-fill" color="#007AFF" size="24" @click="handleNavigation" />
+            <text>
+              {{ merchantData?.address }}
+            </text>
+          </view>
           <view class="phone flex">
-            <u-icon name="phone-fill" color="#007AFF" size="24" @click="hanleCall" />
+            <u-icon name="phone-fill" color="#007AFF" size="24" @click="handleCall" />
             <text class="text">
-              {{ merchantData.phone }}
+              {{ merchantData?.phone }}
             </text>
           </view>
         </Card>
@@ -34,10 +37,10 @@
 
         <Card>
           <view class="plans-card">
-            <view class="plans-title">
+            <view class="card-title">
               停车优惠套餐
             </view>
-            <view v-for="plan in plans" :key="plan.id">
+            <view v-for="plan in merchantData?.plans" :key="plan.id">
               <u-gap height="1" bg-color="#cdcdcd" />
               <view class="plan-cell">
                 <view class="plan-info">
@@ -56,6 +59,40 @@
             </view>
           </view>
         </Card>
+
+        <Card>
+          <view class="location" @click="handleNavigation">
+            <view class="card-title">
+              车场位置
+            </view>
+            <view>
+              <u-image src="https://s2.loli.net/2024/07/29/V41L9MBqF2CbIsA.png" height="300rpx" width="100%" radius="15rpx" :fade="true">
+                <template #loading>
+                  <u-loading-icon />
+                </template>
+              </u-image>
+            </view>
+          </view>
+        </Card>
+
+        <Card>
+          <view class="service-card">
+            <view class="card-title">
+              提供服务
+            </view>
+            <view class="service-cell">
+              <view v-for="service, index in merchantData?.services" :key="index" class="service-item">
+                <u-icon :name="service.icon" color="#007AFF" size="24" />
+                <text class="service-name">
+                  {{ service.name }}
+                </text>
+              </view>
+            </view>
+          </view>
+        </Card>
+
+        <!-- 底部安全区 -->
+        <view class="safe-area-inset-bottom" />
       </view>
     </view>
     <view v-if="showEmpty">
@@ -72,9 +109,8 @@ import type { MerchantInfo } from '@/store/modules/merchant/types';
 import { getById } from '@/api/merchant';
 
 // 从路由获取id
-const id = ref(0);
+const id = ref('');
 const merchantData = ref<MerchantInfo>();
-const plans = ref([]);
 
 const showLoading = ref(true);
 const showDetail = ref(false);
@@ -104,8 +140,27 @@ function switchPage(type: PageType) {
   }
 }
 
+function navigateTo(path: string) {
+  uni.navigateTo({
+    url: path,
+  });
+}
+
+function handleNavigation() {
+  if (!merchantData.value) {
+    return;
+  }
+
+  uni.openLocation({
+    name: merchantData.value!.name,
+    address: merchantData.value!.address,
+    latitude: merchantData.value!.latitude,
+    longitude: merchantData.value!.longitude,
+  });
+}
+
 onLoad((option) => {
-  id.value = option.id;
+  id.value = option?.id;
   if (!id.value) {
     switchPage(PageType.Empty);
     console.warn('请传入商户ID');
@@ -114,7 +169,6 @@ onLoad((option) => {
   console.log(`开始加载商户ID：${id.value}`);
   getById(id.value).then((res) => {
     merchantData.value = res;
-    plans.value = res.plans;
 
     uni.setNavigationBarTitle({
       title: merchantData.value.name,
@@ -156,6 +210,12 @@ const tabList = reactive([
       font-size: 24rpx;
       color: #696969;
     }
+
+    .desc {
+      font-size: 24rpx;
+      line-height: 1.5;
+      color: #696969;
+    }
   }
 
   .phone {
@@ -169,11 +229,6 @@ const tabList = reactive([
   display: flex;
   flex-direction: column;
   gap: 10rpx;
-
-  .plans-title {
-    font-size: 32rpx;
-    font-weight: bold;
-  }
 
   .plan-cell{
     display: flex;
@@ -201,5 +256,33 @@ const tabList = reactive([
       color: #fb5c00;
     }
   }
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+
+  .service-cell{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 110px);
+    grid-gap: 10px 13px;
+    justify-content: space-between;
+    .service-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10rpx;
+    }
+  }
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
 }
 </style>
