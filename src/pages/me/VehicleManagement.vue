@@ -6,30 +6,30 @@
         <label for="license-plate">车牌号码:</label>
         <input id="license-plate" model:value="{{vehicleInfo.licensePlate}}" placeholder="请输入车牌号码">
       </view>
-      <!-- 动力类型单选下拉菜单 -->
+      <!-- 动力类型单选按钮 -->
       <view class="form-group">
         <label for="power-type">动力类型:</label>
-        <radio-group id="power-type" model:value="{{vehicleInfo.powerType}}">
+        <radio-group id="power-type">
           <label v-for="item in powerTypeOptions" :key="item.value">
-            <radio :value="item.value" />{{ item.label }}
+            <radio model:value="{{vehicleInfo.powerType}}" :value="item.value">{{ item.label }}</radio>
           </label>
         </radio-group>
       </view>
-      <!-- 车辆类型单选下拉菜单 -->
+      <!-- 车辆类型单选按钮 -->
       <view class="form-group">
         <label for="vehicle-type">车辆类型:</label>
-        <radio-group id="vehicle-type" model:value="{{vehicleInfo.vehicleType}}">
+        <radio-group id="vehicle-type">
           <label v-for="item in vehicleTypeOptions" :key="item.value">
-            <radio :value="item.value" />{{ item.label }}
+            <radio model:value="{{vehicleInfo.vehicleType}}" :value="item.value">{{ item.label }}</radio>
           </label>
         </radio-group>
       </view>
-      <!-- ETC信息单选下拉菜单 -->
+      <!-- ETC信息单选按钮 -->
       <view class="form-group">
         <label for="etc-info">ETC信息:</label>
-        <radio-group id="etc-info" model:value="{{vehicleInfo.etcInfo}}">
+        <radio-group id="etc-info">
           <label v-for="item in etcInfoOptions" :key="item.value">
-            <radio :value="item.value" />{{ item.label }}
+            <radio model:value="{{vehicleInfo.etcInfo}}" :value="item.value">{{ item.label }}</radio>
           </label>
         </radio-group>
       </view>
