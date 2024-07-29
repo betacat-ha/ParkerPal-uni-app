@@ -20,7 +20,6 @@
 
 <script setup>
 import { computed, reactive, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
 import OrderCard from './OrderCard.vue';
 
 const orders = ref([
@@ -86,8 +85,7 @@ const list1 = reactive([
 const activeTab = ref('全部'); // 默认显示全部订单
 const activeTabIndex = computed(() => list1.findIndex(item => item.name === activeTab.value)); // 计算当前激活的标签的索引
 
-const router = useRouter();
-const type = ref(router.currentRoute.value.query.type || 'all'); // 获取 URL 中的 type 参数，默认为 'all'
+const type = ref('all'); // 获取 URL 中的 type 参数，默认为 'all'
 
 // 根据当前激活的标签筛选订单
 const filteredOrders = computed(() => {
@@ -117,4 +115,8 @@ watch(type, (newType) => {
 if (type.value) {
   activeTab.value = type.value === 'all' ? '全部' : type.value;
 }
+
+onLoad((option) => {
+  type.value = option?.type;
+});
 </script>
