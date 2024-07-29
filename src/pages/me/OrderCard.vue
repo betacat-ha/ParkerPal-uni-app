@@ -1,36 +1,37 @@
 <template>
   <view class="order-card">
-    <view class="order-info">
-      <text class="order-title">
-        {{ orderData.title }}
-      </text>
-      <text class="order-id">
-        订单编号: {{ orderData.id }}
-      </text>
-    </view>
-    <view class="order-status">
-      <text :class="{ 'status-pending': orderData.status === '待付款', 'status-used': orderData.status === '待使用', 'status-refund': orderData.status === '退款/取消', 'status-review': orderData.status === '待评价' }">
-        {{ orderData.status }}
-      </text>
-    </view>
-    <view class="order-amount">
-      <text>￥{{ orderData.amount }}</text>
-    </view>
-    <view class="order-actions">
-      <!-- 根据订单状态显示不同的操作 -->
-      <button v-if="orderData.status === '待付款'" @click="goToPayment(orderData.id)">
-        去付款
-      </button>
-      <button v-if="orderData.status === '待使用'" @click="goToUse(orderData.id)">
-        去使用
-      </button>
-      <button v-if="orderData.status === '退款/取消'" @click="viewDetails(orderData.id)">
-        查看详情
-      </button>
-      <button v-if="orderData.status === '待评价'" @click="goToReview(orderData.id)">
-        去评价
-      </button>
-    </view>
+    <Card class="order-info-card">
+      <view class="info">
+        <view class="title">
+          <text> {{ orderData.title }} </text>
+        </view>
+        <view class="time">
+          <text>订单时间: {{ orderData.time }}</text>
+        </view>
+      </view>
+      <view class="status">
+        <text :class="{ 'status-pending': orderData.status === '待付款', 'status-used': orderData.status === '待使用', 'status-refund': orderData.status === '退款/取消', 'status-review': orderData.status === '待评价' }">
+          {{ orderData.status }}
+        </text>
+      </view>
+      <view class="amount">
+        <text>￥{{ orderData.amount }}</text>
+      </view>
+      <view class="actions">
+        <button v-if="orderData.status === '待付款'" @click="goToPayment(orderData.id)">
+          去付款
+        </button>
+        <button v-if="orderData.status === '待使用'" @click="goToUse(orderData.id)">
+          去使用
+        </button>
+        <button v-if="orderData.status === '退款/取消'" @click="viewDetails(orderData.id)">
+          去查看
+        </button>
+        <button v-if="orderData.status === '待评价'" @click="goToReview(orderData.id)">
+          去评价
+        </button>
+      </view>
+    </card>
   </view>
 </template>
 
@@ -60,73 +61,66 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .order-card {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
+  gap: 20rpx;
+  padding: 20rpx;
+  position: relative;
 }
 
-.order-info {
+.order-info-card {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  flex-direction: column;
+  gap: 15rpx;
 
-.order-title {
-  font-size: 16px;
-  font-weight: bold;
-}
+  .info {
+    flex: 1;
+  }
 
-.order-id {
-  font-size: 14px;
-  color: #666;
-}
+  .title {
+    font-size: 32rpx;
+    font-weight: bold;
+  }
 
-.order-status {
-  margin-top: 10px;
-}
+  .time {
+    font-size: 24rpx;
+    color: #888;
+  }
 
-.status-pending {
-  color: #f50;
-}
+  .status {
+    font-size: 24rpx;
+    line-height: 1.5;
+    color: #ff6347;
+  }
 
-.status-used {
-  color: #06f;
-}
+  .amount {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #333;
+  }
 
-.status-refund {
-  color: #f90;
-}
+  .actions {
+    position: absolute;
+    bottom: 30rpx; /* 距离底部的距离 */
+    right: 30rpx; /* 距离右侧的距离 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 
-.status-review {
-  color: #0b3;
-}
-
-.order-amount {
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-.order-actions {
-  margin-top: 10px;
-  display: flex;
-}
-
-button {
-  margin-right: 10px;
-  padding: 5px 15px;
-  border: none;
-  border-radius: 4px;
-  background-color: #8cd4f3;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #97f0cc;
+    button {
+      padding: 5rpx 20rpx;
+      margin-top: 10rpx;
+      background-color: transparent;
+      color: #1E90FF;
+      border: 2rpx solid  #1E90FF;
+      border-radius: 8rpx;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 24rpx;
+      transition: all 0.3s ease;
+    }
+  }
 }
 </style>

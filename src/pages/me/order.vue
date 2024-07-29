@@ -100,8 +100,6 @@ function handleClick(item) {
   else {
     activeTab.value = item.name;
   }
-  // 更新URL中的type
-  router.push({ query: { type: activeTab.value }, replace: true }); //  replace: true 可以避免在历史记录中添加新记录
 }
 
 // 监听 type 变化
