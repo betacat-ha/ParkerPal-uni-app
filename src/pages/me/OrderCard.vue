@@ -5,8 +5,9 @@
         <view class="title">
           <text> {{ orderData.title }} </text>
         </view>
+        <view class="button-divider" /> <!-- 分界线 -->
         <view class="time">
-          <text>订单时间: {{ orderData.time }}</text>
+          <text>{{ orderData.time }}</text>
         </view>
       </view>
       <view class="status">
@@ -121,6 +122,10 @@ export default {
       font-size: 24rpx;
       transition: all 0.3s ease;
     }
+  }
+  .button-divider {
+    border-top: 1px solid #E8E8E8; /* 分界线样式 */
+    margin-top: 10rpx;
   }
 }
 </style>
