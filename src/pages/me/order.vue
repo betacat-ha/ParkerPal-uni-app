@@ -17,7 +17,8 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import OrderCard from './OrderCard.vue';
 
 const orders = ref([
@@ -80,15 +81,15 @@ const list1 = reactive([
   { name: '钱包卡卷' },
 ]);
 
-// 当前激活的标签
-const activeTab = ref('全部');
+const activeTab = ref('全部'); // 默认显示全部订单
+
+const router = useRouter();
+const type = ref(router.currentRoute.value.query.type || 'all'); // 获取 URL 中的 type 参数，默认为 'all'
 
 // 根据当前激活的标签筛选订单
 const filteredOrders = computed(() => {
-  if (activeTab.value === '全部')
-    return [];// 如果选择全部，则不筛选
   const status = activeTab.value;
-  return orders.value.filter(order => order.status === status);
+  return status === '全部' || status === '钱包卡卷' ? orders.value : orders.value.filter(order => order.status === status);
 });
 
 function handleClick(item) {
@@ -98,5 +99,19 @@ function handleClick(item) {
   else {
     activeTab.value = item.name;
   }
+  // 更新URL中的type
+  router.push({ query: { type: activeTab.value }, replace: true }); //  replace: true 可以避免在历史记录中添加新记录
+}
+
+// 监听 type 变化
+watch(type, (newType) => {
+  if (newType) {
+    activeTab.value = newType === 'all' ? '全部' : newType;
+  }
+});
+
+// 初始页面加载时，设置 activeTab
+if (type.value) {
+  activeTab.value = type.value === 'all' ? '全部' : type.value;
 }
 </script>
