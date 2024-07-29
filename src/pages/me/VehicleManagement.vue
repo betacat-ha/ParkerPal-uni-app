@@ -6,41 +6,32 @@
         <label for="license-plate">车牌号码:</label>
         <input id="license-plate" model:value="{{vehicleInfo.licensePlate}}" placeholder="请输入车牌号码">
       </view>
+      <!-- 动力类型单选下拉菜单 -->
       <view class="form-group">
         <label for="power-type">动力类型:</label>
-        <select id="power-type" model:value="{{vehicleInfo.powerType}}">
-          <option value="oil">
-            油车
-          </option>
-          <option value="electric">
-            纯电
-          </option>
-          <option value="hybrid">
-            混动
-          </option>
-        </select>
+        <radio-group id="power-type" model:value="{{vehicleInfo.powerType}}">
+          <label v-for="item in powerTypeOptions" :key="item.value">
+            <radio :value="item.value" />{{ item.label }}
+          </label>
+        </radio-group>
       </view>
+      <!-- 车辆类型单选下拉菜单 -->
       <view class="form-group">
         <label for="vehicle-type">车辆类型:</label>
-        <select id="vehicle-type" model:value="{{vehicleInfo.vehicleType}}">
-          <option value="non-pickup">
-            非皮卡
-          </option>
-          <option value="pickup">
-            皮卡
-          </option>
-        </select>
+        <radio-group id="vehicle-type" model:value="{{vehicleInfo.vehicleType}}">
+          <label v-for="item in vehicleTypeOptions" :key="item.value">
+            <radio :value="item.value" />{{ item.label }}
+          </label>
+        </radio-group>
       </view>
+      <!-- ETC信息单选下拉菜单 -->
       <view class="form-group">
-        <label for="vehicle-type">ETC信息:</label>
-        <select id="vehicle-type" model:value="{{vehicleInfo.etcInfo}}">
-          <option value="yes">
-            有ETC
-          </option>
-          <option value="no">
-            无ETC
-          </option>
-        </select>
+        <label for="etc-info">ETC信息:</label>
+        <radio-group id="etc-info" model:value="{{vehicleInfo.etcInfo}}">
+          <label v-for="item in etcInfoOptions" :key="item.value">
+            <radio :value="item.value" />{{ item.label }}
+          </label>
+        </radio-group>
       </view>
       <view class="form-group">
         <label for="model">车型信息:</label>
@@ -64,6 +55,23 @@ const vehicleInfo = storeToRefs(vehicleStore);
 onLoad(() => {
   vehicleStore.fetchVehicleInfo();
 });
+
+// 定义选项数据
+const powerTypeOptions = ref([
+  { value: 'oil', label: '油车' },
+  { value: 'electric', label: '纯电' },
+  { value: 'hybrid', label: '混动' },
+]);
+
+const vehicleTypeOptions = ref([
+  { value: 'non-pickup', label: '非皮卡' },
+  { value: 'pickup', label: '皮卡' },
+]);
+
+const etcInfoOptions = ref([
+  { value: 'yes', label: '有ETC' },
+  { value: 'no', label: '无ETC' },
+]);
 
 // 提交车辆数据的方法
 const submitVehicleData = async () => {
