@@ -86,6 +86,8 @@
       ]
     }
   ],
+  "preloadRule": {
+  },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "智泊无忧",

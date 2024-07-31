@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import zPaging from 'z-paging/components/z-paging/z-paging.vue';
-import MerchantCard from './merchant-card.vue';
+import MerchantCard from '../me/merchant-card.vue';
 import { useMerchantStore } from '@/store/index';
 import type { MerchantInfo } from '@/store/modules/merchant/types';
 

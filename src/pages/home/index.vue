@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import ActivedOrderCard from './actived-order-card.vue';
-import MerchantCard from '@/pages/merchant/merchant-card.vue';
+import MerchantCard from '@/pages/me/merchant-card.vue';
 import { useMerchantStore, useUserStore } from '@/store/index';
 
 const merchantStore = useMerchantStore();
