@@ -120,6 +120,11 @@ function fetchUserInfo() {
 onMounted(() => {
   fetchUserInfo();
 });
+
+onShow(() => {
+  // 设置当前tab
+  useUserStore().tabValue = 2;
+});
 </script>
 
 <style lang="scss">

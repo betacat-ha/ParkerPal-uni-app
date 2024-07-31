@@ -14,7 +14,7 @@
             停车位：{{ vehicleData.orderInfo.parkingSpace }}
           </text>
         </view>
-        <view class="nav-btn">
+        <view class="nav-btn" @click="switchTab('/pages/driving/index')">
           <u-icon name="map" size="50rpx" />
           <!-- <text>室内导航</text> -->
         </view>
@@ -23,32 +23,34 @@
   </Card>
 </template>
 
-<script>
-export default {
-  name: 'VehicleInfoCard',
-  props: {
-    vehicleData: {
-      type: Object,
-      default: () => ({
-        licensePlate: '粤A·123456',
-        orderInfo: {
-          orderId: '123456789',
-          orderTime: '2024-07-01 12:00:00',
-          orderStatus: '已入场',
-          orderPrice: '100',
-          orderType: '月卡',
-          parkingSpace: 'A13',
-        },
-        merchant: {
-          name: '广东技术师范大学体育馆',
-        },
-      }),
-    },
+<script setup>
+const props = defineProps({
+  vehicleData: {
+    type: Object,
+    default: () => ({
+      licensePlate: '粤A·123456',
+      orderInfo: {
+        orderId: '123456789',
+        orderTime: '2024-07-01 12:00:00',
+        orderStatus: '已入场',
+        orderPrice: '100',
+        orderType: '月卡',
+        parkingSpace: 'A13',
+      },
+      merchant: {
+        name: '广东技术师范大学体育馆',
+      },
+    }),
   },
-  data() {
-    return {};
-  },
-};
+});
+
+const vehicleData = props.vehicleData;
+
+function switchTab(pagePath) {
+  uni.switchTab({
+    url: `${pagePath}`,
+  });
+}
 </script>
 
 <style lang="scss" scoped>

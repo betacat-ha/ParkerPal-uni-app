@@ -1,11 +1,5 @@
 <template>
   <view class="page-wrap">
-    <!-- <image class="mb-50rpx mt-200rpx h-200rpx w-200rpx" src="@/static/images/logo.png" width="200rpx" height="200rpx" />
-    <view class="flex justify-center">
-      <text class="font-size-36rpx color-gray-700">
-        {{ title }}
-      </text>
-    </view> -->
     <u-navbar :safe-area-inset-top="true" :placeholder="true">
       <template #left>
         <view class="u-nav-slot" style="width: 68vw;">
@@ -31,7 +25,7 @@
         正在进行的订单
       </view>
     </view>
-    <VehicleInfoCard class="width-100 mb-20rpx" />
+    <ActiveOrderCard class="width-100 mb-20rpx" />
 
     <view class="title-bar">
       <view class="text">
@@ -57,8 +51,8 @@
 
 <script setup lang="ts">
 import MerchantCard from './merchant-card.vue';
-import VehicleInfoCard from './vehicle-info-card.vue';
-import { useMerchantStore } from '@/store/index';
+import ActiveOrderCard from './actived-order-card.vue';
+import { useMerchantStore, useUserStore } from '@/store/index';
 
 const merchantStore = useMerchantStore();
 const merchantList = storeToRefs(merchantStore).list;
@@ -71,6 +65,9 @@ onShow(() => {
     page: 0,
     limit: 3,
   });
+
+  // 设置当前tab
+  useUserStore().tabValue = 0;
 });
 
 const bannerList = reactive([
