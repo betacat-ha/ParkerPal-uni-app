@@ -39,6 +39,11 @@
       "path": "pages/me/VehicleManagement",
       "style": {
       }
+    },
+    {
+      "path": "pages/me/order-detail",
+      "style": {
+      }
     }
   ],
   "subPackages": [
