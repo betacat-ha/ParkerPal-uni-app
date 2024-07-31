@@ -31,7 +31,7 @@ const vehicleStore = useVehicleStore();
 const vehicleInfo = storeToRefs(vehicleStore);
 
 const goToPage = () => {
-  uni.navigateTo({ url: '/pages/me/VehicleManagement' });
+  uni.navigateTo({ url: '/pages/vehicle/edit' });
 };
 
 onLoad(() => {

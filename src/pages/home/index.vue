@@ -25,7 +25,7 @@
         正在进行的订单
       </view>
     </view>
-    <ActiveOrderCard class="width-100 mb-20rpx" />
+    <ActivedOrderCard class="width-100 mb-20rpx" />
 
     <view class="title-bar">
       <view class="text">
@@ -50,8 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import MerchantCard from './merchant-card.vue';
-import ActiveOrderCard from './actived-order-card.vue';
+import ActivedOrderCard from './actived-order-card.vue';
+import MerchantCard from '@/pages/merchant/merchant-card.vue';
 import { useMerchantStore, useUserStore } from '@/store/index';
 
 const merchantStore = useMerchantStore();
@@ -82,7 +82,7 @@ const bannerList = reactive([
 const searchKeyword = ref<string>('广东技术师范大学');
 
 function handleSearch() {
-  uni.navigateTo({ url: `/pages/home/merchant/index?keyword=${searchKeyword.value}` });
+  uni.navigateTo({ url: `/pages/merchant/index?keyword=${searchKeyword.value}` });
 }
 
 function handleScan() {
@@ -107,14 +107,14 @@ function handleAgree() {
 // 点击查看更多
 function navigateToMerchant() {
   uni.navigateTo({
-    url: '/pages/home/merchant/index',
+    url: '/pages/merchant/index',
   });
 }
 
 // 点击商户卡片
 function navigateToMerchantByID(id: string) {
   uni.navigateTo({
-    url: `/pages/home/merchant/detail?id=${id}`,
+    url: `/pages/merchant/detail?id=${id}`,
   });
 }
 </script>

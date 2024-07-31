@@ -20,7 +20,7 @@
 
 <script setup>
 import { computed, reactive, ref, watch } from 'vue';
-import OrderCard from './OrderCard.vue';
+import OrderCard from './order-card.vue';
 
 const orders = ref([
   {

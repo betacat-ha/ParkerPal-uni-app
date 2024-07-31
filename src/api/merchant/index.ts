@@ -13,4 +13,4 @@ enum URL {
 
 export const getAllList = () => get<MerchantState>({ url: URL.allList });
 export const getList = (data: pageParams) => post<pageResult<MerchantInfo>>({ url: URL.listByPage, data });
-export const getById = (id: string) => get<MerchantInfo>({ url: URL.infoById.replace('@{id}', id) });
+export const getById = (id: string, catchError = false) => get<MerchantInfo>({ url: URL.infoById.replace('@{id}', id), custom: { catch: catchError } });

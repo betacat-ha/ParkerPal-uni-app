@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import zPaging from 'z-paging/components/z-paging/z-paging.vue';
-import MerchantCard from '../merchant-card.vue';
+import MerchantCard from './merchant-card.vue';
 import { useMerchantStore } from '@/store/index';
 import type { MerchantInfo } from '@/store/modules/merchant/types';
 
@@ -63,7 +63,7 @@ async function queryList(pageNo: number, pageSize: number) {
 // 处理点击商户卡片事件
 function handleClick(id: string) {
   uni.navigateTo({
-    url: `/pages/home/merchant/detail?id=${id}`,
+    url: `/pages/merchant/detail?id=${id}`,
   });
 }
 

@@ -23,35 +23,25 @@
           "indoor-map": "/wxcomponents/indoormap/indoormap"
         }
       }
-    },
-    {
-      "path": "pages/me/index",
-      "style": {
-        "navigationBarTitleText": "我的"
-      }
-    },
-    {
-      "path": "pages/me/order",
-      "style": {
-      }
-    },
-    {
-      "path": "pages/me/VehicleManagement",
-      "style": {
-      }
     }
   ],
   "subPackages": [
     {
-      "root": "pages/me/login",
+      "root": "pages/me",
       "pages": [
         {
-          "path": "index"
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "我的"
+          }
+        },
+        {
+          "path": "/login/index"
         }
       ]
     },
     {
-      "root": "pages/home/merchant",
+      "root": "pages/merchant",
       "pages": [
         {
           "path": "index",
@@ -63,6 +53,28 @@
           "path": "detail",
           "style": {
             "navigationBarTitleText": "车场详情"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/order",
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "订单详情"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/vehicle",
+      "pages": [
+        {
+          "path": "edit",
+          "style": {
+            "navigationBarTitleText": "修改车辆信息"
           }
         }
       ]

@@ -167,7 +167,7 @@ onLoad((option) => {
     return;
   }
   console.log(`开始加载商户ID：${id.value}`);
-  getById(id.value).then((res) => {
+  getById(id.value, false).then((res) => {
     merchantData.value = res;
 
     uni.setNavigationBarTitle({
@@ -175,7 +175,8 @@ onLoad((option) => {
     });
 
     switchPage(PageType.Detail);
-  }).catch(() => {
+  }).catch((res) => {
+    console.log(res);
     switchPage(PageType.Empty);
   });
 });

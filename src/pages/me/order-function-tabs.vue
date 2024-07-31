@@ -40,7 +40,7 @@ export default {
           size: '50rpx',
           color: '#696969',
           text: '全部订单',
-          pagePath: '/pages/me/order',
+          pagePath: '/pages/order/index',
           type: '全部',
         },
         {
@@ -48,7 +48,7 @@ export default {
           size: '50rpx',
           color: '#696969',
           text: '待付款',
-          pagePath: '/pages/me/order',
+          pagePath: '/pages/order/index',
           type: '待付款',
         },
         {
@@ -56,7 +56,7 @@ export default {
           size: '50rpx',
           color: '#696969',
           text: '退款/取消',
-          pagePath: '/pages/me/order',
+          pagePath: '/pages/order/index',
           type: '退款/取消',
         },
         {
@@ -64,7 +64,7 @@ export default {
           size: '50rpx',
           color: '#696969',
           text: '待评价',
-          pagePath: '/pages/me/order',
+          pagePath: '/pages/order/index',
           type: '待评价',
         },
         {
@@ -72,7 +72,7 @@ export default {
           size: '50rpx',
           color: '#696969',
           text: '钱包卡卷',
-          pagePath: '/pages/me/order',
+          pagePath: '/pages/order/index',
           type: '钱包卡卷',
         },
       ],

@@ -23,8 +23,8 @@
       </view>
     </Card>
 
-    <order-card />
-    <carCardVue />
+    <OrderFunctionTabs />
+    <VehicleCard />
     <view class="bg-white">
       <u-cell-group>
         <u-cell icon="star" title="收藏" is-link />
@@ -49,8 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import orderCard from './order-card.vue';
-import carCardVue from './car-card.vue';
+import VehicleCard from './vehicle-card.vue';
+import OrderFunctionTabs from '@/pages/me/order-function-tabs.vue';
 import { useUserStore } from '@/store/index';
 
 interface sheetListModel {
