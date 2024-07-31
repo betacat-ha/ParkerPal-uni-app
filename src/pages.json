@@ -23,20 +23,20 @@
           "indoor-map": "/wxcomponents/indoormap/indoormap"
         }
       }
+    },
+    {
+      "path": "pages/me/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
     }
   ],
   "subPackages": [
     {
-      "root": "pages/me",
+      "root": "pages/me/login",
       "pages": [
         {
-          "path": "index",
-          "style": {
-            "navigationBarTitleText": "我的"
-          }
-        },
-        {
-          "path": "/login/index"
+          "path": "index"
         }
       ]
     },
