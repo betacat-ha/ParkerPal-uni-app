@@ -1,5 +1,5 @@
 <template>
-  <view class="order-card">
+  <view class="order-card" @click="goToPage(orderData.id)">
     <Card class="order-info-card">
       <view class="info">
         <view class="title">
@@ -18,20 +18,6 @@
       <view class="amount">
         <text>￥{{ orderData.amount }}</text>
       </view>
-      <view class="actions">
-        <button v-if="orderData.status === '待付款'" @click="goToPayment(orderData.id)">
-          去付款
-        </button>
-        <button v-if="orderData.status === '待使用'" @click="goToUse(orderData.id)">
-          去使用
-        </button>
-        <button v-if="orderData.status === '退款/取消'" @click="viewDetails(orderData.id)">
-          去查看
-        </button>
-        <button v-if="orderData.status === '待评价'" @click="goToReview(orderData.id)">
-          去评价
-        </button>
-      </view>
     </card>
   </view>
 </template>
@@ -46,17 +32,10 @@ export default {
     },
   },
   methods: {
-    goToPayment(orderId) {
-      console.log('Go to payment for order:', orderId);
-    },
-    goToUse(orderId) {
-      console.log('Go to use for order:', orderId);
-    },
-    viewDetails(orderId) {
-      console.log('View details for order:', orderId);
-    },
-    goToReview(orderId) {
-      console.log('Go to review for order:', orderId);
+    goToPage(orderId) {
+      uni.navigateTo({
+        url: `/pages/order/detail?orderId=${orderId}`,
+      });
     },
   },
 };
@@ -64,11 +43,11 @@ export default {
 
 <style lang="scss" scoped>
 .order-card {
+  position: relative;
   display: flex;
+  padding: 20rpx;
   flex-direction: column;
   gap: 20rpx;
-  padding: 20rpx;
-  position: relative;
 }
 
 .order-info-card {
@@ -102,30 +81,30 @@ export default {
     color: #333;
   }
 
-  .actions {
-    position: absolute;
-    bottom: 30rpx; /* 距离底部的距离 */
-    right: 30rpx; /* 距离右侧的距离 */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+  // .actions {
+  //   position: absolute;
+  //   bottom: 30rpx; /* 距离底部的距离 */
+  //   right: 30rpx; /* 距离右侧的距离 */
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: flex-end;
 
-    button {
-      padding: 5rpx 20rpx;
-      margin-top: 10rpx;
-      background-color: transparent;
-      color: #1E90FF;
-      border: 2rpx solid  #1E90FF;
-      border-radius: 8rpx;
-      box-shadow: none;
-      cursor: pointer;
-      font-size: 24rpx;
-      transition: all 0.3s ease;
-    }
-  }
-  .button-divider {
-    border-top: 1px solid #E8E8E8; /* 分界线样式 */
-    margin-top: 10rpx;
-  }
+  //   button {
+  //     padding: 5rpx 20rpx;
+  //     margin-top: 10rpx;
+  //     background-color: transparent;
+  //     color: #1E90FF;
+  //     border: 2rpx solid  #1E90FF;
+  //     border-radius: 8rpx;
+  //     box-shadow: none;
+  //     cursor: pointer;
+  //     font-size: 24rpx;
+  //     transition: all 0.3s ease;
+  //   }
+  // }
+  // .button-divider {
+  //   border-top: 1px solid #E8E8E8; /* 分界线样式 */
+  //   margin-top: 10rpx;
+  // }
 }
 </style>
