@@ -15,10 +15,12 @@ export function setupRequest() {
 }
 
 export function request<T = any>(config: HttpRequestConfig): Promise<T> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     uni.$u.http.request(config).then((res: IResponse) => {
       const { data } = res;
       resolve(data as T);
+    }).catch((error: any) => {
+      reject(error);
     });
   });
 }

@@ -61,10 +61,17 @@
         </Card>
 
         <Card>
-          <view class="location" @click="handleNavigation">
+          <view class="flex items-center justify-between">
             <view class="card-title">
               车场位置
             </view>
+            <view class="reserve" @click="handleReserve">
+              不想排队？立即预约停车位
+              <u-icon name="arrow-right" color="#000000" />
+            </view>
+          </view>
+
+          <view class="location" @click="handleNavigation">
             <view>
               <u-image src="https://s2.loli.net/2024/07/29/V41L9MBqF2CbIsA.png" height="300rpx" width="100%" radius="15rpx" :fade="true">
                 <template #loading>
@@ -159,6 +166,17 @@ function handleNavigation() {
   });
 }
 
+function handleCall() {
+  console.log('handleCall');
+}
+
+function handleReserve() {
+  uni.showToast({
+    title: '预约成功',
+    icon: 'none',
+  });
+}
+
 onLoad((option) => {
   id.value = option?.id;
   if (!id.value) {
@@ -167,7 +185,7 @@ onLoad((option) => {
     return;
   }
   console.log(`开始加载商户ID：${id.value}`);
-  getById(id.value, false).then((res) => {
+  getById(id.value, true).then((res) => {
     merchantData.value = res;
 
     uni.setNavigationBarTitle({
@@ -176,7 +194,6 @@ onLoad((option) => {
 
     switchPage(PageType.Detail);
   }).catch((res) => {
-    console.log(res);
     switchPage(PageType.Empty);
   });
 });
@@ -280,10 +297,16 @@ const tabList = reactive([
 
 .card-title {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   font-size: 32rpx;
   font-weight: bold;
   margin-bottom: 10rpx;
+}
+
+.reserve {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  margin-bottom: 8rpx;
 }
 </style>
