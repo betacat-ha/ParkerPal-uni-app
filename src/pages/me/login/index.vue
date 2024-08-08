@@ -56,8 +56,8 @@ import { useUserStore } from '@/store/index';
 
 const userStore = useUserStore();
 
-const tel = ref<string>('15012345678');
-const code = ref<string>('4321');
+const tel = ref<string>('');
+const code = ref<string>('');
 const tips = ref<string>();
 const uCodeRef = ref<InstanceType<typeof uCode> | null>(null);
 

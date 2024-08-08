@@ -14,18 +14,19 @@
             {{ userInfo.name === '' ? '点这里可以登录' : `微信号：${userInfo.weixinId}` }}
           </view>
         </view>
-        <view class="ml-10rpx p-10rpx">
+        <!-- <view class="ml-10rpx p-10rpx">
           <u-icon name="scan" color="#969799" />
-        </view>
+        </view> -->
         <view class="ml-10rpx p-10rpx">
           <u-icon name="arrow-right" color="#969799" />
         </view>
       </view>
     </Card>
 
-    <OrderFunctionTabs />
-    <VehicleCard />
-    <view class="bg-white">
+    <OrderFunctionTabs v-if="userInfo.name !== ''" />
+    <VehicleCard v-if="userInfo.name !== ''" />
+
+    <view v-if="userInfo.name !== ''" class="bg-white">
       <u-cell-group>
         <u-cell icon="star" title="收藏" is-link />
         <u-cell icon="heart" title="语音包" is-link />

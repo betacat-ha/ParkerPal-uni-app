@@ -79,7 +79,7 @@ const bannerList = reactive([
   },
 ]);
 
-const searchKeyword = ref<string>('广东技术师范大学');
+const searchKeyword = ref<string>('');
 
 function handleSearch() {
   uni.navigateTo({ url: `/pages/merchant/index?keyword=${searchKeyword.value}` });
