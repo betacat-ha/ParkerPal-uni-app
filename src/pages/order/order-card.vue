@@ -1,13 +1,16 @@
 <template>
-  <view class="order-card" @click="goToPage(orderData.id)">
+  <view class="order-card" @click="goToPage()">
     <Card class="order-info-card">
       <view class="info">
         <view class="title">
-          <text> {{ orderData.title }} </text>
+          <text> {{ orderData.parkingLotName }} </text>
         </view>
         <view class="button-divider" /> <!-- 分界线 -->
+        <view class="license">
+          车牌号：<text>{{ orderData.licensePlate }}</text>
+        </view>
         <view class="time">
-          <text>{{ orderData.time }}</text>
+          停车时长：<text>{{ orderData.parkingDuration }}</text>
         </view>
       </view>
       <view class="status">
@@ -15,8 +18,9 @@
           {{ orderData.status }}
         </text>
       </view>
+      <view class="button-divider" /> <!-- 分界线 -->
       <view class="amount">
-        <text>￥{{ orderData.amount }}</text>
+        <text>费用：￥{{ orderData.amount }}</text>
       </view>
     </card>
   </view>
@@ -32,9 +36,9 @@ export default {
     },
   },
   methods: {
-    goToPage(orderId) {
+    goToPage() {
       uni.navigateTo({
-        url: `/pages/order/detail?orderId=${orderId}`,
+        url: `/pages/order/detail`,
       });
     },
   },
@@ -43,11 +47,11 @@ export default {
 
 <style lang="scss" scoped>
 .order-card {
-  position: relative;
   display: flex;
-  padding: 20rpx;
   flex-direction: column;
   gap: 20rpx;
+  padding: 20rpx;
+  position: relative;
 }
 
 .order-info-card {
@@ -62,49 +66,31 @@ export default {
   .title {
     font-size: 32rpx;
     font-weight: bold;
+    color: #0f0f0f;
   }
-
+  .license {
+    font-size: 28rpx;
+    color: #6f6d6d;
+  }
   .time {
-    font-size: 24rpx;
-    color: #888;
+    font-size: 28rpx;
+    color: #6f6d6d;
   }
 
   .status {
-    font-size: 24rpx;
-    line-height: 1.5;
-    color: #ff6347;
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #6f6d6d;
   }
 
   .amount {
     font-size: 28rpx;
     font-weight: bold;
-    color: #333;
+    color: #fb7900;
   }
-
-  // .actions {
-  //   position: absolute;
-  //   bottom: 30rpx; /* 距离底部的距离 */
-  //   right: 30rpx; /* 距离右侧的距离 */
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: flex-end;
-
-  //   button {
-  //     padding: 5rpx 20rpx;
-  //     margin-top: 10rpx;
-  //     background-color: transparent;
-  //     color: #1E90FF;
-  //     border: 2rpx solid  #1E90FF;
-  //     border-radius: 8rpx;
-  //     box-shadow: none;
-  //     cursor: pointer;
-  //     font-size: 24rpx;
-  //     transition: all 0.3s ease;
-  //   }
-  // }
-  // .button-divider {
-  //   border-top: 1px solid #E8E8E8; /* 分界线样式 */
-  //   margin-top: 10rpx;
-  // }
-}
+  }
+  .button-divider {
+    border-top: 1px solid #E8E8E8; /* 分界线样式 */
+    margin-top: 10rpx;
+  }
 </style>
