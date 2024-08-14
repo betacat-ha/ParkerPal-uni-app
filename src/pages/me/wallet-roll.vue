@@ -1,41 +1,40 @@
 <template>
-  <view class="coupon-container">
-    <!-- 将优惠券卡片内容放置在 v-for 循环内部 -->
-    <view
-      v-for="(coupon, index) in coupons"
-      :key="coupon.id"
-      class="coupon-card"
-      :data-coupon-id="coupon.id"
-      @click="goToCouponDetail(coupon)"
-    >
-      <view class="coupon-header">
-        <text class="coupon-title">
-          {{ coupon.title }}
+  <view class="page-wrap">
+    <view class="coupon-container">
+      <!-- 将优惠券卡片内容放置在 v-for 循环内部 -->
+      <Card
+        v-for="(coupon, index) in coupons"
+        :key="coupon.id"
+        :data-coupon-id="coupon.id"
+        @click="goToCouponDetail(coupon)"
+      >
+        <view class="coupon-header">
+          <text class="coupon-title">
+            {{ coupon.title }}
+          </text>
+          <text class="coupon-discount">
+            {{ coupon.discount }}
+          </text>
+        </view>
+        <view class="coupon-body">
+          <text class="coupon-description">
+            {{ coupon.description }}
+          </text>
+        </view>
+        <view class="coupon-body" />
+        <text class="coupon-expiration">
+          有效期至：{{ coupon.expiration }}
         </text>
-        <text class="coupon-discount">
-          {{ coupon.discount }}
-        </text>
-      </view>
-      <view class="coupon-body">
-        <text class="coupon-description">
-          {{ coupon.description }}
-        </text>
-      </view>
-      <view class="coupon-body" />
-      <text class="coupon-expiration">
-        有效期至：{{ coupon.expiration }}
-      </text>
+      </Card>
     </view>
-  </view>
 
-  <view class="bg-white">
-    <u-swiper :list="bannerList" key-name="image" :autoplay="true" circular show-title />
-  </view>
+    <view class="bg-white">
+      <u-swiper :list="bannerList" key-name="image" :autoplay="true" circular show-title />
+    </view>
 
-  <Card />
-
-  <view class="bg-white">
-    <u-swiper :list="bannerList1" key-name="image" :autoplay="true" circular show-title />
+    <view class="bg-white">
+      <u-swiper :list="bannerList1" key-name="image" :autoplay="true" circular show-title />
+    </view>
   </view>
 </template>
 
@@ -119,16 +118,6 @@ function useCoupon(couponId) {
 </script>
 
 <style>
-.coupon-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(48, 48, 48, 0.1);
-  margin: 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .coupon-header {
   display: flex;
   align-items: center;
@@ -145,7 +134,7 @@ function useCoupon(couponId) {
 .coupon-discount {
   background-color: #fff6f6;
   color: #e75353;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px 5px;
   font-size: 16px;
 }
@@ -180,8 +169,10 @@ function useCoupon(couponId) {
   cursor: pointer;
 }
 .coupon-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-gap: 10px 10px;
   justify-content: space-between;
 }
 
@@ -189,5 +180,12 @@ function useCoupon(couponId) {
   margin-bottom: 10px;
   width: calc(49% - 10px);
   box-sizing: border-box;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  padding: 20rpx;
 }
 </style>
