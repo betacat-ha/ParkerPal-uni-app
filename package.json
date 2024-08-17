@@ -1,8 +1,7 @@
 {
-  "name": "uniapp-vue3-project",
+  "name": "parker-pal",
   "type": "module",
-  "version": "1.0.6",
-  "license": "MIT",
+  "version": "1.1.0",
   "scripts": {
     "dev:h5": "uni",
     "dev:h5-pro": "uni --mode production",
@@ -15,8 +14,7 @@
     "type-check": "vue-tsc --noEmit",
     "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx,vue}\" --fix",
     "stylelint": "stylelint \"src/**/*.(vue|scss|css)\" --fix",
-    "cz": "git add . && npx czg",
-    "postinstall": "simple-git-hooks"
+    "prepare": "husky"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-4020220240624001",
@@ -34,6 +32,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-alpha-4020220240624001",
     "@dcloudio/uni-mp-xhs": "3.0.0-alpha-4020220240624001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-4020220240624001",
+    "husky": "^9.1.4",
     "pinia": "2.0.36",
     "uview-plus": "^3.3.3",
     "vite-plugin-require": "^1.2.14",
@@ -56,7 +55,6 @@
     "@unocss/preset-icons": "^0.61.0",
     "@vue/runtime-core": "^3.4.30",
     "@vue/tsconfig": "^0.5.1",
-    "czg": "^1.9.2",
     "eslint": "^8.57.0",
     "lint-staged": "^15.2.5",
     "miniprogram-api-typings": "^3.12.2",
@@ -65,7 +63,6 @@
     "postcss-scss": "^4.0.9",
     "rollup-plugin-visualizer": "^5.12.0",
     "sass": "^1.77.4",
-    "simple-git-hooks": "^2.11.1",
     "stylelint": "^16.6.1",
     "stylelint-config-recess-order": "^5.0.1",
     "stylelint-config-standard": "^36.0.0",
@@ -81,10 +78,6 @@
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-replace-image-url": "^1.1.1",
     "vue-tsc": "^2.0.22"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged",
-    "commit-msg": "node scripts/verifyCommit.js"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": "eslint --fix",
