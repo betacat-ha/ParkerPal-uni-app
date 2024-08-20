@@ -33,3 +33,6 @@ unpackage/
 /stats.html
 types/auto-imports.d.ts
 types/components.d.ts
+
+# macOS
+.DS_Store
