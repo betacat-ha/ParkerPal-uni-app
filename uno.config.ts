@@ -1,34 +1,35 @@
-import type { Preset, SourceCodeTransformer } from 'unocss';
+import type { Preset, SourceCodeTransformer } from 'unocss'
 import {
   defineConfig,
   presetAttributify,
   presetIcons,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss';
+} from 'unocss'
 import {
   presetApplet,
   presetRemRpx,
   transformerAttributify,
-} from 'unocss-applet';
+} from 'unocss-applet'
 
-const isApplet = process.env?.UNI_PLATFORM?.startsWith('mp-') ?? false;
-const presets: Preset[] = [];
-const transformers: SourceCodeTransformer[] = [];
+// eslint-disable-next-line node/prefer-global/process
+const isApplet = process.env?.UNI_PLATFORM?.startsWith('mp-') ?? false
+const presets: Preset[] = []
+const transformers: SourceCodeTransformer[] = []
 
 if (isApplet) {
   /**
    * UnoCSS Applet
    * @see https://github.com/unocss-applet/unocss-applet
    */
-  presets.push(presetApplet());
-  presets.push(presetRemRpx()); // 如果需要使用 rem 转 rpx 单位，需要启用此插件
-  transformers.push(transformerAttributify({ ignoreAttributes: ['block'] }));
+  presets.push(presetApplet())
+  presets.push(presetRemRpx()) // 如果需要使用 rem 转 rpx 单位，需要启用此插件
+  transformers.push(transformerAttributify({ ignoreAttributes: ['block'] }))
 }
 else {
-  presets.push(presetApplet());
-  presets.push(presetAttributify());
-  presets.push(presetRemRpx({ mode: 'rpx2rem' }));
+  presets.push(presetApplet())
+  presets.push(presetAttributify())
+  presets.push(presetRemRpx({ mode: 'rpx2rem' }))
 }
 
 export default defineConfig({
@@ -73,4 +74,4 @@ export default defineConfig({
     ['pt-safe', { 'padding-top': 'env(safe-area-inset-top)' }],
     ['pb-safe', { 'padding-bottom': 'env(safe-area-inset-bottom)' }],
   ],
-});
+})

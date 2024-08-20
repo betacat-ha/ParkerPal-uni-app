@@ -7,13 +7,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-.DS_Store
-dist
-*.local
+# Intermediate/dist files
+node_modules/
+dist/
+out/
+lib/
+tmp/
 
-# Editor directories and files
+# IDE and Editor Slurp
 .idea
+.hbuilderx
 *.suo
 *.ntvs*
 *.njsproj
@@ -26,6 +29,6 @@ yarn.lock
 pnpm-lock.yaml
 
 # Custom
-.hbuilderx
-unpackage
+unpackage/
 /stats.html
+/types/

@@ -1,13 +1,13 @@
-export default {
+module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-standard-vue'],
   plugins: ['stylelint-order'],
   overrides: [
     {
-      files: ['**/*.(scss|css|vue|html)'],
+      files: ['**/*.{scss,css,vue}'],
       customSyntax: 'postcss-scss',
     },
     {
-      files: ['**/*.(html|vue)'],
+      files: ['**/*.{html,vue}'],
       customSyntax: 'postcss-html',
     },
   ],
@@ -49,6 +49,13 @@ export default {
       'display',
       'justify-content',
       'align-items',
+      'flex-direction',
+      'flex-wrap',
+      'flex-flow',
+      'flex-grow',
+      'flex-shrink',
+      'flex-basis',
+      'order',
       'float',
       'clear',
       'overflow',
@@ -72,6 +79,10 @@ export default {
       'max-height',
       'font-size',
       'font-family',
+      'font-weight',
+      'font-style',
+      'line-height',
+      'letter-spacing',
       'text-align',
       'text-justify',
       'text-indent',
@@ -111,6 +122,8 @@ export default {
       'text-shadow',
       'resize',
       'transition',
+      'animation',
+      'transform',
     ],
   },
-};
+}

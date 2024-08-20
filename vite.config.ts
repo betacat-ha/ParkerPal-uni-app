@@ -1,27 +1,39 @@
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
-import type { UserConfig } from 'vite';
-import createVitePlugins from './build/vite/plugins';
-import proxy from './build/vite/proxy';
+import { resolve } from 'node:path'
+import { defineConfig, loadEnv } from 'vite'
+import createVitePlugins from './build/index'
 
-// https://vitejs.dev/config/
-export default defineConfig((): UserConfig => {
-  const isBuild = process.env.NODE_ENV === 'production';
+export default defineConfig(({ command, mode }) => {
+  const isBuild = command === 'build'
+  // eslint-disable-next-line node/prefer-global/process
+  const viteEnv = loadEnv(mode, process.cwd())
+
   return {
+    plugins: [createVitePlugins(isBuild)],
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
-        // 设置别名
         '@': resolve(__dirname, './src'),
       },
     },
-    // vite 相关配置
     server: {
       port: 8080,
       host: true,
       open: true,
-      proxy,
+      proxy: {
+        '/api': {
+          target: viteEnv.VITE_API_BASE_URL,
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, ''),
+          secure: false,
+        },
+      },
     },
-    plugins: createVitePlugins(isBuild),
-  };
-});
+    esbuild: {
+      // drop: mode === 'production' ? ['console', 'debugger'] : []
+    },
+    build: {
+      minify: 'esbuild',
+      sourcemap: false, // 是否生成sourcemap
+    },
+  }
+})
