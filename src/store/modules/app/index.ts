@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import type { AppState } from './types';
+import { defineStore } from 'pinia'
+import type { AppState } from './types'
 
 const useAppStore = defineStore('app', {
   state: (): AppState => ({
@@ -7,30 +7,30 @@ const useAppStore = defineStore('app', {
   }),
   getters: {
     getSystemInfo(): UniApp.GetSystemInfoResult {
-      return this.systemInfo;
+      return this.systemInfo
     },
   },
   actions: {
     setSystemInfo(info: UniApp.GetSystemInfoResult) {
-      this.systemInfo = info;
+      this.systemInfo = info
     },
     initSystemInfo() {
       uni.getSystemInfo({
         success: (res: UniApp.GetSystemInfoResult) => {
-          this.setSystemInfo(res);
+          this.setSystemInfo(res)
         },
         fail: (err: any) => {
-          console.error(err);
+          console.error(err)
         },
-      });
+      })
     },
     checkUpdate() {
-      const updateManager = uni.getUpdateManager();
+      const updateManager = uni.getUpdateManager()
       updateManager.onCheckForUpdate((res: UniApp.OnCheckForUpdateResult) => {
         // 请求完新版本信息的回调
 
-        console.log(res.hasUpdate);
-      });
+        console.log(res.hasUpdate)
+      })
       updateManager.onUpdateReady(() => {
         uni.showModal({
           title: '更新提示',
@@ -38,21 +38,21 @@ const useAppStore = defineStore('app', {
           success(res) {
             if (res.confirm) {
               // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-              updateManager.applyUpdate();
+              updateManager.applyUpdate()
             }
           },
-        });
-      });
+        })
+      })
       updateManager.onUpdateFailed((res: any) => {
-        console.error(res);
+        console.error(res)
         // 新的版本下载失败
         uni.showToast({
           title: '更新失败',
           icon: 'error',
-        });
-      });
+        })
+      })
     },
   },
-});
+})
 
-export default useAppStore;
+export default useAppStore

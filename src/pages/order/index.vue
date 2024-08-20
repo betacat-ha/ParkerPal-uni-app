@@ -1,27 +1,7 @@
-<template>
-  <view>
-    <!-- 标签栏 -->
-    <u-sticky bg-color="#ffffff">
-      <u-tabs :list="list1" :current="activeTabIndex" @change="handleClick" />
-    </u-sticky>
-    <!-- 内容展示 -->
-    <view v-if="activeTab === '全部'">
-      <OrderCard v-for="order in orders" :key="order.id" :order-data="order" />
-    </view>
-    <view v-else-if="activeTab === '钱包卡券'">
-      <walletRollVue />
-    </view>
-    <view v-else>
-      <text>{{ activeTab.value }}</text>
-      <OrderCard v-for="(order, index) in filteredOrders" :key="`filtered-${index}`" :order-data="order" />
-    </view>
-  </view>
-</template>
-
 <script setup>
-import { computed, reactive, ref, watch } from 'vue';
-import walletRollVue from '../me/wallet-roll.vue';
-import OrderCard from './order-card.vue';
+import { computed, reactive, ref, watch } from 'vue'
+import walletRollVue from '../me/wallet-roll.vue'
+import OrderCard from './order-card.vue'
 
 const orders = ref([
   {
@@ -115,7 +95,7 @@ const orders = ref([
     amount: 9.99,
   },
 
-]);
+])
 
 const list1 = reactive([
   { name: '全部' },
@@ -124,41 +104,61 @@ const list1 = reactive([
   { name: '待评价' },
   { name: '已完成' },
   { name: '钱包卡券' },
-]);
+])
 
-const activeTab = ref('全部'); // 默认显示全部订单
-const activeTabIndex = computed(() => list1.findIndex(item => item.name === activeTab.value)); // 计算当前激活的标签的索引
+const activeTab = ref('全部') // 默认显示全部订单
+const activeTabIndex = computed(() => list1.findIndex(item => item.name === activeTab.value)) // 计算当前激活的标签的索引
 
-const type = ref('all');
+const type = ref('all')
 
 // 根据当前激活的标签筛选订单
 const filteredOrders = computed(() => {
-  const status = activeTab.value;
-  return status === '全部' || status === '钱包卡券' ? orders.value : orders.value.filter(order => order.status === status);
-});
+  const status = activeTab.value
+  return status === '全部' || status === '钱包卡券' ? orders.value : orders.value.filter(order => order.status === status)
+})
 
 function handleClick(item) {
   if (item.name === '全部') {
-    activeTab.value = '全部';
+    activeTab.value = '全部'
   }
   else {
-    activeTab.value = item.name;
+    activeTab.value = item.name
   }
 }
 
 // 监听 type 变化
 watch(type, (newType) => {
   if (newType) {
-    activeTab.value = newType === 'all' ? '全部' : newType;
+    activeTab.value = newType === 'all' ? '全部' : newType
   }
-});
+})
 
 // 初始页面加载时，设置 activeTab
 if (type.value) {
-  activeTab.value = type.value === 'all' ? '全部' : type.value;
+  activeTab.value = type.value === 'all' ? '全部' : type.value
 }
 
 onLoad((option) => {
-  type.value = option?.type;
-});
+  type.value = option?.type
+})
 </script>
+
+<template>
+  <view>
+    <!-- 标签栏 -->
+    <u-sticky bg-color="#ffffff">
+      <u-tabs :list="list1" :current="activeTabIndex" @change="handleClick" />
+    </u-sticky>
+    <!-- 内容展示 -->
+    <view v-if="activeTab === '全部'">
+      <OrderCard v-for="order in orders" :key="order.id" :order-data="order" />
+    </view>
+    <view v-else-if="activeTab === '钱包卡券'">
+      <walletRollVue />
+    </view>
+    <view v-else>
+      <text>{{ activeTab.value }}</text>
+      <OrderCard v-for="(order, index) in filteredOrders" :key="`filtered-${index}`" :order-data="order" />
+    </view>
+  </view>
+</template>

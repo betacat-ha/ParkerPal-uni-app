@@ -1,3 +1,97 @@
+<script setup lang="ts">
+import type { MerchantInfo } from '@/store/modules/merchant/types'
+import { getById } from '@/api/merchant'
+
+// 从路由获取id
+const id = ref('')
+const merchantData = ref<MerchantInfo>()
+
+const showLoading = ref(true)
+const showDetail = ref(false)
+const showEmpty = ref(false)
+
+enum PageType {
+  Detail,
+  Empty,
+  Loading,
+}
+
+function switchPage(type: PageType) {
+  showLoading.value = false
+  showDetail.value = false
+  showEmpty.value = false
+
+  switch (type) {
+    case PageType.Detail:
+      showDetail.value = true
+      break
+    case PageType.Empty:
+      showEmpty.value = true
+      break
+    case PageType.Loading:
+      showLoading.value = true
+      break
+  }
+}
+
+// function navigateTo(path: string) {
+//   uni.navigateTo({
+//     url: path,
+//   })
+// }
+
+function handleNavigation() {
+  if (!merchantData.value) {
+    return
+  }
+
+  uni.openLocation({
+    name: merchantData.value!.name,
+    address: merchantData.value!.address,
+    latitude: merchantData.value!.latitude,
+    longitude: merchantData.value!.longitude,
+  })
+}
+
+function handleCall() {
+  console.log('handleCall')
+}
+
+function handleReserve() {
+  uni.showToast({
+    title: '预约成功',
+    icon: 'none',
+  })
+}
+
+onLoad((option) => {
+  id.value = option?.id
+  if (!id.value) {
+    switchPage(PageType.Empty)
+    console.warn('请传入商户ID')
+    return
+  }
+  console.log(`开始加载商户ID：${id.value}`)
+  getById(id.value, true).then((res) => {
+    merchantData.value = res
+
+    uni.setNavigationBarTitle({
+      title: merchantData.value.name,
+    })
+
+    switchPage(PageType.Detail)
+  }).catch(() => {
+    switchPage(PageType.Empty)
+  })
+})
+
+const tabList = reactive([
+  { name: '套餐' },
+  { name: '位置' },
+  { name: '服务' },
+])
+</script>
+
 <template>
   <view>
     <view v-if="showDetail">
@@ -14,7 +108,7 @@
               {{ merchantData?.description }}
             </text>
           </view>
-          <view style="padding: 15rpx 0rpx 15rpx 0rpx">
+          <view style="padding: 15rpx 0rpx">
             <u-gap height="1" bg-color="#cdcdcd" />
           </view>
           <view class="address flex">
@@ -111,100 +205,6 @@
   </view>
 </template>
 
-<script setup lang="ts">
-import type { MerchantInfo } from '@/store/modules/merchant/types';
-import { getById } from '@/api/merchant';
-
-// 从路由获取id
-const id = ref('');
-const merchantData = ref<MerchantInfo>();
-
-const showLoading = ref(true);
-const showDetail = ref(false);
-const showEmpty = ref(false);
-
-enum PageType {
-  Detail,
-  Empty,
-  Loading,
-}
-
-function switchPage(type: PageType) {
-  showLoading.value = false;
-  showDetail.value = false;
-  showEmpty.value = false;
-
-  switch (type) {
-    case PageType.Detail:
-      showDetail.value = true;
-      break;
-    case PageType.Empty:
-      showEmpty.value = true;
-      break;
-    case PageType.Loading:
-      showLoading.value = true;
-      break;
-  }
-}
-
-function navigateTo(path: string) {
-  uni.navigateTo({
-    url: path,
-  });
-}
-
-function handleNavigation() {
-  if (!merchantData.value) {
-    return;
-  }
-
-  uni.openLocation({
-    name: merchantData.value!.name,
-    address: merchantData.value!.address,
-    latitude: merchantData.value!.latitude,
-    longitude: merchantData.value!.longitude,
-  });
-}
-
-function handleCall() {
-  console.log('handleCall');
-}
-
-function handleReserve() {
-  uni.showToast({
-    title: '预约成功',
-    icon: 'none',
-  });
-}
-
-onLoad((option) => {
-  id.value = option?.id;
-  if (!id.value) {
-    switchPage(PageType.Empty);
-    console.warn('请传入商户ID');
-    return;
-  }
-  console.log(`开始加载商户ID：${id.value}`);
-  getById(id.value, true).then((res) => {
-    merchantData.value = res;
-
-    uni.setNavigationBarTitle({
-      title: merchantData.value.name,
-    });
-
-    switchPage(PageType.Detail);
-  }).catch((res) => {
-    switchPage(PageType.Empty);
-  });
-});
-
-const tabList = reactive([
-  { name: '套餐' },
-  { name: '位置' },
-  { name: '服务' },
-]);
-</script>
-
 <style lang="scss" scoped>
 .page-wrap {
   display: flex;
@@ -286,10 +286,11 @@ const tabList = reactive([
     grid-template-columns: repeat(auto-fill, 110px);
     grid-gap: 10px 13px;
     justify-content: space-between;
+
     .service-item {
       display: flex;
-      flex-direction: row;
       align-items: center;
+      flex-direction: row;
       gap: 10rpx;
     }
   }
@@ -298,15 +299,15 @@ const tabList = reactive([
 .card-title {
   display: flex;
   align-items: center;
+  margin-bottom: 10rpx;
   font-size: 32rpx;
   font-weight: bold;
-  margin-bottom: 10rpx;
 }
 
 .reserve {
   display: flex;
   align-items: center;
-  font-size: 28rpx;
   margin-bottom: 8rpx;
+  font-size: 28rpx;
 }
 </style>

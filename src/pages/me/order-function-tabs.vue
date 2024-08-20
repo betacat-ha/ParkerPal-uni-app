@@ -1,24 +1,3 @@
-<template>
-  <Card :shadow="false">
-    <!-- 图标按钮组 -->
-    <view class="icon-buttons">
-      <view
-        v-for="(icon, index) in icons"
-        :key="index"
-        @click="navigateToPage(icon.pagePath, icon.type)"
-      >
-        <u-icon
-          :label="icon.text"
-          label-pos="bottom"
-          :name="icon.name"
-          :size="icon.size"
-          :color="icon.color"
-        />
-      </view>
-    </view>
-  </Card>
-</template>
-
 <script>
 export default {
   name: 'OrderCard',
@@ -76,24 +55,45 @@ export default {
           type: '已完成',
         },
       ],
-    };
+    }
   },
   methods: {
     navigateToPage(pagePath, type) {
-      console.log('Navigating to:', pagePath, 'with type:', type);
+      console.log('Navigating to:', pagePath, 'with type:', type)
       uni.navigateTo({
         url: `${pagePath}?type=${type}`,
-      });
+      })
     },
   },
-};
+}
 </script>
+
+<template>
+  <Card :shadow="false">
+    <!-- 图标按钮组 -->
+    <view class="icon-buttons">
+      <view
+        v-for="(icon, index) in icons"
+        :key="index"
+        @click="navigateToPage(icon.pagePath, icon.type)"
+      >
+        <u-icon
+          :label="icon.text"
+          label-pos="bottom"
+          :name="icon.name"
+          :size="icon.size"
+          :color="icon.color"
+        />
+      </view>
+    </view>
+  </Card>
+</template>
 
 <style lang="scss">
 .icon-buttons {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 10px;
 }
 </style>

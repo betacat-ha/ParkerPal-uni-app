@@ -1,4 +1,4 @@
-import type { MerchantInfo } from '../merchant/types';
+import type { MerchantInfo } from '../merchant/types'
 
 export interface OrderInfo {
   id: string

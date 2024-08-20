@@ -1,3 +1,34 @@
+<script>
+export default {
+  name: 'MerchantCard',
+  props: {
+    merchantData: {
+      type: Object,
+      default: () => ({
+        name: '广东技术师范大学体育馆',
+        address: '中山大道西293号',
+        logo: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
+        plans: [
+          {
+            name: '夜间套餐（1月）',
+            price: 100,
+            tag: '夜间',
+          },
+          {
+            name: '全天套餐（1月）',
+            price: 200,
+            tag: '全天',
+          },
+        ],
+      }),
+    },
+  },
+  data() {
+    return {}
+  },
+}
+</script>
+
 <template>
   <Card>
     <!-- 商户信息 -->
@@ -36,37 +67,6 @@
   </Card>
 </template>
 
-<script>
-export default {
-  name: 'MerchantCard',
-  props: {
-    merchantData: {
-      type: Object,
-      default: () => ({
-        name: '广东技术师范大学体育馆',
-        address: '中山大道西293号',
-        logo: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
-        plans: [
-          {
-            name: '夜间套餐（1月）',
-            price: 100,
-            tag: '夜间',
-          },
-          {
-            name: '全天套餐（1月）',
-            price: 200,
-            tag: '全天',
-          },
-        ],
-      }),
-    },
-  },
-  data() {
-    return {};
-  },
-};
-</script>
-
 <style lang="scss" scoped>
 .merchant {
     display: flex;
@@ -82,9 +82,9 @@ export default {
     .info {
         // 垂直左对齐
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+        flex-direction: column;
         margin-left: 20rpx;
 
         .name {

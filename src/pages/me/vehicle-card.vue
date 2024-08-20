@@ -1,3 +1,18 @@
+<script setup>
+import { useVehicleStore } from '@/store/modules/vehicle/index'
+
+const vehicleStore = useVehicleStore()
+const vehicleInfo = storeToRefs(vehicleStore)
+
+function goToPage() {
+  uni.navigateTo({ url: '/pages/vehicle/edit' })
+}
+
+onLoad(() => {
+  vehicleStore.fetchVehicleInfo()
+})
+</script>
+
 <template>
   <view @click="goToPage">
     <Card :shadow="false">
@@ -24,21 +39,6 @@
   </view>
 </template>
 
-<script setup>
-import { useVehicleStore } from '@/store/modules/vehicle/index';
-
-const vehicleStore = useVehicleStore();
-const vehicleInfo = storeToRefs(vehicleStore);
-
-const goToPage = () => {
-  uni.navigateTo({ url: '/pages/vehicle/edit' });
-};
-
-onLoad(() => {
-  vehicleStore.fetchVehicleInfo();
-});
-</script>
-
 <style lang="scss" scoped>
 .car {
   display: flex;
@@ -46,10 +46,10 @@ onLoad(() => {
   padding: 20px;
 
   .info {
-    flex: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
+    flex: 1;
 
     .header {
       margin-bottom: 10px;

@@ -1,3 +1,33 @@
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  leftTitle: {
+    type: String,
+    default: '',
+  },
+  rightTitle: {
+    type: String,
+    default: '',
+  },
+  titleColor: {
+    type: String,
+    default: '#a7e6ff',
+  },
+  desc: {
+    type: String,
+    default: '',
+  },
+  shadow: {
+    type: Boolean,
+    default: true,
+  },
+})
+
+// 计算属性决定是否显示头部
+const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle || props.desc)
+</script>
+
 <template>
   <view class="card" :style="{ 'box-shadow': shadow ? '0 0 20rpx rgb(0 0 0 / 10%)' : '0' }">
     <!-- 如果有标题，则显示 -->
@@ -23,36 +53,6 @@
   </view>
 </template>
 
-<script setup>
-import { computed } from 'vue';
-
-const props = defineProps({
-  leftTitle: {
-    type: String,
-    default: '',
-  },
-  rightTitle: {
-    type: String,
-    default: '',
-  },
-  titleColor: {
-    type: String,
-    default: '#a7e6ff',
-  },
-  desc: {
-    type: String,
-    default: '',
-  },
-  shadow: {
-    type: Boolean,
-    default: true,
-  },
-});
-
-// 计算属性决定是否显示头部
-const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle || props.desc);
-</script>
-
 <style lang="scss" scoped>
 .card {
   padding: 0 !important;
@@ -70,7 +70,7 @@ const shouldDisplayHeader = computed(() => props.leftTitle || props.rightTitle |
     .card-header-title {
       display: flex;
       justify-content: space-between;
-      padding: 10rpx 20rpx 10rpx 20rpx;
+      padding: 10rpx 20rpx;
     }
 
     .card-header-desc {

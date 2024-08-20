@@ -1,3 +1,22 @@
+<script>
+export default {
+  name: 'OrderCard',
+  props: {
+    orderData: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    goToPage() {
+      uni.navigateTo({
+        url: `/pages/order/detail`,
+      })
+    },
+  },
+}
+</script>
+
 <template>
   <view class="order-card" @click="goToPage()">
     <Card class="order-info-card">
@@ -26,32 +45,13 @@
   </view>
 </template>
 
-<script>
-export default {
-  name: 'OrderCard',
-  props: {
-    orderData: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    goToPage() {
-      uni.navigateTo({
-        url: `/pages/order/detail`,
-      });
-    },
-  },
-};
-</script>
-
 <style lang="scss" scoped>
 .order-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
   padding: 20rpx;
-  position: relative;
+  gap: 20rpx;
 }
 
 .order-info-card {
@@ -68,10 +68,12 @@ export default {
     font-weight: bold;
     color: #0f0f0f;
   }
+
   .license {
     font-size: 28rpx;
     color: #6f6d6d;
   }
+
   .time {
     font-size: 28rpx;
     color: #6f6d6d;
@@ -89,6 +91,7 @@ export default {
     color: #fb7900;
   }
   }
+
   .button-divider {
     border-top: 1px solid #E8E8E8; /* 分界线样式 */
     margin-top: 10rpx;

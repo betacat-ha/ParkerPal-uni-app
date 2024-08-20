@@ -1,44 +1,50 @@
 // 引入配置
-import type { HttpRequestConfig } from 'uview-plus/libs/luch-request/index';
-import { requestInterceptors, responseInterceptors } from './interceptors';
-import type { IResponse } from './type';
+import type { HttpRequestConfig } from 'uview-plus/libs/luch-request/index'
+import { requestInterceptors, responseInterceptors } from './interceptors'
+import type { IResponse } from './type'
 
 // 引入拦截器配置
 export function setupRequest() {
   uni.$u.http.setConfig((defaultConfig: HttpRequestConfig) => {
-    /* defaultConfig 为默认全局配置 */
-    defaultConfig.baseURL = import.meta.env.VITE_APP_BASE_API;
-    return defaultConfig;
-  });
-  requestInterceptors();
-  responseInterceptors();
+    // #ifdef MP
+    defaultConfig.baseURL = import.meta.env.VITE_API_BASE_URL // 微信小程序不需要反向代理
+    // #endif
+
+    // #ifndef MP
+    defaultConfig.baseURL = '/api'
+    // #endif
+
+    return defaultConfig
+  })
+  requestInterceptors()
+  responseInterceptors()
 }
 
 export function request<T = any>(config: HttpRequestConfig): Promise<T> {
   return new Promise((resolve, reject) => {
     uni.$u.http.request(config).then((res: IResponse) => {
-      const { data } = res;
-      resolve(data as T);
+      const { data } = res
+      resolve(data as T)
     }).catch((error: any) => {
-      reject(error);
-    });
-  });
+      reject(error)
+    })
+  })
 }
 
 export function get<T = any>(config: HttpRequestConfig): Promise<T> {
-  return request({ ...config, method: 'GET' });
+  return request({ ...config, method: 'GET' })
 }
 
 export function post<T = any>(config: HttpRequestConfig): Promise<T> {
-  return request({ ...config, method: 'POST' });
+  return request({ ...config, method: 'POST' })
 }
 
 export function upload<T = any>(config: HttpRequestConfig): Promise<T> {
-  return request({ ...config, method: 'UPLOAD' });
+  return request({ ...config, method: 'UPLOAD' })
 }
 
 export function download<T = any>(config: HttpRequestConfig): Promise<T> {
-  return request({ ...config, method: 'DOWNLOAD' });
+  return request({ ...config, method: 'DOWNLOAD' })
 }
 
-export default setupRequest;
+export default setupRequest

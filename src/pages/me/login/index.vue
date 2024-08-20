@@ -1,3 +1,68 @@
+<script setup lang="ts">
+import uCode from 'uview-plus/components/u-code/u-code.vue'
+import type { CSSProperties } from 'vue'
+import { useUserStore } from '@/store/index'
+
+const userStore = useUserStore()
+
+const tel = ref<string>('')
+const code = ref<string>('')
+const tips = ref<string>()
+const uCodeRef = ref<InstanceType<typeof uCode> | null>(null)
+
+const inputStyle = computed<CSSProperties>(() => {
+  const style = {} as CSSProperties
+  if (tel.value && code.value) {
+    style.color = '#fff'
+    style.backgroundColor = '#3572EF'
+  }
+  return style
+})
+
+// 返回首页
+onNavigationBarButtonTap(() => {
+  uni.reLaunch({ url: '/' })
+})
+
+function codeChange(text: string) {
+  tips.value = text
+}
+
+function getCode() {
+  if (uCodeRef.value?.canGetCode) {
+    uni.showLoading({
+      title: '正在获取验证码',
+    })
+
+    userStore.getCodeByPhone(tel.value).then(() => {
+      uni.hideLoading()
+      uni.$u.toast('验证码已发送')
+      uCodeRef.value?.start()
+    }).catch(() => {
+      uni.hideLoading()
+      console.error('获取验证码失败')
+    })
+  }
+  else {
+    uni.$u.toast('倒计时结束后再发送')
+  }
+}
+function submit() {
+  if (uni.$u.test.mobile(tel.value)) {
+    userStore.loginByPhone({
+      phone: tel.value,
+      code: code.value,
+    }).then(async () => {
+      // 获取用户信息
+      await userStore.fetchInfo()
+      uni.$u.toast('登录成功')
+      uni.switchTab({ url: '/pages/me/index' })
+    }).catch(() => {
+    })
+  }
+}
+</script>
+
 <template>
   <view>
     <view class="login-form-wrap">
@@ -48,71 +113,6 @@
     </view>
   </view>
 </template>
-
-<script setup lang="ts">
-import uCode from 'uview-plus/components/u-code/u-code.vue';
-import type { CSSProperties } from 'vue';
-import { useUserStore } from '@/store/index';
-
-const userStore = useUserStore();
-
-const tel = ref<string>('');
-const code = ref<string>('');
-const tips = ref<string>();
-const uCodeRef = ref<InstanceType<typeof uCode> | null>(null);
-
-const inputStyle = computed<CSSProperties>(() => {
-  const style = {} as CSSProperties;
-  if (tel.value && code.value) {
-    style.color = '#fff';
-    style.backgroundColor = '#3572EF';
-  }
-  return style;
-});
-
-// 返回首页
-onNavigationBarButtonTap(() => {
-  uni.reLaunch({ url: '/' });
-});
-
-function codeChange(text: string) {
-  tips.value = text;
-}
-
-function getCode() {
-  if (uCodeRef.value?.canGetCode) {
-    uni.showLoading({
-      title: '正在获取验证码',
-    });
-
-    userStore.getCodeByPhone(tel.value).then(() => {
-      uni.hideLoading();
-      uni.$u.toast('验证码已发送');
-      uCodeRef.value?.start();
-    }).catch(() => {
-      uni.hideLoading();
-      console.error('获取验证码失败');
-    });
-  }
-  else {
-    uni.$u.toast('倒计时结束后再发送');
-  }
-}
-function submit() {
-  if (uni.$u.test.mobile(tel.value)) {
-    userStore.loginByPhone({
-      phone: tel.value,
-      code: code.value,
-    }).then(async () => {
-      // 获取用户信息
-      await userStore.fetchInfo();
-      uni.$u.toast('登录成功');
-      uni.switchTab({ url: '/pages/me/index' });
-    }).catch(() => {
-    });
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .login-form-wrap {

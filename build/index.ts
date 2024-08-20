@@ -2,15 +2,15 @@
  * @name createVitePlugins
  * @description 封装plugins数组统一调用
  */
-import uniPlugin from '@dcloudio/vite-plugin-uni';
-import type { PluginOption } from 'vite';
-import vitePluginRequire from 'vite-plugin-require';
-import { AutoImportDeps } from './autoImport';
-import { AutoRegistryComponents } from './component';
-import { ConfigUnoCSSPlugin } from './unocss';
-// import { ConfigImageminPlugin } from './imagemin';
-// import { ReplaceUrlPlugin } from './replaceUrl';
-// import { CleanImagePlugin } from './cleanImage';
+import uniPlugin from '@dcloudio/vite-plugin-uni'
+import type { PluginOption } from 'vite'
+import { AutoImportDeps } from './autoImport'
+import { AutoRegistryComponents } from './component'
+import { ConfigUnoCSSPlugin } from './unocss'
+import { ConfigImageminPlugin } from './imagemin'
+// import { ReplaceUrlPlugin } from './replaceUrl'
+// import { CleanImagePlugin } from './cleanImage'
+import { VisualizerPlugin } from './visualizer'
 
 export default function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
@@ -23,21 +23,21 @@ export default function createVitePlugins(isBuild: boolean) {
     AutoRegistryComponents(),
     // uni支持(兼容性写法，当type为module时，必须要这样写)
     (uniPlugin as any).default(),
-  ];
+  ]
 
   if (isBuild) {
     const buildPlugins: (PluginOption | PluginOption[])[] = [
       // 图片压缩插件
-      // ConfigImageminPlugin(),
+      ConfigImageminPlugin(),
       // 图片资源自动转换为网络资源
       // ReplaceUrlPlugin(),
       // 自动清除本地图片
-      // CleanImagePlugin()
+      // CleanImagePlugin(),
       // 打包视图分析
-      // VisualizerPlugin(),
-    ];
-    vitePlugins.push(...buildPlugins);
+      VisualizerPlugin(),
+    ]
+    vitePlugins.push(...buildPlugins)
   }
 
-  return vitePlugins;
+  return vitePlugins
 }

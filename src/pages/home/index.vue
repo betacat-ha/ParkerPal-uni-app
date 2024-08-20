@@ -1,3 +1,73 @@
+<script setup lang="ts">
+import ActivedOrderCard from './actived-order-card.vue'
+import MerchantCard from '@/pages/me/merchant-card.vue'
+import { useMerchantStore, useUserStore } from '@/store/index'
+
+const merchantStore = useMerchantStore()
+const merchantList = storeToRefs(merchantStore).list
+
+const title = ref<string>()
+title.value = import.meta.env.VITE_APP_TITLE
+
+onShow(() => {
+  merchantStore.fetchInfo({
+    page: 0,
+    limit: 3,
+  })
+
+  // 设置当前tab
+  useUserStore().tabValue = 0
+})
+
+const bannerList = reactive([
+  {
+    image: 'https://s2.loli.net/2024/07/28/BHxQ5yLgJ986KnA.png',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/28/t3LIk8SRUnZ2miV.png',
+  },
+])
+
+const searchKeyword = ref<string>('')
+
+function handleSearch() {
+  uni.navigateTo({ url: `/pages/merchant/index?keyword=${searchKeyword.value}` })
+}
+
+function handleScan() {
+  uni.scanCode({
+    onlyFromCamera: true,
+    success: (res) => {
+      console.log('扫描二维码成功,结果:', res.result)
+      uni.$u.toast(`${res.result}`)
+    },
+    error: () => {
+      console.log('扫描二维码出现错误')
+    },
+  })
+}
+
+const showAgreePrivacy = ref(false)
+// 同意隐私协议
+function handleAgree() {
+  console.log('同意隐私政策')
+}
+
+// 点击查看更多
+function navigateToMerchant() {
+  uni.navigateTo({
+    url: '/pages/merchant/index',
+  })
+}
+
+// 点击商户卡片
+function navigateToMerchantByID(id: string) {
+  uni.navigateTo({
+    url: `/pages/merchant/detail?id=${id}`,
+  })
+}
+</script>
+
 <template>
   <view class="page-wrap">
     <u-navbar :safe-area-inset-top="true" :placeholder="true">
@@ -42,91 +112,21 @@
 
     <!-- #ifdef MP-WEIXIN -->
     <!-- 隐私协议组件 -->
-    <!-- <AgreePrivacy v-model="showAgreePrivacy" :disable-check-privacy="false" @agree="handleAgree" /> -->
+    <AgreePrivacy v-model="showAgreePrivacy" :disable-check-privacy="false" @agree="handleAgree" />
     <!-- #endif -->
 
     <Tabbar />
   </view>
 </template>
 
-<script setup lang="ts">
-import ActivedOrderCard from './actived-order-card.vue';
-import MerchantCard from '@/pages/me/merchant-card.vue';
-import { useMerchantStore, useUserStore } from '@/store/index';
-
-const merchantStore = useMerchantStore();
-const merchantList = storeToRefs(merchantStore).list;
-
-const title = ref<string>();
-title.value = import.meta.env.VITE_APP_TITLE;
-
-onShow(() => {
-  merchantStore.fetchInfo({
-    page: 0,
-    limit: 3,
-  });
-
-  // 设置当前tab
-  useUserStore().tabValue = 0;
-});
-
-const bannerList = reactive([
-  {
-    image: 'https://s2.loli.net/2024/07/28/BHxQ5yLgJ986KnA.png',
-  },
-  {
-    image: 'https://s2.loli.net/2024/07/28/t3LIk8SRUnZ2miV.png',
-  },
-]);
-
-const searchKeyword = ref<string>('');
-
-function handleSearch() {
-  uni.navigateTo({ url: `/pages/merchant/index?keyword=${searchKeyword.value}` });
-}
-
-function handleScan() {
-  uni.scanCode({
-    onlyFromCamera: true,
-    success: (res) => {
-      console.log('扫描二维码成功,结果:', res.result);
-      uni.$u.toast(`${res.result}`);
-    },
-    error: () => {
-      console.log('扫描二维码出现错误');
-    },
-  });
-}
-
-const showAgreePrivacy = ref(false);
-// 同意隐私协议
-function handleAgree() {
-  console.log('同意隐私政策');
-}
-
-// 点击查看更多
-function navigateToMerchant() {
-  uni.navigateTo({
-    url: '/pages/merchant/index',
-  });
-}
-
-// 点击商户卡片
-function navigateToMerchantByID(id: string) {
-  uni.navigateTo({
-    url: `/pages/merchant/detail?id=${id}`,
-  });
-}
-</script>
-
 <style lang="scss">
 .page-wrap {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20rpx;
+  flex-direction: column;
   padding: 0rpx 20rpx;
+  gap: 20rpx;
 }
 
 .width-100 {
@@ -138,13 +138,15 @@ function navigateToMerchantByID(id: string) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   padding: 0 20rpx;
   margin: 0 20rpx;
+  width: 100%;
+
   .text {
     font-size: 40rpx;
     font-weight: bold;
   }
+
   .button{
     display: flex;
     align-items: center;

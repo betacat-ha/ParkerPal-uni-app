@@ -33,7 +33,7 @@ export interface SubmitVehicleDataResponse {
 }
 
 // 定义获取车辆信息的 API 调用类型
-export type GetVehicleInfo = (id: string) => Promise<VehicleData>;
+export type GetVehicleInfo = (id: string) => Promise<VehicleData>
 
 // 定义提交车辆数据的 API 调用类型
-export type SubmitVehicleData = (data: VehicleData) => Promise<VehicleData>;
+export type SubmitVehicleData = (data: VehicleData) => Promise<VehicleData>

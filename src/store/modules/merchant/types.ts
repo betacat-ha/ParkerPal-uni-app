@@ -1,4 +1,4 @@
-import type { SwiperItem } from '../common/type';
+import type { SwiperItem } from '../common/type'
 
 export interface Plan {
   id: string

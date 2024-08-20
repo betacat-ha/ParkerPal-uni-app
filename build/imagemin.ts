@@ -2,9 +2,9 @@
  * @name ConfigImageminPlugin
  * @description 图片压缩配置
  */
-import viteImagemin from 'vite-plugin-imagemin';
+import viteImagemin from 'vite-plugin-imagemin'
 
-export const ConfigImageminPlugin = () => {
+export function ConfigImageminPlugin() {
   const plugin = viteImagemin({
     gifsicle: {
       optimizationLevel: 7,
@@ -31,6 +31,6 @@ export const ConfigImageminPlugin = () => {
         },
       ],
     },
-  });
-  return plugin;
-};
+  })
+  return plugin
+}

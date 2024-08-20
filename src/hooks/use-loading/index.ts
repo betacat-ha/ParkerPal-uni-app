@@ -7,13 +7,13 @@ export default function useLoading() {
     uni.showLoading({
       title: content,
       mask: true,
-    });
-  };
+    })
+  }
   const hideLoading = () => {
-    uni.hideLoading();
-  };
+    uni.hideLoading()
+  }
   return {
     showLoading,
     hideLoading,
-  };
+  }
 }

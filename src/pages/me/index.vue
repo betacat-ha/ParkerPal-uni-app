@@ -1,3 +1,82 @@
+<script setup lang="ts">
+import VehicleCard from './vehicle-card.vue'
+import OrderFunctionTabs from '@/pages/me/order-function-tabs.vue'
+import { useUserStore } from '@/store/index'
+
+interface sheetListModel {
+  name: string
+  callback: () => void
+}
+
+const list2 = reactive([
+  {
+    image: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
+    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/26/YEHWeTjDQZ7ploI.jpg',
+    title: '身无彩凤双飞翼，心有灵犀一点通',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/26/28CWvoisqSc7AYK.jpg',
+    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/26/maQ163oScPik4uI.jpg',
+    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+  },
+  {
+    image: 'https://s2.loli.net/2024/07/26/8R9uLCVAjBJ3D6i.jpg',
+    title: '身无彩凤双飞翼，心有灵犀一点通',
+  },
+])
+
+const userStore = useUserStore()
+const userInfo = storeToRefs(userStore).info
+
+const sheet = ref({
+  show: false,
+  title: '',
+  list: [] as sheetListModel[],
+})
+
+function sheetOnSelect(index: sheetListModel) {
+  index.callback()
+}
+
+function doLogin() {
+  uni.navigateTo({
+    url: '/pages/me/login/index',
+  })
+}
+
+function doLogout() {
+  console.log('doLogout')
+  sheet.value.title = ''
+  sheet.value.list = [{
+    name: '退出登录',
+    callback: () => {
+      sheet.value.show = false
+      userStore.logout()
+    },
+  }]
+  sheet.value.show = true
+}
+
+function fetchUserInfo() {
+  userStore.fetchInfo()
+}
+
+onMounted(() => {
+  fetchUserInfo()
+})
+
+onShow(() => {
+  // 设置当前tab
+  useUserStore().tabValue = 2
+})
+</script>
+
 <template>
   <view class="page-wrap">
     <!-- <u-navbar title="" placeholder left-icon="" right-icon="camera-fill" /> -->
@@ -48,85 +127,6 @@
     <u-action-sheet :actions="sheet.list" :title="sheet.title" :show="sheet.show" :safe-area="true" cancel-text="取消" @select="sheetOnSelect" @close="sheet.show = false" />
   </view>
 </template>
-
-<script setup lang="ts">
-import VehicleCard from './vehicle-card.vue';
-import OrderFunctionTabs from '@/pages/me/order-function-tabs.vue';
-import { useUserStore } from '@/store/index';
-
-interface sheetListModel {
-  name: string
-  callback: () => void
-}
-
-const list2 = reactive([
-  {
-    image: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
-    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
-  },
-  {
-    image: 'https://s2.loli.net/2024/07/26/YEHWeTjDQZ7ploI.jpg',
-    title: '身无彩凤双飞翼，心有灵犀一点通',
-  },
-  {
-    image: 'https://s2.loli.net/2024/07/26/28CWvoisqSc7AYK.jpg',
-    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',
-  },
-  {
-    image: 'https://s2.loli.net/2024/07/26/maQ163oScPik4uI.jpg',
-    title: '昨夜星辰昨夜风，画楼西畔桂堂东',
-  },
-  {
-    image: 'https://s2.loli.net/2024/07/26/8R9uLCVAjBJ3D6i.jpg',
-    title: '身无彩凤双飞翼，心有灵犀一点通',
-  },
-]);
-
-const userStore = useUserStore();
-const userInfo = storeToRefs(userStore).info;
-
-const sheet = ref({
-  show: false,
-  title: '',
-  list: [] as sheetListModel[],
-});
-
-const sheetOnSelect = (index: sheetListModel) => {
-  index.callback();
-};
-
-function doLogin() {
-  uni.navigateTo({
-    url: '/pages/me/login/index',
-  });
-}
-
-function doLogout() {
-  console.log('doLogout');
-  sheet.value.title = '';
-  sheet.value.list = [{
-    name: '退出登录',
-    callback: () => {
-      sheet.value.show = false;
-      userStore.logout();
-    },
-  }];
-  sheet.value.show = true;
-}
-
-function fetchUserInfo() {
-  userStore.fetchInfo();
-}
-
-onMounted(() => {
-  fetchUserInfo();
-});
-
-onShow(() => {
-  // 设置当前tab
-  useUserStore().tabValue = 2;
-});
-</script>
 
 <style lang="scss">
 .page-wrap {
