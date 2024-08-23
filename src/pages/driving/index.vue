@@ -31,8 +31,8 @@ function addMarkers() {
       longitude: 113.371,
     },
     {
-      latitude: 23.131,
-      longitude: 113.372,
+      latitude: 23.130714,
+      longitude: 113.372196,
     },
     {
       latitude: 23.131,
@@ -91,12 +91,12 @@ function addGroundOverlay() {
     opacity: 1, // 图层透明度
     bounds: { // 图片覆盖的经纬度范围
       northeast: {
-        latitude: 23.1312,
-        longitude: 113.3712,
+        latitude: 23.130933,
+        longitude: 113.372588,
       },
       southwest: {
-        latitude: 23.1321,
-        longitude: 113.3719,
+        latitude: 23.130583,
+        longitude: 113.371849,
       },
     },
     fail: (err) => {
