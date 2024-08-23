@@ -9,6 +9,10 @@ const merchantList = storeToRefs(merchantStore).list
 const title = ref<string>()
 title.value = import.meta.env.VITE_APP_TITLE
 
+onLoad(() => {
+  getLocation();
+})
+
 onShow(() => {
   merchantStore.fetchInfo({
     page: 0,
@@ -66,6 +70,55 @@ function navigateToMerchantByID(id: string) {
     url: `/pages/merchant/detail?id=${id}`,
   })
 }
+
+// 获取位置
+function getLocation() {
+  uni.getFuzzyLocation({
+    success: function (res) {
+      console.log('获取模糊位置成功,结果:', res)
+      previewTips()
+    },
+    fail: () => {
+      console.log('获取模糊位置失败')
+      previewTips()
+    },
+  });
+
+  // uni.getLocation({
+  //   type: 'wgs84',
+  //   success: (res) => {
+  //     console.log('获取位置成功,结果:', res)
+  //     // uni.$u.toast(`${res.latitude},${res.longitude}`)
+  //     previewTips()
+  //   },
+  //   fail: () => {
+  //     console.log('获取位置失败')
+  //     previewTips()
+  //   },
+  // })
+}
+
+// 体验版提示
+function previewTips() {
+  if (uni.getStorageSync("previewMode") == 1) {
+    uni.$u.toast("您处于体验模式中，任何操作均不会被保存。")
+    return
+  }
+
+  uni.showModal({
+    title: '即将进入体验模式',
+    content: '您所在的区域未开通服务，本次体验不会收集您的数据。',
+    showCancel: false,
+    success: (res) => {
+      if (res.confirm) {
+        console.log('用户点击确定')
+        uni.setStorageSync("previewMode", 1)
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    },
+  })
+}
 </script>
 
 <template>
@@ -77,17 +130,16 @@ function navigateToMerchantByID(id: string) {
             <text style="padding-right: 20rpx;">
               智泊无忧
             </text>
-            <u-search
-              v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场"
-              :clearabled="true" @search="handleSearch" @click-icon="handleScan"
-            />
+            <u-search v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场"
+              :clearabled="true" @search="handleSearch" @click-icon="handleScan" />
           </view>
         </view>
       </template>
     </u-navbar>
 
     <view class="width-100 mb-20rpx">
-      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10" interval="5000" />
+      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10"
+        interval="5000" />
     </view>
 
     <view class="title-bar">
@@ -147,7 +199,7 @@ function navigateToMerchantByID(id: string) {
     font-weight: bold;
   }
 
-  .button{
+  .button {
     display: flex;
     align-items: center;
     font-size: 24rpx;
