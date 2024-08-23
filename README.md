@@ -5,9 +5,9 @@
 <div>
 
 <div align="center">
-<img src="img/Home.PNG" height="300"/>
-<img src="img/Navigation.PNG" height="300"/>
-<img src="img/Personal_Info_1.PNG" height="300"/>
+<img src="img/Home.png" height="300"/>
+<img src="img/Navigation.png" height="300"/>
+<img src="img/Personal_Info_1.png" height="300"/>
 <div>
 
 <div align="left" />
