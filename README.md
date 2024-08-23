@@ -1,7 +1,20 @@
-## 智泊无忧
+<div align="center">
+  <img width="100px" alt="logo" style="width: 100px; 
+        height: 100px; border-radius: 15px; margin: 5;" src="src/static/images/logo.png"/>
+  <p style="font-size: 24px; font-weight: bold;">智泊无忧</p>
+<div>
+
+<div align="center">
+<img src="img/Home.PNG" height="300"/>
+<img src="img/Navigation.PNG" height="300"/>
+<img src="img/Personal_Info_1.PNG" height="300"/>
+<div>
+
+<div align="left" />
+
 
 ### 技术栈
-uni-app、vue3、uview-plus、ooomap
+uni-app、Vue3、uview-plus、qqmap
 
 ### 开发
 
