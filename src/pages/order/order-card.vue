@@ -1,28 +1,9 @@
-<script>
-export default {
-  name: 'OrderCard',
-  props: {
-    orderData: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    goToPage() {
-      uni.navigateTo({
-        url: `/pages/order/detail`,
-      })
-    },
-  },
-}
-</script>
-
 <template>
   <view class="order-card" @click="goToPage()">
     <Card class="order-info-card">
       <view class="info">
         <view class="title">
-          <text> {{ orderData.parkingLotName }} </text>
+          <text> {{ orderData.merchantName }} </text>
         </view>
         <view class="button-divider" /> <!-- 分界线 -->
         <view class="license">
@@ -33,8 +14,9 @@ export default {
         </view>
       </view>
       <view class="status">
-        <text :class="{ 'status-pending': orderData.status === '待付款', 'status-used': orderData.status === '待使用', 'status-refund': orderData.status === '退款/取消', 'status-review': orderData.status === '待评价' }">
-          {{ orderData.status }}
+        <!-- <text :class="{ 'status-pending': orderData.status === '待付款', 'status-used': orderData.status === '待使用', 'status-refund': orderData.status === '退款/售后', 'status-review': orderData.status === '待评价' }"> -->
+        <text>
+          {{ orderData.orderstatus }}
         </text>
       </view>
       <view class="button-divider" /> <!-- 分界线 -->
@@ -45,13 +27,38 @@ export default {
   </view>
 </template>
 
+<script>
+export default {
+  name: 'OrderCard',
+  props: {
+    orderData: {
+      type: Object,
+      default: () => ({
+        merchantName: '广东技术师范大学体育馆',
+        licensePlate: '粤M·1234N',
+        parkingDuration: '2小时45分06秒',
+        status: '待付款',
+        amount: '25.02',
+      }),
+    },
+  },
+  methods: {
+    // goToPage() {
+    //   uni.navigateTo({
+    //     url: `/pages/order/detail?id=${id}`,
+    //   });
+    // },
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 .order-card {
-  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 20rpx;
   gap: 20rpx;
+  padding: 20rpx;
+  position: relative;
 }
 
 .order-info-card {
@@ -68,12 +75,10 @@ export default {
     font-weight: bold;
     color: #0f0f0f;
   }
-
   .license {
     font-size: 28rpx;
     color: #6f6d6d;
   }
-
   .time {
     font-size: 28rpx;
     color: #6f6d6d;
@@ -91,7 +96,6 @@ export default {
     color: #fb7900;
   }
   }
-
   .button-divider {
     border-top: 1px solid #E8E8E8; /* 分界线样式 */
     margin-top: 10rpx;
