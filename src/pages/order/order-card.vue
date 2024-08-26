@@ -1,24 +1,26 @@
 <template>
-  <view class="order-card" @click="goToPage()">
+  <view class="order-card">
     <Card class="order-info-card">
       <view class="info">
         <view class="title">
           <text> {{ orderData.merchantName }} </text>
         </view>
-        <view class="button-divider" /> <!-- 分界线 -->
-        <view class="license">
-          车牌号：<text>{{ orderData.licensePlate }}</text>
-        </view>
-        <view class="time">
-          停车时长：<text>{{ orderData.parkingDuration }}</text>
-        </view>
-      </view>
-      <view class="status">
+        <view class="status">
         <!-- <text :class="{ 'status-pending': orderData.status === '待付款', 'status-used': orderData.status === '待使用', 'status-refund': orderData.status === '退款/售后', 'status-review': orderData.status === '待评价' }"> -->
         <text>
           {{ orderData.orderstatus }}
         </text>
       </view>
+        <view class="button-divider" /> <!-- 分界线 -->
+        
+        <view class="createTime">
+          <text>{{ orderData.createTime }}</text>
+        </view>
+        <view class="time">
+          停车时长：<text>{{ orderData.parkingDuration }}</text>
+        </view>
+      </view>
+      
       <view class="button-divider" /> <!-- 分界线 -->
       <view class="amount">
         <text>费用：￥{{ orderData.amount }}</text>
@@ -76,6 +78,10 @@ export default {
     color: #0f0f0f;
   }
   .license {
+    font-size: 28rpx;
+    color: #6f6d6d;
+  }
+  .createTime {
     font-size: 28rpx;
     color: #6f6d6d;
   }
