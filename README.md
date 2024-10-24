@@ -1,6 +1,24 @@
+<<<<<<< HEAD
 # ParkerPalApp
 
 智泊无忧跨端应用
+=======
+<div align="center">
+  <img width="100px" alt="logo" style="width: 100px; 
+        height: 100px; border-radius: 15px; margin: 5;" src="src/static/images/logo.png"/>
+  <p style="font-size: 24px; font-weight: bold;">智泊无忧</p>
+</div>
+
+<div align="center">
+    <img src="img/Home.png" height="300"/>
+    <img src="img/Navigation.png" height="300"/>
+    <img src="img/Personal_Info_1.png" height="300"/>
+</div>
+
+### 技术栈
+
+uni-app、Vue3、uview-plus、qqmap
+>>>>>>> 2e0ad223e13805f5a4f572b420029c637f7d35e2
 
 ## 技术栈
 
@@ -63,8 +81,24 @@ pnpm run dev:mp-weixin
 ```
 
 ### 代码提交
+<<<<<<< HEAD
 
 TODO
+=======
+
+```bash
+pnpm run eslint # eslint校验
+pnpm cz
+```
+
+### 更新uniapp版本
+
+更新uniapp相关依赖到最新正式版
+
+```bash
+npx @dcloudio/uvm@latest
+```
+>>>>>>> 2e0ad223e13805f5a4f572b420029c637f7d35e2
 
 ### 注意事项
 
@@ -76,10 +110,13 @@ TODO
     示例一：style中的图片使用
 
     ```vue
+<<<<<<< HEAD
     <script setup lang="ts">
     import bgImg from '@/static/images/bg_img.png'
     </script>
 
+=======
+>>>>>>> 2e0ad223e13805f5a4f572b420029c637f7d35e2
     <template>
       <view :style="`background-image: url('${bgImg}')`">
         <!-- else -->
@@ -117,4 +154,8 @@ TODO
 
 > 拦截uni.switchTab本身没有问题。但是在微信小程序端点击tabbar的底层逻辑并不是触发uni.switchTab。所以误认为拦截无效，此类场景的解决方案是在tabbar页面的页面生命周期onShow中处理。
 
+<<<<<<< HEAD
 6. 本项目使用了easycom自动导入，公共组件请遵循组件同名目录，eg:card/card.index。
+=======
+6. 本项目使用了easycom自动导入，公共组件请遵循组件同名目录，eg:card/card.index。
+>>>>>>> 2e0ad223e13805f5a4f572b420029c637f7d35e2

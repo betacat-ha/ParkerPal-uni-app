@@ -15,7 +15,17 @@
       "postcss": true,
       "minified": true
     },
-    "usingComponents": true
+    "usingComponents": true,
+    "permission": {
+      // 获取当前的地理位置、速度 配置
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于为你提供室内定位和指引。"
+      },
+      "scope.userFuzzyLocation": {
+        "desc": "你的位置信息将用于为你推荐附近的停车场。"
+      }
+    },
+    "requiredPrivateInfos" : [ "getFuzzyLocation" ]
   },
   "vueVersion": "3"
 }
