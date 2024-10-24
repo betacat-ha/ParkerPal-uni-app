@@ -79,10 +79,10 @@
     "vue-tsc": "^2.0.22"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": "eslint --fix",
+    "**/*.{js,jsx,ts,tsx}": "eslint --ignore-pattern \"uniCloud-aliyun/**\" --ignore-pattern \"src/uni_modules/**\" --fix",
     "**/*.{scss,css}": "stylelint --fix",
     "**/*.vue": [
-      "eslint --fix",
+      "eslint --ignore-pattern \"uniCloud-aliyun/**\" --ignore-pattern \"src/uni_modules/**\" --fix",
       "stylelint --fix"
     ]
   }
