@@ -1,14 +1,33 @@
 <script setup lang="ts">
-import VehicleCard from './vehicle-card.vue'
-import OrderFunctionTabs from '@/pages/me/order-function-tabs.vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import { useUserStore } from '@/store/index'
 
-interface sheetListModel {
-  name: string
-  callback: () => void
+const userStore = useUserStore()
+const loading = ref(true)
+
+onMounted(() => {
+  loading.value = false
+})
+
+watchEffect(() => {
+  if (userStore.isLoggedIn) {
+    navigateToUserCenter()
+  }
+})
+
+function navigateToUserCenter() {
+  uni.navigateTo({
+    url: '/pages/me/user/index',
+  })
 }
 
-const list2 = reactive([
+function navigateToUserLogin() {
+  uni.navigateTo({
+    url: '/pages/me/user/login/index',
+  })
+}
+
+const imges = reactive([
   {
     image: 'https://s2.loli.net/2024/07/11/LaotOqrlU9ISvTw.jpg',
     title: '昨夜星辰昨夜风，画楼西畔桂堂东',
@@ -30,125 +49,95 @@ const list2 = reactive([
     title: '身无彩凤双飞翼，心有灵犀一点通',
   },
 ])
-
-const userStore = useUserStore()
-const userInfo = storeToRefs(userStore).info
-
-const sheet = ref({
-  show: false,
-  title: '',
-  list: [] as sheetListModel[],
-})
-
-function sheetOnSelect(index: sheetListModel) {
-  index.callback()
-}
-
-function doLogin() {
-  uni.navigateTo({
-    url: '/pages/me/login/index',
-  })
-}
-
-function doLogout() {
-  console.log('doLogout')
-  sheet.value.title = ''
-  sheet.value.list = [{
-    name: '退出登录',
-    callback: () => {
-      sheet.value.show = false
-      userStore.logout()
-    },
-  }]
-  sheet.value.show = true
-}
-
-function fetchUserInfo() {
-  userStore.fetchInfo()
-}
-
-onMounted(() => {
-  fetchUserInfo()
-})
-
-onShow(() => {
-  // 设置当前tab
-  useUserStore().tabValue = 2
-})
 </script>
 
 <template>
-  <view class="page-wrap">
-    <!-- <u-navbar title="" placeholder left-icon="" right-icon="camera-fill" /> -->
-    <Card :shadow="false">
-      <view class="flex items-center">
-        <view class="mr-10rpx">
-          <u-avatar src="/static/images/logo.png" size="70" />
-        </view>
-        <view class="ml-10rpx flex-1" @click="userInfo.name === '' ? doLogin() : doLogout();">
-          <view class="pb-20rpx font-size-36rpx">
-            {{ userInfo.name === '' ? '未登录' : userInfo.name }}
-          </view>
-          <view class="u-tips-color font-size-28rpx">
-            {{ userInfo.name === '' ? '点这里可以登录' : `微信号：${userInfo.weixinId}` }}
-          </view>
-        </view>
-        <!-- <view class="ml-10rpx p-10rpx">
-          <u-icon name="scan" color="#969799" />
-        </view> -->
-        <view class="ml-10rpx p-10rpx">
-          <u-icon name="arrow-right" color="#969799" />
-        </view>
-      </view>
-    </Card>
-
-    <OrderFunctionTabs v-if="userInfo.name !== ''" />
-    <VehicleCard v-if="userInfo.name !== ''" />
-
-    <view v-if="userInfo.name !== ''" class="bg-white">
-      <u-cell-group>
-        <u-cell icon="star" title="收藏" is-link />
-        <u-cell icon="heart" title="语音包" is-link />
-        <u-cell icon="photo" title="历史导航记录" is-link />
-      </u-cell-group>
-    </view>
-    <view class="bg-white">
-      <u-cell-group>
-        <u-cell icon="setting" title="设置" is-link />
-      </u-cell-group>
+  <view class="container">
+    <view class="swiper-container">
+      <u-swiper :list="imges" key-name="image" :autoplay="true" circular show-title />
     </view>
 
-    <view class="bg-white">
-      <u-swiper :list="list2" key-name="image" :autoplay="true" circular show-title />
-    </view>
+    <div v-if="loading" class="loading">
+      <u-icon name="loading" size="60" color="#primaryColor" />
+      <text class="message">
+        正在加载...
+      </text>
+    </div>
 
-    <Tabbar />
-
-    <u-action-sheet :actions="sheet.list" :title="sheet.title" :show="sheet.show" :safe-area="true" cancel-text="取消" @select="sheetOnSelect" @close="sheet.show = false" />
+    <div v-else-if="!userStore.isLoggedIn" class="not-logged-in">
+      <text class="message">
+        请登录
+      </text>
+      <button class="action-button primary" @click="navigateToUserLogin">
+        用户登录
+      </button>
+      <button class="action-button secondary">
+        商家登录
+      </button>
+    </div>
   </view>
+  <Tabbar />
 </template>
 
-<style lang="scss">
-.page-wrap {
+<style lang="scss" scoped>
+$primaryColor: #3572EF;
+$secondaryColor: #FF6B6B;
+$textColor: #333;
+$buttonWidth: 240rpx;
+$buttonHeight: 80rpx;
+$buttonRadius: 10rpx;
+$buttonFontSize: 28rpx;
+$buttonShadow: 0 2rpx 4rpx rgb(0 0 0 / 10%);
+
+.container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 20rpx;
-  padding: 20rpx;
+  padding: 0 20rpx;
+  height: 100vh;
+  background-color: #f8f8f8;
 }
 
-.bg-white {
-  background-color: white;
+.swiper-container {
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  width: 100%;
+  max-width: 750rpx; /* 可以根据需要调整 */
+  height: 400rpx; /* 图片的高度 */
 }
 
-.font-size-36rpx {
-  font-size: 36rpx;
+.loading,
+.not-logged-in {
+  text-align: center;
 }
 
-.font-size-28rpx {
-  font-size: 28rpx;
+.message {
+  margin: 20rpx 0;
+  font-size: 30rpx;
+  color: $textColor;
 }
 
-.u-tips-color {
-  color: #909399;
+.action-button {
+  margin: 20rpx 0;
+  width: $buttonWidth;
+  height: $buttonHeight;
+  font-size: $buttonFontSize;
+  line-height: $buttonHeight;
+  color: #fff;
+  border-radius: $buttonRadius;
+  box-shadow: $buttonShadow;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.primary {
+  background-color: $primaryColor;
+}
+
+.secondary {
+  background-color: $secondaryColor;
 }
 </style>

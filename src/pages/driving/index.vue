@@ -8,8 +8,7 @@ const lng = ref(113.372)
 const scale = ref(17)
 
 onShow(() => {
-  // 设置当前tab
-  useUserStore().tabValue = 1
+  useUserStore().setTabValue(1)
 })
 
 const mapContext = uni.createMapContext('map', this)

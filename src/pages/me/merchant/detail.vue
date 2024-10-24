@@ -34,12 +34,6 @@ function switchPage(type: PageType) {
   }
 }
 
-// function navigateTo(path: string) {
-//   uni.navigateTo({
-//     url: path,
-//   })
-// }
-
 function handleNavigation() {
   if (!merchantData.value) {
     return

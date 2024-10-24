@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import zPaging from 'z-paging/components/z-paging/z-paging.vue'
-import MerchantCard from '../me/merchant-card.vue'
-import { useMerchantStore } from '@/store/index'
-import type { MerchantInfo } from '@/store/modules/merchant/types'
+// import MerchantCard from '../me/merchant-card.vue'
 
 const pagingRef = ref<InstanceType<typeof zPaging> | null>(null)
 const dataList = ref<MerchantInfo[]>([])
 const searchKeyword = ref('')
-
-const merchantStore = useMerchantStore()
-const merchantList = storeToRefs(merchantStore).list
 
 // 处理搜索事件
 function handleSearch() {
@@ -62,14 +56,14 @@ onLoad((option) => {
       <view class="search-bar">
         <u-search
           v-model="searchKeyword" search-icon="search" :show-action="false" placeholder="搜搜附近的停车场"
-          class="input" :clearabled="true" @search="handleSearch" @clear="handleClear"
+          class="input" :clearabled="Wtrue" @search="handleSearch" @clear="handleClear"
         />
       </view>
     </template>
 
     <!-- 商家列表 -->
     <view v-for="(item, index) in dataList" :key="index" style="padding: 20rpx 20rpx 0;" @click="handleClick(item.id)">
-      <MerchantCard :merchant-data="item" />
+      <!-- <MerchantCard :merchant-data="item" /> -->
     </view>
   </z-paging>
 </template>

@@ -1,22 +1,26 @@
 <script setup lang="ts">
-import ActivedOrderCard from './actived-order-card.vue'
-import MerchantCard from '@/pages/me/merchant-card.vue'
-import { useMerchantStore, useUserStore } from '@/store/index'
+import { useOrderStore, useParkingLotStore, useUserStore } from '@/store/index'
+import type { TbOrder } from '@/store/modules/order/types'
 
-const merchantStore = useMerchantStore()
-const merchantList = storeToRefs(merchantStore).list
+const userStore = useUserStore()
+const parkingLotStore = useParkingLotStore()
+const orderStore = useOrderStore()
+const { parkingLots } = storeToRefs(parkingLotStore)
 
-const title = ref<string>()
-title.value = import.meta.env.VITE_APP_TITLE
+const searchKeyword = ref('')
+const showAgreePrivacy = ref(false)
+const activeOrder = ref<TbOrder | null>(null)
+
+onMounted(async () => {
+  await parkingLotStore.getParkingLots()
+  if (userStore.isLoggedIn) {
+    await orderStore.getOrdersByUserId(userStore.getUserId!)
+  }
+  activeOrder.value = await orderStore.getActiveOrder()
+})
 
 onShow(() => {
-  merchantStore.fetchInfo({
-    page: 0,
-    limit: 3,
-  })
-
-  // 设置当前tab
-  useUserStore().tabValue = 0
+  userStore.setTabValue(0)
 })
 
 const bannerList = reactive([
@@ -28,43 +32,40 @@ const bannerList = reactive([
   },
 ])
 
-const searchKeyword = ref<string>('')
+const filteredParkingLots = computed(() => {
+  if (!searchKeyword.value)
+    return parkingLots.value
+  return parkingLots.value.filter(lot =>
+    lot.name.toLowerCase().includes(searchKeyword.value.toLowerCase())
+    || lot.address.toLowerCase().includes(searchKeyword.value.toLowerCase()),
+  )
+})
 
-function handleSearch() {
-  uni.navigateTo({ url: `/pages/merchant/index?keyword=${searchKeyword.value}` })
+function handleSearch(key: string) {
+  searchKeyword.value = key
 }
 
 function handleScan() {
   uni.scanCode({
     onlyFromCamera: true,
     success: (res) => {
-      console.log('扫描二维码成功,结果:', res.result)
+      console.log(res.result)
       uni.$u.toast(`${res.result}`)
-    },
-    error: () => {
-      console.log('扫描二维码出现错误')
     },
   })
 }
 
-const showAgreePrivacy = ref(false)
+function navigateToParkingLotDetail(parkingLotId: string) {
+  uni.navigateTo({ url: `/pages/home/parkinglot/detail?parkingLotId=${parkingLotId}` })
+}
+
+function navigateToOrder(orderId: string) {
+  uni.navigateTo({ url: `/pages/home/me/user/order?orderId=${orderId}` })
+}
+
 // 同意隐私协议
 function handleAgree() {
   console.log('同意隐私政策')
-}
-
-// 点击查看更多
-function navigateToMerchant() {
-  uni.navigateTo({
-    url: '/pages/merchant/index',
-  })
-}
-
-// 点击商户卡片
-function navigateToMerchantByID(id: string) {
-  uni.navigateTo({
-    url: `/pages/merchant/detail?id=${id}`,
-  })
 }
 </script>
 
@@ -78,8 +79,13 @@ function navigateToMerchantByID(id: string) {
               智泊无忧
             </text>
             <u-search
-              v-model="searchKeyword" search-icon="scan" :show-action="false" placeholder="搜搜附近的停车场"
-              :clearabled="true" @search="handleSearch" @click-icon="handleScan"
+              v-model="searchKeyword"
+              search-icon="scan"
+              :show-action="false"
+              placeholder="搜索停车场"
+              :clearabled="true"
+              @search="handleSearch"
+              @click-icon="handleScan"
             />
           </view>
         </view>
@@ -95,19 +101,63 @@ function navigateToMerchantByID(id: string) {
         正在进行的订单
       </view>
     </view>
-    <ActivedOrderCard class="width-100 mb-20rpx" />
+    <view v-if="activeOrder">
+      <Card :right-title="`订单号:${activeOrder.orderNo}`">
+        <view class="active-order">
+          <view>
+            <view>
+              <text class="parking-lot-name">
+                {{ activeOrder.parkingLotName }}
+              </text>
+            </view>
+            <view>
+              <text class="item-gray">
+                位置：{{ activeOrder.position }}
+              </text>
+            </view>
+            <view>
+              <text class="item-gray">
+                创建时间：{{ activeOrder.createTime }}
+              </text>
+            </view>
+          </view>
+          <view class="nav-btn" @click="navigateToOrder(activeOrder._id)">
+            <u-icon name="map" size="50rpx" />
+          </view>
+        </view>
+      </Card>
+    </view>
+    <view v-else class="no-order">
+      <text>快去使用服务</text>
+    </view>
 
     <view class="title-bar">
       <view class="text">
         附近的停车场
       </view>
-      <view class="button" @click="navigateToMerchant">
-        查看更多
-        <u-icon name="arrow-right" color="#909399" />
-      </view>
     </view>
-    <view v-for="(item, index) in merchantList" :key="index" class="width-100" @click="navigateToMerchantByID(item.id)">
-      <MerchantCard :merchant-data="item" />
+    <view
+      v-for="(lot, index) in filteredParkingLots"
+      :key="index"
+      class="width-100"
+      @click="navigateToParkingLotDetail(lot._id)"
+    >
+      <Card>
+        <view class="parking-lot">
+          <image :src="lot.logo" mode="aspectFill" :fade="true" class="logo">
+            <u-loading-icon />
+          </image>
+          <view class="info">
+            <text class="name">
+              {{ lot.name }}
+            </text>
+            <text class="address">
+              {{ lot.address }}
+            </text>
+            <text>剩余空位： {{ lot.remainSpaces }}</text>
+          </view>
+        </view>
+      </Card>
     </view>
 
     <!-- #ifdef MP-WEIXIN -->
@@ -119,7 +169,7 @@ function navigateToMerchantByID(id: string) {
   </view>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .page-wrap {
   display: flex;
   justify-content: center;
@@ -157,5 +207,65 @@ function navigateToMerchantByID(id: string) {
 
 .bg-white {
   background-color: white;
+}
+
+.parking-lot {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  .logo {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 20rpx;
+  }
+
+  .info {
+    // 垂直左对齐
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 20rpx;
+
+    .name {
+      font-size: 32rpx;
+      color: #333;
+    }
+
+    .address {
+      font-size: 24rpx;
+      color: #999;
+    }
+  }
+}
+
+.active-order {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .parking-lot-name {
+    font-size: 30rpx;
+    font-weight: bold;
+  }
+
+  .item-gray {
+    margin-top: 5rpx;
+    color: #999;
+  }
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.no-order {
+  padding: 20rpx;
+  font-size: 32rpx;
+  text-align: center;
+  color: #999;
 }
 </style>
