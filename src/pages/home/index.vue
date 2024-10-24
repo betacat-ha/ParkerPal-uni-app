@@ -93,7 +93,8 @@ function handleAgree() {
     </u-navbar>
 
     <view class="width-100 mb-20rpx">
-      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10" interval="5000" />
+      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10"
+        interval="5000" />
     </view>
 
     <view class="title-bar">
@@ -197,7 +198,7 @@ function handleAgree() {
     font-weight: bold;
   }
 
-  .button{
+  .button {
     display: flex;
     align-items: center;
     font-size: 24rpx;

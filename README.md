@@ -95,12 +95,14 @@ pnpm cz
 
 更新uniapp相关依赖到最新正式版
 
+
 ```bash
 npx @dcloudio/uvm@latest
 ```
 >>>>>>> 2e0ad223e13805f5a4f572b420029c637f7d35e2
 
 ### 注意事项
+
 
 1. 如果项目中不需要压缩图片，可以移除`vite-plugin-imagemin`插件后再初始化，以避免由于网路问题造成初始化报错的情况
 2. 微信小程序开发者工具中内置的打包分析不准确，本项目使用了`rollup-plugin-visualizer`来分析小程序包体积，默认不开启，有需要的移除相关注释即可
@@ -127,6 +129,7 @@ npx @dcloudio/uvm@latest
     示例二：js中的图片使用
 
     ```vue
+    ```vue
     <script setup lang="ts">
     import walletIcon from '@/static/images/icon_wallet.png'
     const menuList = [
@@ -141,6 +144,8 @@ npx @dcloudio/uvm@latest
     ```
 
     示例二：css中的图片使用
+
+    ```vue
 
     ```vue
     <style lang="scss">

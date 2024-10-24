@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import type { OrderState, TbOrder } from './types'
 import { userApi } from '@/api/index'
 
-const useOrderStore = defineStore('oder', {
+const useOrderStore = defineStore('order', {
   state: (): OrderState => {
     return {
       orders: [],
@@ -10,7 +10,7 @@ const useOrderStore = defineStore('oder', {
       page: 0,
       pageSize: 0,
       hasNext: false,
-    }
+    };
   },
   actions: {
     async getOrdersByUserId(userId: string) {
@@ -30,6 +30,6 @@ const useOrderStore = defineStore('oder', {
       return null
     },
   },
-})
+});
 
-export default useOrderStore
+export default useOrderStore;
