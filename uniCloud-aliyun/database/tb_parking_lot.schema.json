@@ -1,0 +1,41 @@
+{
+  "bsonType": "object",
+  "required": ["name", "address", "phone", "status", "remainSpaces"],
+  "properties": {
+    "_id": {
+      "description": "停车场唯一标识符",
+      "bsonType": "string"
+    },
+    "name": {
+      "description": "停车场名称",
+      "bsonType": "string"
+    },
+    "address": {
+      "description": "地址",
+      "bsonType": "string"
+    },
+    "phone": {
+      "description": "联系电话",
+      "bsonType": "string"
+    },
+    "logo": {
+      "description": "停车场图片",
+      "bsonType": "string"
+    },
+    "status": {
+      "description": "状态 (例如: 1 表示启用, 0 表示禁用)",
+      "bsonType": "int"
+    },
+    "remainSpaces": {
+      "description": "剩余车位数量",
+      "bsonType": "int"
+    },
+    "packages": {
+      "description": "关联的停车套餐ID列表",
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string"
+      }
+    }
+  }
+}

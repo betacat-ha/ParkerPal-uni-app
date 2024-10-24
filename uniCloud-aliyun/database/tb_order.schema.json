@@ -1,0 +1,70 @@
+{
+  "bsonType": "object",
+  "required": [
+    "orderNo",
+    "actualPayment",
+    "discount",
+    "parkingDuration",
+    "payment",
+    "parkingLotName",
+    "status",
+    "userId",
+    "parkingLotId",
+    "packageId",
+    "createTime"
+  ],
+  "properties": {
+    "_id": {
+      "description": "订单唯一标识符",
+      "bsonType": "string"
+    },
+    "orderNo": {
+      "description": "订单号",
+      "bsonType": "string"
+    },
+    "actualPayment": {
+      "description": "实际支付金额",
+      "bsonType": "double"
+    },
+    "discount": {
+      "description": "折扣金额",
+      "bsonType": "double"
+    },
+    "parkingDuration": {
+      "description": "停车时长",
+      "bsonType": "string"
+    },
+    "payment": {
+      "description": "支付方式",
+      "bsonType": "string"
+    },
+    "position": {
+      "description": "车位位置",
+      "bsonType": "string"
+    },
+    "parkingLotName": {
+      "description": "停车场名称",
+      "bsonType": "string"
+    },
+    "parkingLotId": {
+      "description": "停车场ID",
+      "bsonType": "string"
+    },
+    "packageId": {
+      "description": "停车套餐ID",
+      "bsonType": "string"
+    },
+    "userId": {
+      "description": "用户ID",
+      "bsonType": "string"
+    },
+    "status": {
+      "description": "订单状态",
+      "bsonType": "string"
+    },
+    "createTime": {
+      "description": "创建时间",
+      "bsonType": "timestamp"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "bsonType": "object",
+  "required": ["merchantId", "username", "password"],
+  "properties": {
+    "_id": {
+      "description": "商户唯一标识符",
+      "bsonType": "string"
+    },
+    "username": {
+      "description": "用户名",
+      "bsonType": "string"
+    },
+    "password": {
+      "description": "密码（加密存储）",
+      "bsonType": "string"
+    },
+    "parkingLots": {
+      "description": "关联的停车场ID列表",
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string"
+      }
+    }
+  }
+}

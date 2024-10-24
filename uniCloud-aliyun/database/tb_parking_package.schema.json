@@ -1,0 +1,31 @@
+{
+  "bsonType": "object",
+  "required": [
+    "name",
+    "description",
+    "price",
+    "status"
+  ],
+  "properties": {
+    "_id": {
+      "description": "套餐唯一标识符",
+      "bsonType": "string"
+    },
+    "name": {
+      "description": "套餐名称",
+      "bsonType": "string"
+    },
+    "description": {
+      "description": "套餐描述",
+      "bsonType": "string"
+    },
+    "price": {
+      "description": "套餐价格",
+      "bsonType": "double"
+    },
+    "status": {
+      "description": "套餐状态 (例如: 1 表示启用, 0 表示禁用)",
+      "bsonType": "int"
+    }
+  }
+}
