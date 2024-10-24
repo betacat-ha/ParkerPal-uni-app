@@ -1,45 +1,33 @@
 import { defineStore } from 'pinia'
-import type { OrderInfo, OrderState } from './types'
-import { getAllList, getList } from '@/api/order'
-import type { pageParams } from '@/api/order/types'
+import type { OrderState, TbOrder } from './types'
+import { userApi } from '@/api/index'
 
 const useOrderStore = defineStore('oder', {
   state: (): OrderState => {
     return {
-      list: [] as OrderInfo[],
+      orders: [],
       total: 0,
       page: 0,
       pageSize: 0,
       hasNext: false,
     }
   },
-  getters: {
-  },
   actions: {
-    setOderState(partial: Partial<OrderState>) {
-      this.$patch(partial)
-    },
-    async fetchInfo(pageParams: pageParams) {
-      console.log('开始获取信息')
-      const result = await getList(pageParams)
-      this.setOderState(result)
-    },
-    async fetchAllInfo() {
-      console.log('开始获取全部信息')
-      const result = await getAllList()
-      this.setOderState(result)
-    },
-    async fetchNextInfo() {
-      if (!this.hasNext) {
-        console.log('数据已到底')
-        return
+    async getOrdersByUserId(userId: string) {
+      try {
+        const res = await userApi.getOrdersByUserId(userId)
+        this.orders = res.data
       }
-
-      console.log('开始获取下一页信息')
-      const result = await getList({ page: this.page + 1, limit: this.pageSize })
-      // 追加数据
-      this.hasNext = result.hasNext
-      this.list = this.list.concat(result.list)
+      catch (e) {
+        console.error(e)
+      }
+    },
+    async getActiveOrder() {
+      if (this.orders.length > 0) {
+        const activeOrder: TbOrder = toRaw(this.orders.filter(order => order.status === 'IN_PROGRESS')[0])
+        return activeOrder === undefined ? null : activeOrder
+      }
+      return null
     },
   },
 })

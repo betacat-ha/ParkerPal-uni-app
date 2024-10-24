@@ -1,18 +1,38 @@
-/**
- * 通用接口
- */
-import type { SendCodeParams, SendCodeResult, UploadImageResult } from './types'
 import { post, upload } from '@/utils/request'
 
 enum URL {
-  upload = '/common/upload',
+  upload = '/upload',
   sendCode = '/sendCode',
 }
 
-// 图片上传
-export function uploadImage(imagePath: string) {
-  return upload<UploadImageResult>({ url: URL.upload, filePath: imagePath, name: 'file' })
+const httpApi = {
+  async uploadFile(path: string) {
+    return await upload({ url: URL.upload, filePath: path, name: 'file' })
+  },
+
+  async sendCode(tel: string) { // 发送验证码
+    return await post({ url: URL.sendCode, data: { tel } })
+  },
 }
 
-// 发送验证码
-export const sendCode = (data: SendCodeParams) => post<SendCodeResult>({ url: URL.sendCode, data })
+const cloudApi = {
+  async uploadImage(path: string) {
+    return path
+  },
+
+  async sendCode(tel: string) {
+    return tel
+  },
+}
+
+export function createCommonApi(requestMethod: 'http' | 'cloud') {
+  if (requestMethod === 'http') {
+    return httpApi
+  }
+  else if (requestMethod === 'cloud') {
+    return cloudApi
+  }
+  else {
+    throw new Error('Invalid requestMethod. Use "http" or "cloud".')
+  }
+}

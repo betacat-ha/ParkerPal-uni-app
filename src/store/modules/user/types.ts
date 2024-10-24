@@ -1,23 +1,23 @@
-export type RoleType = '' | '*' | 'user'
+export interface TbVehicle {
+  _id: string
+  make: string
+  model: string
+  year: number
+  licensePlate: string
+}
 
-export interface UserInfo {
-  id: string | undefined
-  name: string | undefined
-  avatar: string | undefined
-  weixinId: string | undefined
+export interface TbUser {
+  _id: string
+  username: string
+  password: string
+  name: string
+  avatar: string | null
+  vehicles: TbVehicle[]
 }
 
 export interface UserState {
-  info: UserInfo
+  user: TbUser | null
+  weixinId: string | null
   token: string
   tabValue: number
 }
-
-export type providerType =
-  | 'weixin'
-  | 'qq'
-  | 'sinaweibo'
-  | 'xiaomi'
-  | 'apple'
-  | 'univerify'
-  | undefined
