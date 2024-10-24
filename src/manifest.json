@@ -25,7 +25,7 @@
         "desc": "你的位置信息将用于为你推荐附近的停车场。"
       }
     },
-    "requiredPrivateInfos" : [ "getFuzzyLocation" ]
+    "requiredPrivateInfos": ["getFuzzyLocation"]
   },
   "vueVersion": "3"
 }
