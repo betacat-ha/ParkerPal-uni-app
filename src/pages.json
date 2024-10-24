@@ -65,54 +65,58 @@
   },
   "subPackages": [
     {
-      "root": "pages/me/login",
+      "root": "pages/home/parkinglot",
       "pages": [
         {
-          "path": "index"
+          "path": "detail",
+          "style": {
+            "navigationBarTitleText": "停车场详细"
+          }
         }
       ]
     },
     {
-      "root": "pages/merchant",
+      "root": "pages/me/user",
       "pages": [
         {
           "path": "index",
           "style": {
-            "navigationBarTitleText": "附近的停车场"
+            "navigationBarTitleText": "用户中心"
           }
         },
         {
-          "path": "detail",
+          "path": "order/index",
           "style": {
-            "navigationBarTitleText": "车场详情"
+            "navigationBarTitleText": "订单"
+          }
+        },
+        {
+          "path": "vehicle/index",
+          "style": {
+            "navigationBarTitleText": "车辆"
+          }
+        },
+        {
+          "path": "login/index",
+          "style": {
+            "navigationBarTitleText": "用户登录"
           }
         }
       ]
     },
     {
-      "root": "pages/order",
+      "root": "pages/me/merchant",
       "pages": [
         {
           "path": "index",
           "style": {
-            "navigationBarTitleText": "订单列表"
+            "navigationBarTitleText": "商户中心"
           }
         },
         {
-          "path": "detail",
+          "path": "login/index",
           "style": {
-            "navigationBarTitleText": "订单详情"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages/vehicle",
-      "pages": [
-        {
-          "path": "edit",
-          "style": {
-            "navigationBarTitleText": "修改车辆信息"
+            "navigationBarTitleText": "商家登录"
           }
         }
       ]

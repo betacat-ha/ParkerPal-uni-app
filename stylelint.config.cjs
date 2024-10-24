@@ -12,6 +12,7 @@ module.exports = {
     },
   ],
   ignoreFiles: [
+    '**/uni_modules/**',
     '**/*.js',
     '**/*.jsx',
     '**/*.tsx',
@@ -20,7 +21,6 @@ module.exports = {
     '**/*.md',
     '**/*.yaml',
     'dist/*',
-    'uni_modules/*',
   ],
   rules: {
     'import-notation': 'string',

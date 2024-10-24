@@ -24,7 +24,18 @@ export default defineConfig(({ command, mode }) => {
           target: viteEnv.VITE_API_BASE_URL,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
-          secure: false,
+          secure: true,
+          // configure: (proxy, options: any) => {
+          //   // 配置此项可在响应头中看到请求的真实地址
+          //   proxy.on('proxyRes', (proxyRes, req) => {
+          //     proxyRes.headers['x-real-url'] = new URL(req.url || '', options.target)?.href || ''
+          //   })
+          // },
+          bypass(req, res, options: any) {
+            const proxyURL = options.target + options.rewrite(req.url)
+            req.headers['x-req-proxyURL'] = proxyURL // 设置未生效
+            res.setHeader('x-req-proxyURL', proxyURL) // 设置响应头可以看到
+          },
         },
       },
     },
