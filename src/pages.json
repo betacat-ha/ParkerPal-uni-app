@@ -87,13 +87,13 @@
         {
           "path": "order/index",
           "style": {
-            "navigationBarTitleText": "订单"
+            "navigationBarTitleText": "我的订单"
           }
         },
         {
           "path": "vehicle/index",
           "style": {
-            "navigationBarTitleText": "车辆"
+            "navigationBarTitleText": "我的车辆"
           }
         },
         {
