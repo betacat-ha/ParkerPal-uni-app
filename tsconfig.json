@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "jsx": "preserve",
-    "lib": ["DOM", "ESNext"],
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -11,11 +10,11 @@
     },
     "resolveJsonModule": true,
     "types": [
+      "vite/client",
       "@dcloudio/types",
-      "@uni-helper/uni-app-types",
+      "@mini-types/alipay",
       "miniprogram-api-typings",
-      "vue",
-      "pinia"
+      "@uni-helper/uni-types"
     ],
     "allowJs": true,
     "strict": true,
@@ -28,7 +27,7 @@
     "skipLibCheck": true
   },
   "vueCompilerOptions": {
-    "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
+    "plugins": ["@uni-helper/uni-types/volar-plugin"]
   },
   "include": [
     "src/**/*.ts",
