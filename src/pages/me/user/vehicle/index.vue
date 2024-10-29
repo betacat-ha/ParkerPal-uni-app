@@ -6,23 +6,25 @@ const vehicles = userStore.getUserVehicles
 </script>
 
 <template>
-  <div v-for="(vehicle, index) in vehicles" :key="index">
+  <Navbar title="我的车辆" />
+
+  <view v-for="(vehicle, index) in vehicles" :key="index">
     <Card :shadow="false" @click="() => goToPage(vehicle.vehicleId)">
-      <div class="car">
-        <div class="info">
-          <div class="sub-header">
+      <view class="car">
+        <view class="info">
+          <view class="sub-header">
             <span class="sub-title">我的车辆</span>
-          </div>
-          <div class="content">
+          </view>
+          <view class="content">
             <span class="license-plate">{{ vehicle.licensePlate }}</span>
-          </div>
-        </div>
-        <div v-if="vehicle.imageUrl" class="image-container">
+          </view>
+        </view>
+        <view v-if="vehicle.imageUrl" class="image-container">
           <img class="vehicle-image" :src="vehicle.imageUrl" alt="Vehicle Image">
-        </div>
-      </div>
+        </view>
+      </view>
     </Card>
-  </div>
+  </view>
 </template>
 
 <style scoped>

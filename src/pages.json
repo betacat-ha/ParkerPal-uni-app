@@ -1,25 +1,19 @@
 {
   "pages": [
     {
-      "path": "pages/home/index",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "#ffffff",
-        "navigationBarTitleText": "首页",
-        "navigationBarTextStyle": "black"
-      }
+      "path": "pages/home/index"
     },
     {
-      "path": "pages/driving/index",
-      "style": {
-        "navigationBarTitleText": "导航"
-      }
+      "path": "pages/driving/index"
     },
     {
-      "path": "pages/me/index",
-      "style": {
-        "navigationBarTitleText": "我的"
-      }
+      "path": "pages/me/index"
+    },
+    {
+      "path": "pages/me/user/index"
+    },
+    {
+      "path": "pages/me/merchant/index"
     }
   ],
   "condition": { // 模式配置，仅开发期间生效
@@ -40,6 +34,7 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "智泊无忧",
     "navigationBarBackgroundColor": "#ffffff",
+    "navigationStyle": "custom",
     "backgroundColor": "#f3f5f9"
   },
   "tabBar": {
@@ -53,7 +48,10 @@
         "pagePath": "pages/driving/index"
       },
       {
-        "pagePath": "pages/me/index"
+        "pagePath": "pages/me/user/index"
+      },
+      {
+        "pagePath": "pages/me/merchant/index"
       }
     ]
   },
@@ -65,59 +63,26 @@
   },
   "subPackages": [
     {
+      "root": "pages/me/user/order",
+      "pages": [
+        {
+          "path": "index"
+        }
+      ]
+    },
+    {
+      "root": "pages/me/user/vehicle",
+      "pages": [
+        {
+          "path": "index"
+        }
+      ]
+    },
+    {
       "root": "pages/home/parkinglot",
       "pages": [
         {
-          "path": "detail",
-          "style": {
-            "navigationBarTitleText": "停车场详细"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages/me/user",
-      "pages": [
-        {
-          "path": "index",
-          "style": {
-            "navigationBarTitleText": "用户中心"
-          }
-        },
-        {
-          "path": "order/index",
-          "style": {
-            "navigationBarTitleText": "我的订单"
-          }
-        },
-        {
-          "path": "vehicle/index",
-          "style": {
-            "navigationBarTitleText": "我的车辆"
-          }
-        },
-        {
-          "path": "login/index",
-          "style": {
-            "navigationBarTitleText": "用户登录"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages/me/merchant",
-      "pages": [
-        {
-          "path": "index",
-          "style": {
-            "navigationBarTitleText": "商户中心"
-          }
-        },
-        {
-          "path": "login/index",
-          "style": {
-            "navigationBarTitleText": "商家登录"
-          }
+          "path": "detail"
         }
       ]
     }

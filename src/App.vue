@@ -1,14 +1,12 @@
 <script setup lang="ts">
-onLaunch(() => {
+onMounted(() => {
   console.log('App Launch')
-  // 隐藏原生标题栏
-  // #ifdef MP-WEIXIN
-  uni.hideTabBar()
-  // #endif
 })
+
 onShow(() => {
   console.log('App Show')
 })
+
 onHide(() => {
   console.log('App Hide')
 })

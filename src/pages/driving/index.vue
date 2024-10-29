@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { useUserStore } from '@/store/index'
-
 const imgUrl = '../../static/images'
 
 const lat = ref(23.131)
 const lng = ref(113.372)
 const scale = ref(17)
 
-onShow(() => {
-  useUserStore().setTabValue(1)
-})
-
 const mapContext = uni.createMapContext('map', this)
+
 addMarkers()
 addGroundOverlay()
 console.log(mapContext)
+
 mapContext.on('markerClusterCreate', (e) => {
   console.log('markerClusterCreate', e)
 })
@@ -113,6 +109,8 @@ function handleMarkerClick(e: any) {
 
 <template>
   <view>
+    <Navbar />
+
     <map
       id="map" class="map"
       :latitude="lat"

@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { useRouter } from 'uni-mini-router'
 import { useOrderStore, useParkingLotStore, useUserStore } from '@/store/index'
 import type { TbOrder } from '@/store/modules/order/types'
 
+const router = useRouter()
 const userStore = useUserStore()
 const parkingLotStore = useParkingLotStore()
 const orderStore = useOrderStore()
@@ -17,10 +19,6 @@ onMounted(async () => {
     await orderStore.getOrdersByUserId(userStore.getUserId!)
   }
   activeOrder.value = await orderStore.getActiveOrder()
-})
-
-onShow(() => {
-  userStore.setTabValue(0)
 })
 
 const bannerList = reactive([
@@ -55,12 +53,12 @@ function handleScan() {
   })
 }
 
-function navigateToParkingLotDetail(parkingLotId: string) {
-  uni.navigateTo({ url: `/pages/home/parkinglot/detail?parkingLotId=${parkingLotId}` })
+function goToParkingLotDetail(parkingLotId: string) {
+  router.push({ path: '/pages/home/parkinglot/detail', query: { parkingLotId } })
 }
 
-function navigateToOrder(orderId: string) {
-  uni.navigateTo({ url: `/pages/home/me/user/order?orderId=${orderId}` })
+function goToOrder(orderId: string) {
+  router.push({ path: '/pages/home/me/user/order', query: { orderId } })
 }
 
 // 同意隐私协议
@@ -93,8 +91,10 @@ function handleAgree() {
     </u-navbar>
 
     <view class="width-100 mb-20rpx">
-      <u-swiper :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10"
-        interval="5000" />
+      <u-swiper
+        :list="bannerList" key-name="image" :autoplay="true" indicator height="200" radius="10"
+        interval="5000"
+      />
     </view>
 
     <view class="title-bar">
@@ -122,7 +122,7 @@ function handleAgree() {
               </text>
             </view>
           </view>
-          <view class="nav-btn" @click="navigateToOrder(activeOrder._id)">
+          <view class="nav-btn" @click="goToOrder(activeOrder._id)">
             <u-icon name="map" size="50rpx" />
           </view>
         </view>
@@ -141,7 +141,7 @@ function handleAgree() {
       v-for="(lot, index) in filteredParkingLots"
       :key="index"
       class="width-100"
-      @click="navigateToParkingLotDetail(lot._id)"
+      @click="goToParkingLotDetail(lot._id)"
     >
       <Card>
         <view class="parking-lot">

@@ -10,7 +10,7 @@ const useOrderStore = defineStore('order', {
       page: 0,
       pageSize: 0,
       hasNext: false,
-    };
+    }
   },
   actions: {
     async getOrdersByUserId(userId: string) {
@@ -30,6 +30,6 @@ const useOrderStore = defineStore('order', {
       return null
     },
   },
-});
+})
 
-export default useOrderStore;
+export default useOrderStore

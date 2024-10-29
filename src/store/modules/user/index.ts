@@ -7,7 +7,7 @@ const useUserStore = defineStore('user', {
     user: null,
     weixinId: null,
     token: '',
-    tabValue: 0,
+    tabValue: 0, // 默认激活首页
   }),
   actions: {
     setTabValue(active: number) {

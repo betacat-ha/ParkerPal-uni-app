@@ -3,7 +3,6 @@ import { useParkingLotStore } from '@/store/index'
 import type { ParkingLotDetails } from '@/store/modules/parkinglot/types'
 
 const parkingLotStore = useParkingLotStore()
-
 const parkingLotDetails = ref<ParkingLotDetails | null>(null)
 
 onLoad(async (query) => {
@@ -24,7 +23,9 @@ watch(parkingLotDetails, (newVal) => {
 </script>
 
 <template>
-  <div v-if="parkingLotDetails" class="parking-lot-detail">
+  <Navbar />
+
+  <view v-if="parkingLotDetails" class="parking-lot-detail">
     <h2>{{ parkingLotDetails.name }}</h2>
     <p><strong>地址:</strong> {{ parkingLotDetails.address }}</p>
     <p><strong>电话:</strong> {{ parkingLotDetails.phone }}</p>
@@ -36,10 +37,10 @@ watch(parkingLotDetails, (newVal) => {
         <strong>{{ pkg.name }}:</strong> {{ pkg.description }}
       </li>
     </ul>
-  </div>
-  <div v-else>
+  </view>
+  <view v-else>
     <p>Loading...</p>
-  </div>
+  </view>
 </template>
 
 <style scoped>

@@ -1,31 +1,27 @@
 <script setup lang="ts">
+import { useRouter } from 'uni-mini-router'
 import { useUserStore } from '@/store/index'
 
+const router = useRouter()
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
 
-function navigateToOrder() {
-  uni.navigateTo({
-    url: '/pages/me/user/order/index',
-  })
+async function dologout() {
+  await userStore.logout()
 }
 
-function navigateToVehicle() {
-  uni.navigateTo({
-    url: '/pages/me/user/vehicle/index',
-  })
+function goToOrder() {
+  router.push('/pages/me/user/order/index')
 }
 
-function dologout() {
-
+function goToVehicle() {
+  router.push('/pages/me/user/vehicle/index')
 }
-
-onMounted(async () => {
-  await userStore.login('testuser', '123456')
-})
 </script>
 
 <template>
+  <Navbar title="用户中心" />
+
   <view class="user-center">
     <view class="top-bar">
       <view class="back-button">
@@ -50,11 +46,11 @@ onMounted(async () => {
       </view>
     </view>
     <view class="quick-links">
-      <view class="link" @click="navigateToVehicle">
+      <view class="link" @click="goToVehicle">
         <!-- <image src="@/static/icons/update.png" mode="aspectFit" /> -->
         <text>我的车辆</text>
       </view>
-      <view class="link" @click="navigateToOrder">
+      <view class="link" @click="goToOrder">
         <!-- <image src="@/static/icons/shop.png" mode="aspectFit" /> -->
         <text>我的订单</text>
       </view>
@@ -77,6 +73,8 @@ onMounted(async () => {
       </button>
     </view>
   </view>
+
+  <Tabbar />
 </template>
 
 <style lang="scss" scoped>

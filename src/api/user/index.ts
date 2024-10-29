@@ -65,7 +65,7 @@ const cloudApi = {
   },
 
   async logout() {
-    return null
+    return '' // 数据库暂时没有与登录状态有关的字段 TDOO
   },
 
   async getParkingLots() {

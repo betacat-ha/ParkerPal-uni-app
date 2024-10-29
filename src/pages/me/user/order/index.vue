@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRouter } from 'uni-mini-router'
 import { useOrderStore, useUserStore } from '@/store/index'
 import type { TbOrder } from '@/store/modules/order/types'
 
@@ -15,6 +16,7 @@ enum OrderStatus {
   COMPLETED = 'COMPLETED',
 }
 
+const router = useRouter()
 const orderStore = useOrderStore()
 const userStore = useUserStore()
 const { orders } = storeToRefs(orderStore)
@@ -50,14 +52,14 @@ function updateFilteredOrders(status: OrderStatus) {
   filteredOrders.value = orders.value.filter(order => status === OrderStatus.ALL || order.status === status)
 }
 
-function navigateToOrderDetail(orderId: string) {
-  uni.navigateTo({
-    url: `/pages/me/user/order/index?orderId=${orderId}`,
-  })
+function goToOrderDetail(orderId: string) {
+  router.push({ path: '/pages/me/user/order/index', params: { orderId } })
 }
 </script>
 
 <template>
+  <Navbar title="我的订单" />
+
   <view class="container">
     <!-- 标签栏 -->
     <u-sticky bg-color="#ffffff">
@@ -65,7 +67,7 @@ function navigateToOrderDetail(orderId: string) {
     </u-sticky>
 
     <!-- 订单列表 -->
-    <view v-for="order in filteredOrders" :key="order._id" class="order-card" @click="navigateToOrderDetail(order._id)">
+    <view v-for="order in filteredOrders" :key="order._id" class="order-card" @click="goToOrderDetail(order._id)">
       <view class="order-info">
         <view class="title">
           <text>{{ order.parkingLotName }}</text>
