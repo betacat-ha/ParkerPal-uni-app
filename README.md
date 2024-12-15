@@ -1,4 +1,4 @@
-# ParkerPalApp
+# ParkerPal-APP
 
 智泊无忧跨端应用
 
@@ -20,11 +20,11 @@ uni-app、vue3、uview-plus、pinia
 
 > 项目使用`esLint`和`stylelint`配合`husky`自动化校验代码规范
 
-## 运行和部署
+## 项目环境
 
-```bash
-pnpm run dev:mp-weixin
-```
+建议`node`版本**20**以上
+
+> 如果仍然无法正确下载依赖，可以解压`node_modules.zip`使用
 
 > 注意！使用`unicloud`时配合`hbuild x`使用
 
@@ -57,7 +57,7 @@ pnpm run dev:mp-weixin
       "id": "1",
       "name": "智泊无忧",
       "avatar": "",
-      "weixinId": "ParkerPal"
+      "weixinId": "parkerpal-app"
     },
     "token": "eyJhbGciOiJIUz(省略后续内容)"
   }
