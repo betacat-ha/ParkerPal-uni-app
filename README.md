@@ -1,6 +1,6 @@
 <div align="center">
   <img width="100px" alt="logo" style="width: 100px;
-        height: 100px; border-radius: 15px; margin: 5;" src="src/static/images/logo.png"/>
+        height: 100px; border-radius: 15px; margin: 5;" src="src/static/images/logo-round.png"/>
   <p style="font-size: 24px; font-weight: bold;">智泊无忧小程序端</p>
 </div>
 <div>
