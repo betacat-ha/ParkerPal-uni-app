@@ -11,7 +11,7 @@ export function setupRequest() {
     // #endif
 
     // #ifndef MP
-    defaultConfig.baseURL = '/api'
+    defaultConfig.baseURL = import.meta.env.VITE_API_BASE_URL
     // #endif
 
     return defaultConfig

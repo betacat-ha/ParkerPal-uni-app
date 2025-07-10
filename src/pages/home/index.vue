@@ -21,6 +21,11 @@ onMounted(async () => {
   activeOrder.value = await orderStore.getActiveOrder()
 })
 
+onShow(() => {
+  // 设置当前tab
+  useUserStore().tabValue = 0
+})
+
 const bannerList = reactive([
   {
     image: 'https://s2.loli.net/2024/07/28/BHxQ5yLgJ986KnA.png',
