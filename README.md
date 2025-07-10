@@ -1,13 +1,14 @@
-# ParkerPal-APP
-
-智泊无忧跨端应用
-
 <div align="center">
   <img width="100px" alt="logo" style="width: 100px;
         height: 100px; border-radius: 15px; margin: 5;" src="src/static/images/logo.png"/>
-  <p style="font-size: 24px; font-weight: bold;">智泊无忧</p>
+  <p style="font-size: 24px; font-weight: bold;">智泊无忧小程序端</p>
 </div>
-
+<div>
+<img alt="Platform badge" src="https://img.shields.io/badge/platform-WeiXin--MiniProgram-green">
+<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/betacat-ha/ParkerPal-uni-app">
+<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/betacat-ha/ParkerPal-uni-app">
+<img alt="GitHub License Badge" src="https://img.shields.io/github/license/betacat-ha/ParkerPal-uni-app">
+</div>
 <div align="center">
     <img src="img/Home.png" height="300"/>
     <img src="img/Navigation.png" height="300"/>
