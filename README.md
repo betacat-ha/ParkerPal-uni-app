@@ -3,7 +3,7 @@
         height: 100px; border-radius: 15px; margin: 5;" src="src/static/images/logo-round.png"/>
   <p style="font-size: 24px; font-weight: bold;">智泊无忧小程序端</p>
 </div>
-<div>
+<div align="center">
 <img alt="Platform badge" src="https://img.shields.io/badge/platform-WeiXin--MiniProgram-green">
 <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/betacat-ha/ParkerPal-uni-app">
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/betacat-ha/ParkerPal-uni-app">
