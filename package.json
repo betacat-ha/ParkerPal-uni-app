@@ -2,6 +2,20 @@
   "name": "parkerpal-app",
   "type": "module",
   "version": "2.0.0",
+  "author": {
+    "name": "parkerpal",
+    "email": "admin@betacat.com.cn",
+    "url": "https://blog.betacat.com.cn"
+  },
+  "license": "MPL-2.0",
+  "homepage": "https://github.com/betacat-ha/ParkerPal-uni-app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betacat-ha/ParkerPal-uni-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/betacat-ha/ParkerPal-uni-app/issues"
+  },
   "scripts": {
     "dev:h5": "uni",
     "dev:h5-pro": "uni --mode production",
