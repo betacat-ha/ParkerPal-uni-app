@@ -76,7 +76,7 @@
     "unocss-applet": "^0.8.2",
     "unplugin-auto-import": "^0.17.6",
     "unplugin-vue-components": "^0.27.2",
-    "vite": "^5.2.8",
+    "vite": "^6.4.3",
     "vite-plugin-clean-build": "^1.1.1",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-replace-image-url": "^1.1.1",
