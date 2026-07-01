@@ -26,7 +26,6 @@ tmp/
 # Lock
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
 
 # Custom
 unpackage/
